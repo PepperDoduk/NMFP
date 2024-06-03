@@ -4,25 +4,44 @@ using UnityEngine;
 
 public class N_PlayerController : MonoBehaviour
 {
-    public int speed;
-    float hAxis;
-    float vAxis;
+    public Transform caemraTransform;
+    public CharacterController characterController;
 
-    Vector3 moveVec;
+    public float moveSpeed = 10f;
+    public float jumpSpeed = 10f;
+    public float gravity = - 10f;
+    public float yVelocity = 0;
 
+
+    // Start is called before the first frame update
     void Start()
     {
         
     }
+
+    // Update is called once per frame
     void Update()
     {
-        hAxis = Input.GetAxisRaw("Horizontal");
-        vAxis = Input.GetAxisRaw("Vertical");
+        float hAxis = Input.GetAxis("Horizontal");
+        float VAxis = Input.GetAxis("Vertical");
+        Vector3 moveDir = new Vector3(hAxis, 0, VAxis);
 
-        moveVec = new Vector3(hAxis, 0, vAxis).normalized;
+        moveDir = caemraTransform.TransformDirection(moveDir);
+        moveDir *= moveSpeed;
 
-        transform.position += moveVec * speed * Time.deltaTime;
+        if(characterController.isGrounded)
+        {
+            yVelocity = 0;
 
-        transform.LookAt(transform.position + moveVec);
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                yVelocity = jumpSpeed;
+            }
+        }
+
+        yVelocity += (gravity * Time.deltaTime);
+        moveDir.y = yVelocity;
+
+        characterController.Move(moveDir * Time.deltaTime);
     }
 }
