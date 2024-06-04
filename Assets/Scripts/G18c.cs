@@ -1,18 +1,60 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class G18c : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    public Animator anim;
+    public int animNum = 0;
+
+    public int maxAmmo = 17;
+    public int currentAmmo;
+
+
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
+
+        currentAmmo = maxAmmo;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Input.GetMouseButtonDown(0);
+        anim.SetInteger("g18", animNum);
+
+        if (currentAmmo < 1)
+        {
+            animNum = 1;
+            currentAmmo = maxAmmo;
+        }
+
+        if (Input.GetMouseButtonDown(0) && currentAmmo > 0)
+        {
+            currentAmmo--;
+            animNum = -1;
+        }
+        if(Input.GetMouseButtonUp(0))
+        {
+            animNum = 0;
+        }
     }
+
+    public void Fire()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.G18fire);
+    }
+    public void R1()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.G18r1);
+    }
+    public void R2()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.G18r2);
+    }
+    public void R3()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.G18r3);
+    }
+
 }
