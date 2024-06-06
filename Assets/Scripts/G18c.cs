@@ -8,6 +8,8 @@ public class G18c : MonoBehaviour
     public Animator anim;
     public int animNum = 0;
 
+    public int randF;
+
     public int maxAmmo = 17;
     public int currentAmmo;
 
@@ -26,13 +28,14 @@ public class G18c : MonoBehaviour
         if (currentAmmo < 1)
         {
             animNum = 1;
-            currentAmmo = maxAmmo;
+            
         }
 
         if (Input.GetMouseButtonDown(0) && currentAmmo > 0)
         {
-            currentAmmo--;
-            animNum = -1;
+            randF = Random.Range(-3, 0);
+            
+            animNum = randF;
         }
         if(Input.GetMouseButtonUp(0))
         {
@@ -42,6 +45,7 @@ public class G18c : MonoBehaviour
 
     public void Fire()
     {
+        currentAmmo--;
         AudioManager.instance.PlaySfx(AudioManager.Sfx.G18fire);
     }
     public void R1()
@@ -57,4 +61,8 @@ public class G18c : MonoBehaviour
         AudioManager.instance.PlaySfx(AudioManager.Sfx.G18r3);
     }
 
+    public void Reaload()
+    {
+        currentAmmo = maxAmmo;
+    }
 }
