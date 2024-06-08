@@ -28,6 +28,13 @@ public class AudioManager : MonoBehaviour
         G18r1, 
         G18r2, 
         G18r3, 
+        BarretFire,
+        BarretR1,
+        BarretR2,
+        BarretR3,
+        BarretR4,
+        BarretR5,
+
 
     }
     void Awake()

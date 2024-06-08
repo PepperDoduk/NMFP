@@ -617,6 +617,34 @@ PrefabInstance:
       propertyPath: sfxVolume
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7560519271781295924, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
+      propertyPath: sfxClips.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7560519271781295924, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
+      propertyPath: sfxClips.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 51b8ff0c83e87704aaaa19b25ea1d4f0, type: 3}
+    - target: {fileID: 7560519271781295924, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
+      propertyPath: sfxClips.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: ce533950e3006864f85da5f35381a88f, type: 3}
+    - target: {fileID: 7560519271781295924, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
+      propertyPath: sfxClips.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 41f6cb0ccc2d0c940ac4d0191a0af197, type: 3}
+    - target: {fileID: 7560519271781295924, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
+      propertyPath: sfxClips.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: f4cf8c757a1fd8646aa0ebd19741a339, type: 3}
+    - target: {fileID: 7560519271781295924, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
+      propertyPath: sfxClips.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: fc581c4c865a00c44994cca351bdbedc, type: 3}
+    - target: {fileID: 7560519271781295924, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
+      propertyPath: sfxClips.Array.data[9]
+      value: 
+      objectReference: {fileID: 8300000, guid: 327dddf09e9773e48b02f856728751de, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
