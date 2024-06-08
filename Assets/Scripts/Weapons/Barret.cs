@@ -45,11 +45,13 @@ public class Barret : MonoBehaviour
 
     public void Fire()
     {
+        
         currentAmmo--;
         AudioManager.instance.PlaySfx(AudioManager.Sfx.BarretFire);
     }
     public void RemoveMag()
     {
+        
         AudioManager.instance.PlaySfx(AudioManager.Sfx.BarretR1);
     }
     public void MagCombination()
@@ -66,6 +68,7 @@ public class Barret : MonoBehaviour
     }
     public void Boltadvance()
     {
+        
         AudioManager.instance.PlaySfx(AudioManager.Sfx.BarretR5);
     }
 
