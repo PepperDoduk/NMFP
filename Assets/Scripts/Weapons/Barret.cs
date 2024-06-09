@@ -33,8 +33,8 @@ public class Barret : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && currentAmmo > 0)
         {
-            randF = -1; /*Random.Range(-3, 0);*/
-            
+            randF = Random.Range(-3, 0);
+
             animNum = randF;
         }
         if(Input.GetMouseButtonUp(0))
@@ -75,5 +75,6 @@ public class Barret : MonoBehaviour
     public void Reaload()
     {
         currentAmmo = maxAmmo;
+        animNum = 0;
     }
 }

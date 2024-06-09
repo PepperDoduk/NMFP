@@ -64,5 +64,6 @@ public class G18c : MonoBehaviour
     public void Reaload()
     {
         currentAmmo = maxAmmo;
+        animNum = 0;
     }
 }
