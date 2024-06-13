@@ -12,6 +12,8 @@ public class N_PlayerController : MonoBehaviour
     public float gravity = - 10f;
     public float yVelocity = 0;
 
+    public bool isGround = true;
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,14 +31,16 @@ public class N_PlayerController : MonoBehaviour
         moveDir = caemraTransform.TransformDirection(moveDir);
         moveDir *= moveSpeed;
 
+        
         if(characterController.isGrounded)
         {
             yVelocity = 0;
-
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                yVelocity = jumpSpeed;
-            }
+            isGround = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && isGround)
+        {
+            yVelocity = jumpSpeed;
+            isGround = false;
         }
 
         yVelocity += (gravity * Time.deltaTime);
@@ -44,4 +48,5 @@ public class N_PlayerController : MonoBehaviour
 
         characterController.Move(moveDir * Time.deltaTime);
     }
+
 }
