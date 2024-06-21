@@ -21,11 +21,10 @@ public class N_PlayerRayCast : MonoBehaviour
             Debug.DrawRay(transform.position, transform.forward * maxRayDistance, Color.blue, 0.3f);
             if(Physics.Raycast(transform.position, transform.forward, out hit, maxRayDistance))
             {
-                Debug.Log("Hit");
                 if(hit.collider.tag == "Enemy")
                 {
-                    hit.collider.gameObject.GetComponent<N_EnemyStates>().health -= 10;
                     Debug.Log("EnemyHit");
+                    hit.collider.gameObject.GetComponent<N_EnemyStates>().health -= 10;
                 }
             }
         }
