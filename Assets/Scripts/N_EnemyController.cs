@@ -9,13 +9,14 @@ public class N_EnemyController : MonoBehaviour
     private NavMeshAgent nav;
     public Transform player;
 
-    public float moveSpeed = 10f;
+    public float moveSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
+        moveSpeed = GetComponent<N_EnemyStates>().moveSpeed;
         nav.speed = moveSpeed;
     }
 
