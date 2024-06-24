@@ -18,9 +18,10 @@ public class N_PlayerRayCast : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Debug.DrawRay(transform.position, transform.forward * maxRayDistance, Color.blue, 0.3f);
+            Debug.DrawRay(transform.position, transform.forward * maxRayDistance, Color.red, 0.3f);
             if(Physics.Raycast(transform.position, transform.forward, out hit, maxRayDistance))
             {
+                Debug.Log($"{hit.collider.tag} Hit");
                 if(hit.collider.tag == "Enemy")
                 {
                     Debug.Log("EnemyHit");

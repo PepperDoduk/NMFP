@@ -10,12 +10,16 @@ public class N_EnemyStates : MonoBehaviour
     public float maxAttackDistance;
     public float attackSpeed;
 
+    private void Awake()
+    {
+        moveSpeed = 5f;
+        health = 100;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        moveSpeed = 5f;
-        health = 100;
+        
     }
 
     // Update is called once per frame
