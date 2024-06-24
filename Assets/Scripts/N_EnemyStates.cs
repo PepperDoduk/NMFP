@@ -2,32 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class N_EnemyStates : MonoBehaviour
+public class N_EnemyStates
 {
-    public float moveSpeed;
-    public float health;
+    public N_EnemyData Data { get; }
+    public float Health { get; private set; }
+    public bool IsAlive => Health > 0;
 
-    public float maxAttackDistance;
-    public float attackSpeed;
 
-    private void Awake()
+    public N_EnemyStates(N_EnemyData pData)
     {
-        moveSpeed = 5f;
-        health = 100;
+        Data = pData;
+        Health = Data.Health;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void TakeDamage(int pDamage)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        Health -= pDamage;
+        if (Health < 0)
+            Health = 0;
     }
 }

@@ -788,7 +788,6 @@ GameObject:
   - component: {fileID: 504940022}
   - component: {fileID: 504940024}
   - component: {fileID: 504940021}
-  - component: {fileID: 504940025}
   m_Layer: 0
   m_Name: EnemyTest
   m_TagString: Enemy
@@ -825,7 +824,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1180364750}
-  moveSpeed: 10
 --- !u!54 &504940022
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -898,22 +896,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &504940025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 504940019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 093d7314f9b92d040a0de1fbc53d5e52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 0
-  health: 0
-  maxAttackDistance: 0
-  attackSpeed: 0
 --- !u!1 &614110429
 GameObject:
   m_ObjectHideFlags: 0

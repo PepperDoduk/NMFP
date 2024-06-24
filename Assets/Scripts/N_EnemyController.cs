@@ -5,26 +5,35 @@ using UnityEngine.AI;
 
 public class N_EnemyController : MonoBehaviour
 {
+     public N_EnemyStates states = new N_EnemyStates(new N_EnemyData(
+        "Name",
+        100,
+        5,
+        10,
+        1
+        ));
+
     private Rigidbody rigid;
     private NavMeshAgent nav;
     public Transform player;
 
-    public float moveSpeed;
 
-    // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
-        moveSpeed = GetComponent<N_EnemyStates>().moveSpeed;
-        nav.speed = moveSpeed;
+        nav.speed = states.Data.MoveSpeed;
     }
 
-    // Update is called once per frame
     void Update()
     {
         nav.SetDestination(player.position);
+        if(!states.IsAlive)
+        {
+            Destroy(gameObject);
+        }
     }
+
     private void FixedUpdate()
     {
         rigid.velocity = Vector3.zero;
