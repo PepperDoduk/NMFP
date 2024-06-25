@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class N_WeaponController : MonoBehaviour
 {
-    //public N_WeaponStates curWeapon;
+    public N_WeaponStates curWeapon;
     public GameObject weapon;
-    GameObject swapWeapon;
+    N_WeaponStates swapWeapon;
     public string wepName;
     public bool canSwapWep = false;
 
@@ -20,8 +20,10 @@ public class N_WeaponController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && canSwapWep)
         {
             weapon.SetActive(false);
-            weapon = swapWeapon;
+            weapon = swapWeapon.WeaponPrefab;
+            curWeapon = swapWeapon;
             weapon.SetActive(true);
+            Debug.Log("Weapon Swapped");
         }
     }
 
@@ -33,7 +35,7 @@ public class N_WeaponController : MonoBehaviour
 
             canSwapWep = true;
 
-            swapWeapon = other.transform.GetComponent<N_WeaponStates>().WeaponPrefab;
+            swapWeapon = other.transform.GetComponent<N_WeaponStates>();
         }
     }
     private void OnTriggerExit(Collider other)

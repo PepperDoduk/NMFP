@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class G18c : MonoBehaviour
 {
-
+    public N_PlayerRayCast playerRay;
     public Animator anim;
     public int animNum = 0;
 
@@ -13,11 +13,10 @@ public class G18c : MonoBehaviour
     public int maxAmmo = 17;
     public int currentAmmo;
 
-
     void Start()
     {
         anim = GetComponent<Animator>();
-
+        playerRay = GameObject.Find("Player").GetComponent<N_PlayerRayCast>();
         currentAmmo = maxAmmo;
     }
 
@@ -28,7 +27,7 @@ public class G18c : MonoBehaviour
         if (currentAmmo < 1)
         {
             animNum = 1;
-            
+            playerRay.reroad = true;
         }
 
         if (Input.GetMouseButtonDown(0) && currentAmmo > 0)
@@ -65,5 +64,6 @@ public class G18c : MonoBehaviour
     {
         currentAmmo = maxAmmo;
         animNum = 0;
+        playerRay.reroad = false;
     }
 }
