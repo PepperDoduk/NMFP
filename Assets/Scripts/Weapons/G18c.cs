@@ -40,6 +40,11 @@ public class G18c : MonoBehaviour
         {
             animNum = 0;
         }
+
+        if(Input.GetKeyDown(KeyCode.R) && currentAmmo != maxAmmo)
+        {
+            animNum = 1;
+        }
     }
 
     public void Fire()

@@ -22,7 +22,7 @@ public class N_PlayerRayCast : MonoBehaviour
                 //Debug.Log($"{hit.collider.tag} Hit");
                 if (hit.collider.tag == "Enemy")
                 {
-                    //Debug.Log("EnemyHit");
+                    Debug.Log("EnemyHit");
                     hit.collider.gameObject.GetComponent<N_EnemyController>().states.TakeDamage(10);
                 }
             }
