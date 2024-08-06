@@ -485,7 +485,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4676052503429744901, guid: bfc23627f0bbddb4a9096d73f7702a1c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1570986529}
   m_SourcePrefab: {fileID: 100100000, guid: bfc23627f0bbddb4a9096d73f7702a1c, type: 3}
 --- !u!1 &355218069 stripped
 GameObject:
@@ -1889,13 +1892,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7207951391389045143, guid: b440807411d83934cb3a15ba406a2899, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 917247456}
   m_SourcePrefab: {fileID: 100100000, guid: b440807411d83934cb3a15ba406a2899, type: 3}
 --- !u!1 &917247453 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7207951391389045143, guid: b440807411d83934cb3a15ba406a2899, type: 3}
   m_PrefabInstance: {fileID: 917247452}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &917247456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917247453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72fbbb2afbb5ca84fadd37a587bbcace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 10
+  Range: 10
+  RPM: 240
+  ReroadSpeed: 10
+  MaxAmmo: 17
 --- !u!1 &973751719
 GameObject:
   m_ObjectHideFlags: 0
@@ -2316,6 +2339,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1313631073}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1047401066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1047401067}
+  - component: {fileID: 1047401068}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1047401067
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047401066}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.712186, y: 28.57606, z: -5.9140854}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1047401068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047401066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b9202bcc148a34faafc2c91d7b3aa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1172150668
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,7 +2614,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curWeapon: {fileID: 0}
   weapon: {fileID: 917247453}
-  wepName: 
   canSwapWep: 0
 --- !u!1 &1262543044
 GameObject:
@@ -2668,6 +2734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponPrefab: {fileID: 355218069}
+  Data: {fileID: 1570986529}
 --- !u!1 &1313631072
 GameObject:
   m_ObjectHideFlags: 0
@@ -3002,6 +3069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponPrefab: {fileID: 917247453}
+  Data: {fileID: 917247456}
 --- !u!1 &1457913883
 GameObject:
   m_ObjectHideFlags: 0
@@ -3174,6 +3242,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5777191635318919526, guid: bfc23627f0bbddb4a9096d73f7702a1c, type: 3}
   m_PrefabInstance: {fileID: 355218068}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1570986529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355218069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72fbbb2afbb5ca84fadd37a587bbcace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 10
+  Range: 10
+  RPM: 0
+  ReroadSpeed: 10
+  MaxAmmo: 10
 --- !u!1 &1655589355
 GameObject:
   m_ObjectHideFlags: 0
@@ -4416,3 +4501,4 @@ SceneRoots:
   - {fileID: 711871314}
   - {fileID: 1443786482}
   - {fileID: 1262543048}
+  - {fileID: 1047401067}

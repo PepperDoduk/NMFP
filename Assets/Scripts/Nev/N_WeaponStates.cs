@@ -6,16 +6,11 @@ using UnityEngine;
 public class N_WeaponStates : MonoBehaviour
 {
     public GameObject WeaponPrefab;
-    public N_WeaponData Data { get; }
-
-
-    public N_WeaponStates(N_WeaponData pData)
-    {
-        Data = pData;
-    }
+    public N_WeaponData Data;
 
     private void Awake()
     {
-        //WeaponPrefab.SetActive(false);
+        WeaponPrefab.SetActive(false);
+        Data = WeaponPrefab.GetComponent<N_WeaponData>();
     }
 }

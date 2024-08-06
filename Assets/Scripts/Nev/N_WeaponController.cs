@@ -7,7 +7,7 @@ public class N_WeaponController : MonoBehaviour
     public N_WeaponStates curWeapon;
     public GameObject weapon;
     N_WeaponStates swapWeapon;
-    public string wepName;
+    //public string wepName;
     public bool canSwapWep = false;
 
     private void Awake()
@@ -23,6 +23,7 @@ public class N_WeaponController : MonoBehaviour
             weapon = swapWeapon.WeaponPrefab;
             curWeapon = swapWeapon;
             weapon.SetActive(true);
+            GetComponent<N_PlayerRayCast>().canShot = true;
             Debug.Log("Weapon Swapped");
         }
     }

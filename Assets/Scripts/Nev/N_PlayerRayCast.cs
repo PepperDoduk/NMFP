@@ -9,11 +9,11 @@ public class N_PlayerRayCast : MonoBehaviour
     public bool reroad = false;
     public bool canShot = true;
 
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && canShot && !reroad)
         {
+            Debug.Log("Shot");
             Debug.DrawRay(transform.position, transform.forward * maxRayDistance, Color.blue, 0.3f);
             canShot = false;
 
@@ -31,7 +31,8 @@ public class N_PlayerRayCast : MonoBehaviour
     }
     IEnumerator Shotcooldown()
     {
-        yield return new WaitForSeconds(0.2f);
+        float RPM = GetComponent<N_WeaponController>().curWeapon.Data.RPM;
+        yield return new WaitForSeconds(1 / (RPM / 60));
         canShot = true;
     }
 }
