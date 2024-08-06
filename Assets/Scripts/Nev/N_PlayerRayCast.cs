@@ -2,32 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class N_PlayerRayCast : MonoBehaviour
 {
     RaycastHit hit;
     float maxRayDistance = 15f;
     public bool reroad = false;
     public bool canShot = true;
+    public bool repeater = true;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && canShot && !reroad)
+        if (Input.GetKeyDown(KeyCode.V))
         {
-            Debug.Log("Shot");
-            Debug.DrawRay(transform.position, transform.forward * maxRayDistance, Color.blue, 0.3f);
-            canShot = false;
-
-            if (Physics.Raycast(transform.position, transform.forward, out hit, maxRayDistance))
+            if (repeater)
             {
-                //Debug.Log($"{hit.collider.tag} Hit");
-                if (hit.collider.tag == "Enemy")
-                {
-                    Debug.Log("EnemyHit");
-                    hit.collider.gameObject.GetComponent<N_EnemyController>().states.TakeDamage(10);
-                }
+                repeater = false;
             }
-            StartCoroutine(Shotcooldown());
+            else
+            {
+                repeater = true;
+            }
         }
+
+        if (repeater)
+        {
+            if(Input.GetKey(KeyCode.Mouse0) && canShot && !reroad)
+            {
+                Shot();
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0) && canShot && !reroad)
+            {
+                Shot();
+            }
+        }
+    }
+    private void Shot()
+    {
+        Debug.Log("Shot");
+        Debug.DrawRay(transform.position, transform.forward * maxRayDistance, Color.blue, 0.3f);
+        canShot = false;
+
+        if (Physics.Raycast(transform.position, transform.forward, out hit, maxRayDistance))
+        {
+            //Debug.Log($"{hit.collider.tag} Hit");
+            if (hit.collider.tag == "Enemy")
+            {
+                Debug.Log("EnemyHit");
+                hit.collider.gameObject.GetComponent<N_EnemyController>().states.TakeDamage(10);
+            }
+        }
+        StartCoroutine(Shotcooldown());
     }
     IEnumerator Shotcooldown()
     {
