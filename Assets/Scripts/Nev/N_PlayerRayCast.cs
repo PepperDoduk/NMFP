@@ -9,6 +9,7 @@ public class N_PlayerRayCast : MonoBehaviour
     float maxRayDistance = 15f;
     public bool reroad = false;
     public bool canShot = true;
+    public bool shotting = false;
     public bool repeater = true;
 
     private void Update()
@@ -43,8 +44,9 @@ public class N_PlayerRayCast : MonoBehaviour
     private void Shot()
     {
         Debug.Log("Shot");
-        Debug.DrawRay(transform.position, transform.forward * maxRayDistance, Color.blue, 0.3f);
         canShot = false;
+        shotting = true;
+        Debug.DrawRay(transform.position, transform.forward * maxRayDistance, Color.blue, 0.3f);
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, maxRayDistance))
         {
@@ -62,5 +64,6 @@ public class N_PlayerRayCast : MonoBehaviour
         float RPM = GetComponent<N_WeaponController>().curWeapon.Data.RPM;
         yield return new WaitForSeconds(1 / (RPM / 60));
         canShot = true;
+        shotting = false;
     }
 }

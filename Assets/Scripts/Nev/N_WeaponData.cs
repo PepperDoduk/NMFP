@@ -9,5 +9,6 @@ public class N_WeaponData : MonoBehaviour
     public float Range;
     public float RPM;
     public int ReroadSpeed;
+    public int CurAmmo;
     public int MaxAmmo;
 }

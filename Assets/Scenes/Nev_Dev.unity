@@ -879,7 +879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &504940020
 Transform:
   m_ObjectHideFlags: 0
@@ -1831,7 +1831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7207951391389045143, guid: b440807411d83934cb3a15ba406a2899, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8417175258625051124, guid: b440807411d83934cb3a15ba406a2899, type: 3}
       propertyPath: m_LocalScale.x
@@ -1918,6 +1918,7 @@ MonoBehaviour:
   Range: 10
   RPM: 240
   ReroadSpeed: 10
+  CurAmmo: 0
   MaxAmmo: 17
 --- !u!1 &973751719
 GameObject:
@@ -2600,6 +2601,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reroad: 0
   canShot: 1
+  shotting: 0
+  repeater: 1
 --- !u!114 &1180364752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2734,7 +2737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponPrefab: {fileID: 355218069}
-  Data: {fileID: 1570986529}
+  Data: {fileID: 0}
 --- !u!1 &1313631072
 GameObject:
   m_ObjectHideFlags: 0
@@ -3050,7 +3053,7 @@ Transform:
   m_GameObject: {fileID: 1443786478}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -55, y: 12, z: -31.63}
+  m_LocalPosition: {x: -24.3, y: 2.1, z: -2.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3069,7 +3072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponPrefab: {fileID: 917247453}
-  Data: {fileID: 917247456}
+  Data: {fileID: 0}
 --- !u!1 &1457913883
 GameObject:
   m_ObjectHideFlags: 0
@@ -3258,6 +3261,7 @@ MonoBehaviour:
   Range: 10
   RPM: 0
   ReroadSpeed: 10
+  CurAmmo: 0
   MaxAmmo: 10
 --- !u!1 &1655589355
 GameObject:
