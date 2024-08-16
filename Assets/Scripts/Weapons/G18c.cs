@@ -5,6 +5,7 @@ using UnityEngine;
 public class G18c : MonoBehaviour
 {
     public N_PlayerRayCast playerRay;
+    public N_WeaponController Weapon;
     public Animator anim;
     public int animNum = 0;
 
@@ -17,23 +18,24 @@ public class G18c : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         playerRay = GameObject.Find("Player").GetComponent<N_PlayerRayCast>();
+        Weapon = GameObject.Find("Player").GetComponent<N_WeaponController>();
         maxAmmo = GetComponent<N_WeaponData>().MaxAmmo;
     }
 
     void Update()
     {
-        currentAmmo = GameObject.Find("Player").GetComponent<N_WeaponController>().curWeapon.Data.CurAmmo;
+        currentAmmo = Weapon.curWeapon.Data.CurAmmo;
         anim.SetInteger("g18", animNum);
 
         if (currentAmmo < 1)
         {
             animNum = 1;
             playerRay.reroad = true;
-            GameObject.Find("Player").GetComponent<N_WeaponController>().curWeapon.Data.CurAmmo = maxAmmo;
+            Weapon.curWeapon.Data.CurAmmo = maxAmmo;
             Debug.Log("Reroaded");
         }
 
-        if(GameObject.Find("Player").GetComponent<N_PlayerRayCast>().repeater)
+        if(playerRay.repeater)
         {
             if (Input.GetMouseButton(0) && currentAmmo > 0)
             {
@@ -54,7 +56,7 @@ public class G18c : MonoBehaviour
         
         if(Input.GetMouseButtonUp(0))
         {
-            animNum = 0;
+            //animNum = 0;
         }
 
         if(Input.GetKeyDown(KeyCode.R) && currentAmmo != maxAmmo)
@@ -65,8 +67,9 @@ public class G18c : MonoBehaviour
 
     public void Fire()
     {
-        GameObject.Find("Player").GetComponent<N_WeaponController>().curWeapon.Data.CurAmmo--;
         Debug.Log("Fire");
+        Weapon.curWeapon.Data.CurAmmo--;
+        playerRay.Shot();
         AudioManager.instance.PlaySfx(AudioManager.Sfx.G18fire);
     }
     public void R1()
@@ -88,8 +91,13 @@ public class G18c : MonoBehaviour
     public void Reaload()
     {
         Debug.Log("reroading");
-        GameObject.Find("Player").GetComponent<N_WeaponController>().curWeapon.Data.CurAmmo = maxAmmo;
+        Weapon.curWeapon.Data.CurAmmo = maxAmmo;
         animNum = 0;
         playerRay.reroad = false;
+    }
+
+    public void ResetAnimation()
+    {
+        animNum = 0;
     }
 }

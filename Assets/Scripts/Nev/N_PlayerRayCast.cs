@@ -25,23 +25,8 @@ public class N_PlayerRayCast : MonoBehaviour
                 repeater = true;
             }
         }
-
-        if (repeater)
-        {
-            if(Input.GetKey(KeyCode.Mouse0) && canShot && !reroad)
-            {
-                Shot();
-            }
-        }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.Mouse0) && canShot && !reroad)
-            {
-                Shot();
-            }
-        }
     }
-    private void Shot()
+    public void Shot()
     {
         Debug.Log("Shot");
         canShot = false;
