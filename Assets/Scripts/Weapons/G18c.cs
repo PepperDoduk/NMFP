@@ -14,6 +14,8 @@ public class G18c : MonoBehaviour
     public int maxAmmo;
     public int currentAmmo;
 
+    public bool reroading = false;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -30,14 +32,14 @@ public class G18c : MonoBehaviour
         if (currentAmmo < 1)
         {
             animNum = 1;
-            playerRay.reroad = true;
+            reroading = true;
             Weapon.curWeapon.Data.CurAmmo = maxAmmo;
-            Debug.Log("Reroaded");
+            Debug.Log("Reroading");
         }
 
         if(playerRay.repeater)
         {
-            if (Input.GetMouseButton(0) && currentAmmo > 0 && playerRay.canShot)
+            if (Input.GetMouseButton(0) && currentAmmo > 0 && !reroading && playerRay.canShot)
             {
                 randF = Random.Range(-3, 0);
 
@@ -46,7 +48,7 @@ public class G18c : MonoBehaviour
         }
         else
         {
-            if (Input.GetMouseButtonDown(0) && currentAmmo > 0 && playerRay.canShot)
+            if (Input.GetMouseButtonDown(0) && currentAmmo > 0 && !reroading && playerRay.canShot)
             {
                 randF = Random.Range(-3, 0);
 
@@ -85,10 +87,10 @@ public class G18c : MonoBehaviour
 
     public void Reaload()
     {
-        Debug.Log("reroading");
+        Debug.Log("Reroaded");
         Weapon.curWeapon.Data.CurAmmo = maxAmmo;
         animNum = 0;
-        playerRay.reroad = false;
+        reroading = false;
     }
 
     public void ResetAnimation()

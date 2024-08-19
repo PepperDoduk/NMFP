@@ -1916,7 +1916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 10
   Range: 10
-  RPM: 240
+  RPM: 1100
   ReroadSpeed: 10
   CurAmmo: 0
   MaxAmmo: 17
