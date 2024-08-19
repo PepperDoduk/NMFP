@@ -37,7 +37,7 @@ public class G18c : MonoBehaviour
 
         if(playerRay.repeater)
         {
-            if (Input.GetMouseButton(0) && currentAmmo > 0)
+            if (Input.GetMouseButton(0) && currentAmmo > 0 && playerRay.canShot)
             {
                 randF = Random.Range(-3, 0);
 
@@ -46,17 +46,12 @@ public class G18c : MonoBehaviour
         }
         else
         {
-            if (Input.GetMouseButtonDown(0) && currentAmmo > 0)
+            if (Input.GetMouseButtonDown(0) && currentAmmo > 0 && playerRay.canShot)
             {
                 randF = Random.Range(-3, 0);
 
                 animNum = randF;
             }
-        }
-        
-        if(Input.GetMouseButtonUp(0))
-        {
-            //animNum = 0;
         }
 
         if(Input.GetKeyDown(KeyCode.R) && currentAmmo != maxAmmo)
