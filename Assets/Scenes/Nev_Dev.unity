@@ -1310,15 +1310,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2305975305935549676, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.3625605
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2305975305935549676, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5620837
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2305975305935549676, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.1191645
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2305975305935549676, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2599,9 +2599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19d52685921712a4aba8ad46cf782a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reroad: 0
   canShot: 1
-  shotting: 0
   repeater: 1
 --- !u!114 &1180364752
 MonoBehaviour:
@@ -2615,9 +2613,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 147601e50edcb7e4ea9c78b7340aa112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Inventory: []
+  hasItem: 
+  weaponPrefab: {fileID: 917247453}
   curWeapon: {fileID: 0}
-  weapon: {fileID: 917247453}
+  swapWeapon: {fileID: 0}
   canSwapWep: 0
+  canChangeWep: 0
+  swapCooldown: 0.5
+  InvenNum: 0
+  maxInvenNum: 3
 --- !u!1 &1262543044
 GameObject:
   m_ObjectHideFlags: 0
