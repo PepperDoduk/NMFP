@@ -4,23 +4,27 @@ using UnityEngine;
 
 public class N_WeaponController : MonoBehaviour
 {
-    public GameObject[] Inventory;
-    public bool[] hasItem;
-
-    public GameObject weaponPrefab;
-    public N_WeaponStates curWeapon;
-    public N_WeaponStates swapWeapon;
 
     public bool canSwapWep = false;
     public bool canChangeWep = true;
     public float swapCooldown = 0.5f;
 
+    public GameObject Weapon;
+    public N_WeaponStates swapWeapon;
+    public N_WeaponStates[] Inventory;
+
+    public bool[] hasItem;
     public int InvenNum = 0;
     public int maxInvenNum = 3;
 
     private void Awake()
     {
-
+        //Inventory = new N_WeaponStates[maxInvenNum];
+        //hasItem = new bool[maxInvenNum];
+        for (int i = 1; i < maxInvenNum; ++i)
+        {
+            hasItem[i] = false;
+        }
     }
 
     private void Update()
@@ -28,12 +32,35 @@ public class N_WeaponController : MonoBehaviour
         //Swap Weapon
         if (Input.GetKeyDown(KeyCode.F) && canSwapWep && canChangeWep)
         {
+            bool trigger = true;
             canChangeWep = false;
+            Weapon.SetActive(false);
 
-            weaponPrefab.SetActive(false);
-            weaponPrefab = swapWeapon.WeaponPrefab;
-            curWeapon = swapWeapon;
-            weaponPrefab.SetActive(true);
+            for (int i = 0; i < maxInvenNum; ++i)
+            {
+                if (hasItem[i] == false)
+                {
+                    trigger = false;
+
+                    //현재 무기를 바닥에 버리는 함수
+
+                    hasItem[i] = true;
+                    Inventory[i] = swapWeapon;
+                    InvenNum = i;
+
+                    break;
+                }
+            }
+            if (trigger)
+            {
+                //현재 무기를 바닥에 버리는 함수
+
+                Inventory[InvenNum] = swapWeapon;
+            }
+
+            Weapon = Inventory[InvenNum].WeaponPrefab;
+            Weapon.SetActive(true);
+
 
             GetComponent<N_PlayerRayCast>().canShot = true;
             Debug.Log("Weapon Swapped");
@@ -41,27 +68,40 @@ public class N_WeaponController : MonoBehaviour
             StartCoroutine(SwapCooldown(swapCooldown));
         }
 
-        //Inventory
+        //InventoryWheelControll
         float wheelInput = Input.GetAxis("Mouse ScrollWheel");
         if (wheelInput > 0 && canChangeWep)
         {
             canChangeWep = false;
-            InvenNum++;
-            InvenNum %= maxInvenNum;
+
+            do
+            {
+                InvenNum--;
+                if (InvenNum < 0)
+                    InvenNum = maxInvenNum - 1;
+            } while (!hasItem[InvenNum]) ;
+
+            Weapon = Inventory[InvenNum].WeaponPrefab;
+            Weapon.SetActive(true);
 
             StartCoroutine(SwapCooldown(swapCooldown));
 
             Debug.Log("ScrollUP");
         }
-        else if(wheelInput < 0 && canChangeWep)
+        else if (wheelInput < 0 && canChangeWep)
         {
             canChangeWep = false;
-            InvenNum--;
-            if (InvenNum < 0)
-                InvenNum = maxInvenNum;
+
+            do
+            {
+                InvenNum++;
+                InvenNum %= maxInvenNum;
+            } while (!hasItem[InvenNum]);
+
+            Weapon = Inventory[InvenNum].WeaponPrefab;
+            Weapon.SetActive(true);
 
             StartCoroutine(SwapCooldown(swapCooldown));
-
             Debug.Log("ScrollDwon");
         }
 
@@ -85,7 +125,7 @@ public class N_WeaponController : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if(other.transform.tag == "Weapon")
+        if (other.transform.tag == "Weapon")
         {
             Debug.Log("WeaponExit");
 

@@ -1831,7 +1831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7207951391389045143, guid: b440807411d83934cb3a15ba406a2899, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8417175258625051124, guid: b440807411d83934cb3a15ba406a2899, type: 3}
       propertyPath: m_LocalScale.x
@@ -2613,14 +2613,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 147601e50edcb7e4ea9c78b7340aa112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Inventory: []
-  hasItem: 
-  weaponPrefab: {fileID: 917247453}
-  curWeapon: {fileID: 0}
-  swapWeapon: {fileID: 0}
   canSwapWep: 0
-  canChangeWep: 0
+  canChangeWep: 1
   swapCooldown: 0.5
+  Weapon: {fileID: 917247453}
+  swapWeapon: {fileID: 0}
+  Inventory:
+  - {fileID: 1443786483}
+  - {fileID: 0}
+  - {fileID: 0}
+  hasItem: 010000
   InvenNum: 0
   maxInvenNum: 3
 --- !u!1 &1262543044
@@ -4503,8 +4505,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 461136872}
   - {fileID: 148709142}
-  - {fileID: 1180364750}
   - {fileID: 504940020}
+  - {fileID: 1180364750}
   - {fileID: 1731929610}
   - {fileID: 1914118872}
   - {fileID: 711871314}

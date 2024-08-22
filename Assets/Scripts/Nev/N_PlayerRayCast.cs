@@ -5,10 +5,17 @@ using UnityEngine;
 
 public class N_PlayerRayCast : MonoBehaviour
 {
+    N_WeaponController weapon;
     RaycastHit hit;
+
     float maxRayDistance = 15f;
     public bool canShot = true;
     public bool repeater = true;
+
+    private void Awake()
+    {
+        weapon = GetComponent<N_WeaponController>();
+    }
 
     private void Update()
     {
@@ -43,7 +50,7 @@ public class N_PlayerRayCast : MonoBehaviour
     }
     IEnumerator Shotcooldown()
     {
-        float RPM = GetComponent<N_WeaponController>().curWeapon.Data.RPM;
+        float RPM = weapon.Inventory[weapon.InvenNum].Data.RPM;
         yield return new WaitForSeconds(1 / (RPM / 60));
         canShot = true;
     }

@@ -26,14 +26,14 @@ public class G18c : MonoBehaviour
 
     void Update()
     {
-        currentAmmo = Weapon.curWeapon.Data.CurAmmo;
+        currentAmmo = Weapon.Inventory[Weapon.InvenNum].Data.CurAmmo;
         anim.SetInteger("g18", animNum);
 
         if (currentAmmo < 1)
         {
             animNum = 1;
             reroading = true;
-            Weapon.curWeapon.Data.CurAmmo = maxAmmo;
+            Weapon.Inventory[Weapon.InvenNum].Data.CurAmmo = maxAmmo;
             Debug.Log("Reroading");
         }
 
@@ -65,7 +65,7 @@ public class G18c : MonoBehaviour
     public void Fire()
     {
         Debug.Log("Fire");
-        Weapon.curWeapon.Data.CurAmmo--;
+        Weapon.Inventory[Weapon.InvenNum].Data.CurAmmo--;
         playerRay.Shot();
         AudioManager.instance.PlaySfx(AudioManager.Sfx.G18fire);
     }
@@ -88,7 +88,7 @@ public class G18c : MonoBehaviour
     public void Reaload()
     {
         Debug.Log("Reroaded");
-        Weapon.curWeapon.Data.CurAmmo = maxAmmo;
+        Weapon.Inventory[Weapon.InvenNum].Data.CurAmmo = maxAmmo;
         animNum = 0;
         reroading = false;
     }
