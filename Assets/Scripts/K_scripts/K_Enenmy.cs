@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 public class K_Enenmy : MonoBehaviour
 {
@@ -7,23 +8,26 @@ public class K_Enenmy : MonoBehaviour
     public Transform target;
     public NavMeshAgent agent;
     public int Hp;
-    private int currenthp;
-    
+    private int currentHp;
+
+    public event Action OnDeath;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         GameObject player = GameObject.FindWithTag("Player");
         target = player.transform;
-        currenthp = Hp;
+        currentHp = Hp;
     }
 
     void Update()
     {
-
         float distance = Vector3.Distance(target.position, transform.position);
-        agent.SetDestination(target.position);
 
+        if (distance <= lookRadius)
+        {
+            agent.SetDestination(target.position);
+        }
     }
 
     void OnDrawGizmos()
@@ -31,16 +35,19 @@ public class K_Enenmy : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
     }
+
     public void TakeDamage(int damage)
     {
-        currenthp -= damage;
-        if(currenthp<=0)
+        currentHp -= damage;
+        if (currentHp <= 0)
         {
             Die();
         }
     }
-    void Die()
+
+    public void Die()
     {
+        OnDeath?.Invoke();
         Destroy(gameObject);
     }
 }
