@@ -9,29 +9,62 @@ public class K_AlienScout : MonoBehaviour
     public GameObject enemybullet;
     public Transform spawnPoint;
     public float enemySpeed;
-    public Transform player; // 플레이어의 Transform을 참조
+    public float shootingRange = 10f; 
+    private Transform player;
+    private bool isShooting = false;
 
     void Start()
     {
-
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        
     }
 
     void Update()
     {
-        ShootAtPlayer();
+        if (player == null) return;
+
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        if (distanceToPlayer <= shootingRange)
+        {
+            if (!isShooting)
+            {
+                isShooting = true;
+                StartCoroutine(ShootAtPlayer());
+            }
+        }
+        else
+        {
+            isShooting = false;
+            MoveTowardsPlayer();
+        }
     }
 
-    void ShootAtPlayer()
+    IEnumerator ShootAtPlayer()
     {
-        bulletTime -= Time.deltaTime;
-        if (bulletTime > 0) return;
-        bulletTime = time;
-        GameObject bulletObj = Instantiate(enemybullet, spawnPoint.position, spawnPoint.rotation);
-        K_Bullet bulletScript = bulletObj.GetComponent<K_Bullet>();
-        if (bulletScript != null)
+        while (isShooting)
         {
-            bulletScript.SetTarget(player);
+            bulletTime -= Time.deltaTime;
+            if (bulletTime <= 0)
+            {
+                bulletTime = time;
+                GameObject bulletObj = Instantiate(enemybullet, spawnPoint.position, spawnPoint.rotation);
+                K_Bullet bulletScript = bulletObj.GetComponent<K_Bullet>();
+                if (bulletScript != null)
+                {
+                    bulletScript.SetTarget(player);
+                }
+                Destroy(bulletObj, 5f);
+            }
+
+            yield return null; 
         }
-        Destroy(bulletObj, 5f);
+    }
+
+    void MoveTowardsPlayer()
+    {
+       
+        Vector3 direction = (player.position - transform.position).normalized;
+        transform.position += direction * Speed * Time.deltaTime;
     }
 }

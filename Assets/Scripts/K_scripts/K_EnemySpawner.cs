@@ -1,19 +1,30 @@
 using System.Collections;
-using System.Collections.Generic; // List 사용을 위해 필요
+using System.Collections.Generic;
 using UnityEngine;
 
 public class K_EnemySpawner : MonoBehaviour
 {
     public GameObject[] Monsters;
-    public float MonsterInterval = 10f;
     public Vector3[] spawnerPositions;
     public float spawnRange = 2.0f;
     public Transform player;
-    public float triggerRadius = 5f; // 웨이브 시작 범위
-    private int currentWave = 1;
+    public float triggerRadius = 5f;
+    public int[][] monstersPerWavePerType;
+    public float waveInterval = 10f;
+    private int currentWave = 0;
     private bool waveActive = false;
 
     private List<GameObject> activeMonsters = new List<GameObject>();
+
+    void Start()
+    {
+        monstersPerWavePerType = new int[][]
+        {
+            new int[] { 1, 2, 1 },//1wave 
+            new int[] { 2, 3, 2 },//2wave
+            new int[] { 3, 4, 3 },//3wave
+        };
+    }
 
     void Update()
     {
@@ -23,7 +34,7 @@ public class K_EnemySpawner : MonoBehaviour
             StartCoroutine(SpawnWaves());
         }
 
-        if (waveActive && currentWave == 5 && activeMonsters.Count == 0)
+        if (waveActive && currentWave >= monstersPerWavePerType.Length && activeMonsters.Count == 0)
         {
             waveActive = false;
             Debug.Log("모든 웨이브가 완료되었습니다!");
@@ -32,25 +43,24 @@ public class K_EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnWaves()
     {
-        while (currentWave <= 5)
+        while (currentWave < monstersPerWavePerType.Length)
         {
-            int spawnerCount = Mathf.Min(currentWave, spawnerPositions.Length); // 스포너 개수 제한
-            for (int i = 0; i < spawnerCount; i++)
+            int[] monstersToSpawn = monstersPerWavePerType[currentWave];
+            for (int i = 0; i < Monsters.Length; i++)
             {
-                StartCoroutine(SpawnEnemies(MonsterInterval, spawnerPositions[i]));
+                int numberOfEnemies = monstersToSpawn[i];
+                SpawnEnemies(numberOfEnemies, spawnerPositions[i % spawnerPositions.Length]);
             }
 
-            yield return new WaitForSeconds(MonsterInterval * 10);
+            yield return new WaitForSeconds(waveInterval);
             currentWave++;
         }
     }
 
-    IEnumerator SpawnEnemies(float interval, Vector3 spawnerPosition)
+    void SpawnEnemies(int numberOfEnemies, Vector3 spawnerPosition)
     {
-        for (int i = 0; i < currentWave; i++)
+        for (int i = 0; i < numberOfEnemies; i++)
         {
-            yield return new WaitForSeconds(interval);
-
             Vector3 spawnPosition = spawnerPosition + Random.insideUnitSphere * spawnRange;
             spawnPosition.y = spawnerPosition.y;
 
