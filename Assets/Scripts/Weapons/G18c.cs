@@ -31,9 +31,8 @@ public class G18c : MonoBehaviour
 
         if (currentAmmo < 1)
         {
-            animNum = 1;
             reroading = true;
-            Weapon.Inventory[Weapon.InvenNum].Data.CurAmmo = maxAmmo;
+            animNum = 1;
             Debug.Log("Reroading");
         }
 
