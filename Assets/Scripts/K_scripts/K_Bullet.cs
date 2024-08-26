@@ -2,31 +2,30 @@ using UnityEngine;
 
 public class K_Bullet : MonoBehaviour
 {
-    private Transform target;
+    private Vector3 targetPosition;
     public float speed = 10f;
+    public float destroyDistance = 0.1f; 
 
     public void SetTarget(Transform target)
     {
-        this.target = target;
+        targetPosition = target.position;
     }
 
     void Update()
     {
-        if (target == null)
+       
+        if (Vector3.Distance(transform.position, targetPosition) <= destroyDistance)
         {
             Destroy(gameObject);
             return;
         }
 
-        Vector3 direction = (target.position - transform.position).normalized;
+        Vector3 direction = (targetPosition - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform == target)
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }
