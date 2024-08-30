@@ -12,6 +12,8 @@ public class N_PlayerRayCast : MonoBehaviour
     public bool canShot = true;
     public bool repeater = true;
 
+    public float rayZ = 0.02f, rayY = 0.02f;
+
     private void Awake()
     {
         weapon = GetComponent<N_WeaponController>();
@@ -35,7 +37,17 @@ public class N_PlayerRayCast : MonoBehaviour
     {
         Debug.Log("Shot");
         canShot = false;
-        Debug.DrawRay(transform.position, transform.forward * maxRayDistance, Color.blue, 0.3f);
+        //Debug.DrawRay(transform.position, transform.forward * maxRayDistance, Color.blue, 0.3f);
+
+        float randY = Random.Range(-rayY, rayY);
+        float randZ = Random.Range(-rayZ, rayZ);
+
+        Debug.DrawRay(transform.position,
+            new Vector3(transform.forward.x * maxRayDistance, transform.forward.y * maxRayDistance + randY, transform.forward.z * maxRayDistance + randY),
+            Color.blue, 0.3f);
+        Debug.DrawRay(transform.position,
+            new Vector3(transform.forward.x * maxRayDistance, transform.forward.y * maxRayDistance - randZ, transform.forward.z * maxRayDistance - randZ),
+            Color.blue, 0.3f);
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, maxRayDistance))
         {
