@@ -28,7 +28,9 @@ public class K_Enenmy : MonoBehaviour
         {
             agent.SetDestination(target.position);
         }
+        
     }
+
 
     void OnDrawGizmos()
     {

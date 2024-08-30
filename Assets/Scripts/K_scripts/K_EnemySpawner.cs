@@ -14,7 +14,7 @@ public class K_EnemySpawner : MonoBehaviour
     private int currentWave = 0;
     private bool waveActive = false;
 
-    private List<GameObject> activeMonsters = new List<GameObject>();
+    public List<GameObject> activeMonsters = new List<GameObject>();
 
     void Start()
     {
