@@ -8,11 +8,12 @@ public class N_PlayerRayCast : MonoBehaviour
     N_WeaponController weapon;
     RaycastHit hit;
 
-    float maxRayDistance = 15f;
     public bool canShot = true;
     public bool repeater = true;
 
-    public float rayZ = 0.02f, rayY = 0.02f;
+    float maxRayDistance = 15f;
+    public float rayZ = 1.0f;
+    public float rayY = 1.0f;
 
     private void Awake()
     {
@@ -35,12 +36,14 @@ public class N_PlayerRayCast : MonoBehaviour
     }
     public void Shot()
     {
-        Debug.Log("Shot");
+        //Debug.Log("Shot");
         canShot = false;
         //Debug.DrawRay(transform.position, transform.forward * maxRayDistance, Color.blue, 0.3f);
 
-        float randY = Random.Range(-rayY, rayY);
-        float randZ = Random.Range(-rayZ, rayZ);
+        float randY = Random.Range(-rayY * 100, rayY * 100);
+        float randZ = Random.Range(-rayZ * 100, rayZ * 100);
+        randY /= 100;
+        randZ /= 100;
 
         Debug.DrawRay(transform.position,
             new Vector3(transform.forward.x * maxRayDistance, transform.forward.y * maxRayDistance + randY, transform.forward.z * maxRayDistance + randY),
@@ -55,7 +58,6 @@ public class N_PlayerRayCast : MonoBehaviour
             if (hit.collider.tag == "Enemy")
             {
                 Debug.Log("EnemyHit");
-                hit.collider.gameObject.GetComponent<N_EnemyController>().states.TakeDamage(10);
             }
         }
         StartCoroutine(Shotcooldown());
