@@ -48,11 +48,13 @@ public class N_PlayerRayCast : MonoBehaviour
         Debug.DrawRay(transform.position,
             new Vector3(transform.forward.x * maxRayDistance, transform.forward.y * maxRayDistance + randY, transform.forward.z * maxRayDistance + randY),
             Color.blue, 0.3f);
-        Debug.DrawRay(transform.position,
-            new Vector3(transform.forward.x * maxRayDistance, transform.forward.y * maxRayDistance - randZ, transform.forward.z * maxRayDistance - randZ),
-            Color.blue, 0.3f);
 
-        if (Physics.Raycast(transform.position, transform.forward, out hit, maxRayDistance))
+        if (Physics.Raycast(transform.position,
+            new Vector3(
+                transform.forward.x * maxRayDistance,
+                transform.forward.y * maxRayDistance + randY,
+                transform.forward.z * maxRayDistance + randY)
+            , out hit, maxRayDistance))
         {
             //Debug.Log($"{hit.collider.tag} Hit");
             if (hit.collider.tag == "Enemy")

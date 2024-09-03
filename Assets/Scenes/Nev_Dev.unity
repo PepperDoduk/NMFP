@@ -2916,8 +2916,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canShot: 1
   repeater: 1
-  rayZ: 1
-  rayY: 1
+  rayZ: 0.5
+  rayY: 0.25
 --- !u!114 &1180364752
 MonoBehaviour:
   m_ObjectHideFlags: 0
