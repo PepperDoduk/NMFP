@@ -56,7 +56,7 @@ public class K_spawner_story : MonoBehaviour
             GameObject enemy = Instantiate(GeneralEnemies[Random.Range(0, GeneralEnemies.Length)], furthestPosition, Quaternion.identity);
             ActiveMonsters.Add(enemy);
 
-            yield return new WaitForSeconds(2f); // 老馆 格钎 积己 埃拜
+            yield return new WaitForSeconds(2f); 
         }
     }
 

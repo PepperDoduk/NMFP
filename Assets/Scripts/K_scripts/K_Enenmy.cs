@@ -10,6 +10,9 @@ public class K_Enenmy : MonoBehaviour
     public int Hp;
     private int currentHp;
 
+    public GameObject[] dropItems;  
+    public float dropChance = 0.5f;
+
     public event Action OnDeath;
 
     void Start()
@@ -28,9 +31,7 @@ public class K_Enenmy : MonoBehaviour
         {
             agent.SetDestination(target.position);
         }
-        
     }
-
 
     void OnDrawGizmos()
     {
@@ -50,6 +51,20 @@ public class K_Enenmy : MonoBehaviour
     public void Die()
     {
         OnDeath?.Invoke();
+        TryDropItem(); 
         Destroy(gameObject);
+    }
+
+    void TryDropItem()
+    {
+        if (dropItems.Length == 0) return;
+
+        float randomValue = UnityEngine.Random.Range(0f, 1f);
+        if (randomValue <= dropChance)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, dropItems.Length);
+            GameObject dropItem = dropItems[randomIndex];
+            Instantiate(dropItem, transform.position, Quaternion.identity);
+        }
     }
 }
