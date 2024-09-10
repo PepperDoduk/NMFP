@@ -84,6 +84,8 @@ MonoBehaviour:
   target: {fileID: 0}
   agent: {fileID: 651686032520848441}
   Hp: 0
+  dropItems: []
+  dropChance: 0.5
 --- !u!195 &651686032520848441
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -97,7 +99,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 1000
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
