@@ -68,6 +68,20 @@ public class N_WeaponController : MonoBehaviour
             StartCoroutine(SwapCooldown(swapCooldown));
         }
 
+        //InventoryWeaponSwap
+        if(Input.GetKeyDown(KeyCode.Alpha1) && InvenNum != 0)
+        {
+            SelectWep(0);
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha2) && InvenNum != 1)
+        {
+            SelectWep(1);
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha3) && InvenNum != 2)
+        {
+            SelectWep(2);
+        }
+
         //InventoryWheelControll
         float wheelInput = Input.GetAxis("Mouse ScrollWheel");
         if (wheelInput > 0 && canChangeWep)
@@ -104,12 +118,25 @@ public class N_WeaponController : MonoBehaviour
             StartCoroutine(SwapCooldown(swapCooldown));
             Debug.Log("ScrollDwon");
         }
-
-        IEnumerator SwapCooldown(float cd)
+    }
+    private void  SelectWep(int num)
+    {
+        if (canChangeWep && hasItem[num])
         {
-            yield return new WaitForSeconds(swapCooldown);
-            canChangeWep = true;
+            canChangeWep = false;
+            InvenNum = num;
+
+            Weapon = Inventory[InvenNum].WeaponPrefab;
+            Weapon.SetActive(true);
+
+            StartCoroutine(SwapCooldown(swapCooldown));
         }
+        return;
+    }
+    IEnumerator SwapCooldown(float cd)
+    {
+        yield return new WaitForSeconds(swapCooldown);
+        canChangeWep = true;
     }
 
     private void OnTriggerEnter(Collider other)
