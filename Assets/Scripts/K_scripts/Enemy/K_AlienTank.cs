@@ -50,7 +50,7 @@ public class K_AlienTank : MonoBehaviour
             {
                 bulletTime = time;
                 GameObject bulletObj = Instantiate(enemybullet, spawnPoint.position, spawnPoint.rotation);
-                K_Tankbullet bulletScript = bulletObj.GetComponent<K_Tankbullet>();
+                K_missilebullet bulletScript = bulletObj.GetComponent<K_missilebullet>();
                 if (bulletScript != null)
                 {
                     bulletScript.SetTarget(player);

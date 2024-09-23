@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7186594730922658605}
   - component: {fileID: 6200896493110232572}
   - component: {fileID: 1833457652394763196}
+  - component: {fileID: -3862699527540593897}
   m_Layer: 0
   m_Name: Tankbullet
   m_TagString: Untagged
@@ -120,4 +121,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   destroyDistance: 0.1
-  explosionMaterial: {fileID: 0}
+--- !u!114 &-3862699527540593897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3336045428557012035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a10f25fa4294b8344b85e4872045a34e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particlePrefab: {fileID: 5309383021027495108, guid: c3eb83c761bf13d4ab578040f5281362, type: 3}
+  poolSize: 10

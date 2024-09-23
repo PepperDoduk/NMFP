@@ -13,10 +13,17 @@ public class K_AlienStormtrooper : MonoBehaviour
     public LineRenderer laserLine;
     public float laserDuration = 0.2f;
 
+    // 레이저 두께를 설정하는 변수
+    public float lineWidth = 0.1f;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         laserLine.enabled = false;
+
+        // LineRenderer 두께 설정
+        laserLine.startWidth = lineWidth;
+        laserLine.endWidth = lineWidth;
     }
 
     void Update()
