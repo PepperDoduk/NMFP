@@ -71,6 +71,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 3315f6aa5ddf6c44180f829ce954a2df, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9221508757637091314}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 3315f6aa5ddf6c44180f829ce954a2df, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3674873478827592803}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 3315f6aa5ddf6c44180f829ce954a2df, type: 3}
 --- !u!1 &3790652236933486746 stripped
 GameObject:
@@ -98,3 +101,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3674873478827592803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3790652236933486746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5389a24592d474048bd45dd4027e2626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRay: {fileID: 0}
+  Weapon: {fileID: 0}
+  anim: {fileID: 0}
+  animNum: 0
+  randF: 0
+  maxAmmo: 0
+  currentAmmo: 0
+  reroading: 0

@@ -95,6 +95,7 @@ public class N_WeaponController : MonoBehaviour
                     InvenNum = maxInvenNum - 1;
             } while (!hasItem[InvenNum]) ;
 
+            Weapon.SetActive(false);
             Weapon = Inventory[InvenNum].WeaponPrefab;
             Weapon.SetActive(true);
 
@@ -112,6 +113,7 @@ public class N_WeaponController : MonoBehaviour
                 InvenNum %= maxInvenNum;
             } while (!hasItem[InvenNum]);
 
+            Weapon.SetActive(false);
             Weapon = Inventory[InvenNum].WeaponPrefab;
             Weapon.SetActive(true);
 
@@ -126,6 +128,7 @@ public class N_WeaponController : MonoBehaviour
             canChangeWep = false;
             InvenNum = num;
 
+            Weapon.SetActive(false);
             Weapon = Inventory[InvenNum].WeaponPrefab;
             Weapon.SetActive(true);
 
