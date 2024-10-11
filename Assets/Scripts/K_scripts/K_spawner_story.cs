@@ -8,7 +8,7 @@ public class K_spawner_story : MonoBehaviour
     public GameObject[] GeneralEnemies;
     public Vector3[] MajorEnemySpawnPositions;
     public Vector3[] GeneralEnemySpawnPositions;
-    public int MajorEnemiesToSpawn = 3; // 소환할 주요 목표 적의 수
+    public int MajorEnemiesToSpawn = 1; // 소환할 주요 목표 적의 수
     public int GeneralEnemiesToSpawn = 5; // 소환할 일반 목표 적의 수
     public float SpawnerRange;
     public Transform player;

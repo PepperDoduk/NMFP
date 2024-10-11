@@ -145,8 +145,9 @@ MonoBehaviour:
   laserCooldown: 5
   spawnPoint: {fileID: 0}
   shootingRange: 10
-  laserLine: {fileID: 0}
+  laserLine: {fileID: 8080683649661691515}
   laserDuration: 0.2
+  lineWidth: 0.1
 --- !u!120 &8080683649661691515
 LineRenderer:
   serializedVersion: 2
