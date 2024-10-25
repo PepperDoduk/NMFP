@@ -20,7 +20,7 @@ public class TestScript_EnemyAttact : MonoBehaviour
         if (other.tag == "Player")
         {
             Debug.Log("playerenter");
-            other.gameObject.GetComponent<N_PlayerState>().TakeDamage(10);
+            other.gameObject.GetComponent<N_PlayerModel>().TakeDamage(10);
         }
     }
 }
