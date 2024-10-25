@@ -4,16 +4,30 @@ using UnityEngine;
 
 public class N_PlayerController : MonoBehaviour
 {
+    private N_IPlayerModel m_playerModel = new N_PlayerModel();
+
     public Transform caemraTransform;
     public CharacterController characterController;
 
-    public float moveSpeed = 10f;
-    public float jumpSpeed = 10f;
-    public float gravity = - 10f;
-    public float yVelocity = 0;
+    private float m_moveSpeed => m_playerModel.MoveSpeed;
+    private float m_jumpSpeed => m_playerModel.JumpSpeed;
+
+    private float MoveSpeed;
+    private float JumpSpeed;
+    private float gravity;
+    private float yVelocity;
 
     public bool isGround = true;
 
+    private void Awake()
+    {
+        m_playerModel = GetComponent<N_PlayerModel>();
+
+        MoveSpeed = m_moveSpeed;
+        JumpSpeed = m_jumpSpeed;
+        gravity = -10f;
+        yVelocity = 0;
+    }
 
     void Update()
     {
@@ -21,9 +35,7 @@ public class N_PlayerController : MonoBehaviour
         float VAxis = Input.GetAxis("Vertical");
         Vector3 moveDir = new Vector3(hAxis, 0, VAxis);
 
-        moveDir = caemraTransform.TransformDirection(moveDir);
-        moveDir *= moveSpeed;
-
+        moveDir = caemraTransform.TransformDirection(moveDir) * MoveSpeed;
         
         if(characterController.isGrounded)
         {
@@ -32,7 +44,7 @@ public class N_PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
         {
-            yVelocity = jumpSpeed;
+            yVelocity = JumpSpeed;
             isGround = false;
         }
 
