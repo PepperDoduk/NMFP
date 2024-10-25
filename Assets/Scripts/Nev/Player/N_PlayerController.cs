@@ -19,7 +19,7 @@ public class N_PlayerController : MonoBehaviour
 
     public bool isGround = true;
 
-    private void Start()
+    private void Awake()
     {
         m_playerModel = GetComponent<N_PlayerModel>();
 
