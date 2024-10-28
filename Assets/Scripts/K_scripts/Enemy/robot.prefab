@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6451959696016971889}
   - component: {fileID: 5160393260363441397}
   - component: {fileID: 7285250170884179956}
+  - component: {fileID: 8393583137091017177}
   m_Layer: 0
   m_Name: robot
   m_TagString: Untagged
@@ -212,3 +213,19 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &8393583137091017177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6461106761415131270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc14fa15673fe34a943fc8052ac4a4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootingRange: 10
+  shootInterval: 2
+  railgunMuzzleFlashParticle: {fileID: 0}
+  laserRifleMuzzleFlashParticle: {fileID: 0}

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class K_Bullet : MonoBehaviour
+public class K_Bullet : MonoBehaviour//≈ıªÁ√º
 {
     private Vector3 targetPosition;
     public float speed = 10f;

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class K_PlasmaRifle : MonoBehaviour
@@ -7,17 +6,15 @@ public class K_PlasmaRifle : MonoBehaviour
     public int Speed;
     [SerializeField] private float time = 5f;
     private float bulletTime;
-    public GameObject enemybullet;
     public Transform spawnPoint;
-    public float enemySpeed;
     public float shootingRange = 10f;
     private Transform player;
     private bool isShooting = false;
+    public GameObject muzzleFlashParticle;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
-
     }
 
     void Update()
@@ -49,13 +46,17 @@ public class K_PlasmaRifle : MonoBehaviour
             if (bulletTime <= 0)
             {
                 bulletTime = time;
-                GameObject bulletObj = Instantiate(enemybullet, spawnPoint.position, spawnPoint.rotation);
-                K_Plasma bulletScript = bulletObj.GetComponent<K_Plasma>();
-                if (bulletScript != null)
+
+                GameObject particle = Instantiate(muzzleFlashParticle, spawnPoint.position, spawnPoint.rotation);
+                Destroy(particle, 1f);
+
+                if (Physics.Raycast(spawnPoint.position, (player.position - spawnPoint.position).normalized, out RaycastHit hit, shootingRange))
                 {
-                    bulletScript.SetTarget(player);
+                    if (hit.transform.CompareTag("Player"))
+                    {
+                        // 플레이어에게 데미지
+                    }
                 }
-                Destroy(bulletObj, 5f);
             }
 
             yield return null;
@@ -64,7 +65,6 @@ public class K_PlasmaRifle : MonoBehaviour
 
     void MoveTowardsPlayer()
     {
-
         Vector3 direction = (player.position - transform.position).normalized;
         transform.position += direction * Speed * Time.deltaTime;
     }

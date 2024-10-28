@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -309,9 +309,70 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1377800890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1377800892}
+  - component: {fileID: 1377800891}
+  m_Layer: 0
+  m_Name: MonsterSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1377800891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377800890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8fe96da3d8d2614f8b465451a0d2b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MajorEnemies:
+  - {fileID: 6461106761415131270, guid: 0c6a73e58885aed49bc66459000c5aa6, type: 3}
+  - {fileID: 5382999559038644734, guid: 8a5e84478ffd90944b3e0f42d0bb21d7, type: 3}
+  GeneralEnemies:
+  - {fileID: 765787209175571503, guid: f4889cbbb06e29d4d8d995a73c6e5422, type: 3}
+  - {fileID: 5277072430982430249, guid: f22055dbce0466a4da614b94085d599e, type: 3}
+  - {fileID: 325557282877759835, guid: 52bc35c5b937efb4395e1a82319f0da3, type: 3}
+  - {fileID: 8587451110926612876, guid: 8fecafe3c22e005498fe45bbd9c5fac2, type: 3}
+  MajorEnemySpawnPositions: []
+  GeneralEnemySpawnPositions: []
+  MajorEnemiesToSpawn: 1
+  GeneralEnemiesToSpawn: 5
+  SpawnerRange: 0
+  player: {fileID: 0}
+  TriggerRadius: 0
+  hasSpawnedEnemies: 0
+--- !u!4 &1377800892
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377800890}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -23.984352, y: -3.3670595, z: 1.6505996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 966402538}
   - {fileID: 733675867}
+  - {fileID: 1377800892}

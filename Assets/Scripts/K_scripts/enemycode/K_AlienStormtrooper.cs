@@ -10,20 +10,11 @@ public class K_AlienStormtrooper : MonoBehaviour
     public float shootingRange = 10f;
     private Transform player;
     private bool isShooting = false;
-    public LineRenderer laserLine;
-    public float laserDuration = 0.2f;
-
-    // 레이저 두께를 설정하는 변수
-    public float lineWidth = 0.1f;
+    public GameObject muzzleFlashParticle;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
-        laserLine.enabled = false;
-
-        // LineRenderer 두께 설정
-        laserLine.startWidth = lineWidth;
-        laserLine.endWidth = lineWidth;
     }
 
     void Update()
@@ -56,21 +47,16 @@ public class K_AlienStormtrooper : MonoBehaviour
             {
                 laserTime = laserCooldown;
 
-                laserLine.SetPosition(0, spawnPoint.position);
-                laserLine.SetPosition(1, player.position);
-                laserLine.enabled = true;
+                GameObject particle = Instantiate(muzzleFlashParticle, spawnPoint.position, spawnPoint.rotation);
+                Destroy(particle, 1f);
 
-                RaycastHit hit;
-                if (Physics.Raycast(spawnPoint.position, (player.position - spawnPoint.position).normalized, out hit, shootingRange))
+                if (Physics.Raycast(spawnPoint.position, (player.position - spawnPoint.position).normalized, out RaycastHit hit, shootingRange))
                 {
                     if (hit.transform.CompareTag("Player"))
                     {
                         // 플레이어에게 데미지
                     }
                 }
-
-                yield return new WaitForSeconds(laserDuration);
-                laserLine.enabled = false;
             }
 
             yield return null;
