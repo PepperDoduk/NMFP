@@ -34,7 +34,13 @@ public class AudioManager : MonoBehaviour
         BarretR3,
         BarretR4,
         BarretR5,
-
+        AKr1,
+        AKr2,
+        AKr3,
+        AKr4,
+        AKr5,
+        AKr6,
+        AKr7,
 
     }
     void Awake()
