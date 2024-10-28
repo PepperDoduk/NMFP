@@ -333,6 +333,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 77039313}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!195 &210844882 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 6983567812448830845, guid: e5b67fe92ed47894d82c6b30c85caab7, type: 3}
+  m_PrefabInstance: {fileID: 8727388019607707196}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &303225138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1865,10 +1870,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookRadius: 10
   target: {fileID: 0}
-  agent: {fileID: 1368323779}
+  agent: {fileID: 0}
   Hp: 0
   dropItems: []
   dropChance: 0.5
+  fly: 0
+  flyHeight: 5
+  flySpeed: 5
 --- !u!114 &1368323781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2692,10 +2700,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookRadius: 10
   target: {fileID: 0}
-  agent: {fileID: 1848285412}
+  agent: {fileID: 0}
   Hp: 0
   dropItems: []
   dropChance: 0.5
+  fly: 0
+  flyHeight: 5
+  flySpeed: 5
 --- !u!212 &1848285414
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3446,7 +3457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3399357346904005848, guid: e5b67fe92ed47894d82c6b30c85caab7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.73
+      value: 4.71
       objectReference: {fileID: 0}
     - target: {fileID: 3399357346904005848, guid: e5b67fe92ed47894d82c6b30c85caab7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3479,6 +3490,30 @@ PrefabInstance:
     - target: {fileID: 3399357346904005848, guid: e5b67fe92ed47894d82c6b30c85caab7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180696492769194331, guid: e5b67fe92ed47894d82c6b30c85caab7, type: 3}
+      propertyPath: Hp
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180696492769194331, guid: e5b67fe92ed47894d82c6b30c85caab7, type: 3}
+      propertyPath: fly
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180696492769194331, guid: e5b67fe92ed47894d82c6b30c85caab7, type: 3}
+      propertyPath: agent
+      value: 
+      objectReference: {fileID: 210844882}
+    - target: {fileID: 6180696492769194331, guid: e5b67fe92ed47894d82c6b30c85caab7, type: 3}
+      propertyPath: flySpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180696492769194331, guid: e5b67fe92ed47894d82c6b30c85caab7, type: 3}
+      propertyPath: flyHeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6983567812448830845, guid: e5b67fe92ed47894d82c6b30c85caab7, type: 3}
+      propertyPath: m_Speed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8261042316164074433, guid: e5b67fe92ed47894d82c6b30c85caab7, type: 3}
       propertyPath: m_Name
