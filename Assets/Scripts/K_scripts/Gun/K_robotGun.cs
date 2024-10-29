@@ -8,11 +8,13 @@ public class K_robotGun : MonoBehaviour
     private Transform player;
     public GameObject railgunMuzzleFlashParticle; // 레일건 파티클 효과
     public GameObject laserRifleMuzzleFlashParticle; // 레이저 라이플 파티클 효과
-
+    GameObject damage;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        damage = GameObject.Find("N_PlayerModel");
         StartCoroutine(AutomaticShooting());
+
     }
 
     IEnumerator AutomaticShooting()
@@ -39,7 +41,7 @@ public class K_robotGun : MonoBehaviour
         {
             if (hit.transform.CompareTag("Player"))
             {
-                // 플레이어에게 데미지
+                damage.GetComponent<N_PlayerModel>().TakeDamage(3);
             }
         }
     }
@@ -53,7 +55,7 @@ public class K_robotGun : MonoBehaviour
         {
             if (hit.transform.CompareTag("Player"))
             {
-                // 플레이어에게 데미지
+                damage.GetComponent<N_PlayerModel>().TakeDamage(3);
             }
         }
     }

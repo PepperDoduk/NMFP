@@ -12,9 +12,11 @@ public class K_AlienStormtrooper : MonoBehaviour
     private bool isShooting = false;
     public GameObject muzzleFlashParticle;
 
+    GameObject damage;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        damage = GameObject.Find("N_PlayerModel");
     }
 
     void Update()
@@ -54,7 +56,7 @@ public class K_AlienStormtrooper : MonoBehaviour
                 {
                     if (hit.transform.CompareTag("Player"))
                     {
-                        // 플레이어에게 데미지
+                        damage.GetComponent<N_PlayerModel>().TakeDamage(5);
                     }
                 }
             }

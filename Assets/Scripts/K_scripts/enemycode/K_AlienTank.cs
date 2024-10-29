@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class K_AlienTank : MonoBehaviour
@@ -14,10 +13,13 @@ public class K_AlienTank : MonoBehaviour
     private Transform player;
     private bool isShooting = false;
 
+    public int damageAmount = 10; // 플레이어에게 줄 데미지
+
+    GameObject damage;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
-
+        damage = GameObject.Find("N_PlayerModel");
     }
 
     void Update()
@@ -55,6 +57,7 @@ public class K_AlienTank : MonoBehaviour
                 {
                     bulletScript.SetTarget(player);
                 }
+
                 Destroy(bulletObj, 5f);
             }
 
@@ -64,8 +67,15 @@ public class K_AlienTank : MonoBehaviour
 
     void MoveTowardsPlayer()
     {
-
         Vector3 direction = (player.position - transform.position).normalized;
         transform.position += direction * Speed * Time.deltaTime;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            damage.GetComponent<N_PlayerModel>().TakeDamage(10);
+        }
     }
 }

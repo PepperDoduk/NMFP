@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4238968664327249981
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 348969283258690964}
+  m_Layer: 0
+  m_Name: Missile_spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &348969283258690964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4238968664327249981}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.043, y: 0.86, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3399357346904005848}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8261042316164074433
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,7 +66,8 @@ Transform:
   m_LocalPosition: {x: -21.2, y: 2.73, z: -8.383144}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 348969283258690964}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5538632128841127626
@@ -153,6 +185,9 @@ MonoBehaviour:
   Hp: 0
   dropItems: []
   dropChance: 0.5
+  fly: 0
+  flyHeight: 5
+  flySpeed: 5
 --- !u!114 &1167379853803656220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +203,7 @@ MonoBehaviour:
   Speed: 0
   time: 5
   enemybullet: {fileID: 0}
-  spawnPoint: {fileID: 0}
+  spawnPoint: {fileID: 348969283258690964}
   enemySpeed: 0
   shootingRange: 10
 --- !u!114 &6574620874174125196

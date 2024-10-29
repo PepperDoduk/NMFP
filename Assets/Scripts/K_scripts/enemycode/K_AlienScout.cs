@@ -1,73 +1,74 @@
-using UnityEngine;
 using System;
+using System.Collections;
+using UnityEngine;
 
-public class K_Enemy : MonoBehaviour
+public class K_AlienScout : MonoBehaviour
 {
-    public float lookRadius = 10f;
-    public Transform target;
-    public int Hp;
-    private int currentHp;
-    public GameObject[] dropItems;
-    public float dropChance = 0.5f;
-    public bool fly; // 하늘에 떠 있을지 여부
-    public float flyHeight = 5f; // 떠 있을 높이
+    public int Speed;
+    [SerializeField] private float time = 5f;
+    private float bulletTime;
+    public GameObject muzzleFlashParticle;
+    public Transform spawnPoint;
+    public float shootingRange = 10f;
+    private Transform player;
+    private bool isShooting = false;
 
-    private Vector3 targetPosition; // 공중에 떠 있을 목표 위치
-
-    public event Action OnDeath;
+    GameObject damage;
 
     void Start()
     {
-        GameObject player = GameObject.FindWithTag("Player");
-        target = player.transform;
-        currentHp = Hp;
-
-        // 공중 목표 위치 설정
-        if (fly)
-        {
-            targetPosition = transform.position + Vector3.up * flyHeight;
-            transform.position = targetPosition;
-        }
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        damage = GameObject.Find("N_PlayerModel");
     }
 
     void Update()
     {
-        if (!fly && target != null)
+        if (player == null) return;
+
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        if (distanceToPlayer <= shootingRange)
         {
-            float distance = Vector3.Distance(target.position, transform.position);
-            if (distance <= lookRadius)
+            if (!isShooting)
             {
-                transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime);
+                isShooting = true;
+                StartCoroutine(ShootAtPlayer());
             }
         }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        currentHp -= damage;
-        if (currentHp <= 0)
+        else
         {
-            Die();
+            isShooting = false;
+            MoveTowardsPlayer();
         }
     }
 
-    public void Die()
+    IEnumerator ShootAtPlayer()
     {
-        OnDeath?.Invoke();
-        TryDropItem();
-        Destroy(gameObject);
+        while (isShooting)
+        {
+            bulletTime -= Time.deltaTime;
+            if (bulletTime <= 0)
+            {
+                bulletTime = time;
+
+                GameObject particle = Instantiate(muzzleFlashParticle, spawnPoint.position, spawnPoint.rotation);
+                Destroy(particle, 1f);
+
+                if (Physics.Raycast(spawnPoint.position, spawnPoint.forward, out RaycastHit hitInfo, shootingRange))
+                {
+                    if (hitInfo.collider.CompareTag("Player"))
+                    {
+                        damage.GetComponent<N_PlayerModel>().TakeDamage(5);
+                    }
+                }
+            }
+            yield return null;
+        }
     }
 
-    void TryDropItem()
+    void MoveTowardsPlayer()
     {
-        if (dropItems.Length == 0) return;
-
-        float randomValue = UnityEngine.Random.Range(0f, 1f);
-        if (randomValue <= dropChance)
-        {
-            int randomIndex = UnityEngine.Random.Range(0, dropItems.Length);
-            GameObject dropItem = dropItems[randomIndex];
-            Instantiate(dropItem, transform.position, Quaternion.identity);
-        }
+        Vector3 direction = (player.position - transform.position).normalized;
+        transform.position += direction * Speed * Time.deltaTime;
     }
 }
