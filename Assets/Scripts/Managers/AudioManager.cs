@@ -43,6 +43,7 @@ public class AudioManager : MonoBehaviour
         AKr7,
         AKfire1,
         AKfire2,
+        AKnoAmmo,
 
     }
     void Awake()

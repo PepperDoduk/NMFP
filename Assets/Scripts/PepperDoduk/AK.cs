@@ -14,7 +14,13 @@ public class AK : MonoBehaviour
     public int maxAmmo;
     public int currentAmmo;
 
-    public bool reroading = false;
+    public bool reloading = false;
+
+    private void Start()
+    {
+        maxAmmo = 30;
+        currentAmmo = maxAmmo;
+    }
 
     private void Update()
     {
@@ -25,9 +31,18 @@ public class AK : MonoBehaviour
             animNum = 1;
         }
 
-        if (Input.GetMouseButtonDown(0) && animNum !=1)
+        if (Input.GetMouseButtonDown(0) && animNum != 1)
         {
-            animNum = -1;
+
+            if (currentAmmo < 1)
+            {
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.AKnoAmmo);
+            }
+            else
+            {
+                randF = Random.Range(-2, 0);
+                animNum = randF;
+            }
         }
 
         if (Input.GetMouseButtonUp(0) && animNum != 1)
@@ -35,26 +50,39 @@ public class AK : MonoBehaviour
             animNum = 0;
             AKfire = 0;
         }
+    }
 
-        
-        
-
+    public void AmmoCheck()
+    {
+        if (currentAmmo < 1) {
+            animNum = 0;
+            return;
+        }
     }
     public void Fire()
     {
-        if (AKfire != 1 && AKfire == 0)
+        randF = Random.Range(-2, 0);
+        if (currentAmmo > 0)
         {
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.AKfire1);
-            Debug.Log("1");
-            AKfire = 1;
-        }
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.AKnoAmmo);
+            currentAmmo--;
+            if (AKfire != 1 && AKfire == 0)
+            {
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.AKfire1);
+                Debug.Log("1");
+                AKfire = 1;
+            }
 
-        else if(AKfire == 1)
-        {
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.AKfire2);
-            Debug.Log("2");
+            else if (AKfire == 1)
+            {
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.AKfire2);
+                Debug.Log("2");
+            }
         }
+        anim.SetInteger("AK", animNum);
     }
+
+
 
     public void OutMag()
     {
@@ -88,5 +116,6 @@ public class AK : MonoBehaviour
     public void ReloadEnd()
     {
         animNum = 0;
+        currentAmmo = maxAmmo;
     }
 }

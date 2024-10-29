@@ -712,7 +712,7 @@ MonoBehaviour:
   AKfire: 0
   maxAmmo: 0
   currentAmmo: 0
-  reroading: 0
+  reloading: 0
 --- !u!1 &1069134370 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5008781426462439135, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
@@ -1115,7 +1115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7560519271781295924, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
       propertyPath: sfxClips.Array.size
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7560519271781295924, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
       propertyPath: sfxClips.Array.data[4]
@@ -1152,7 +1152,7 @@ PrefabInstance:
     - target: {fileID: 7560519271781295924, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
       propertyPath: sfxClips.Array.data[12]
       value: 
-      objectReference: {fileID: 8300000, guid: 492615e1caa2d924a9d2b0e59adcd8b7, type: 3}
+      objectReference: {fileID: 8300000, guid: 4f3dee2995add0a4c9f06a7dd04ba417, type: 3}
     - target: {fileID: 7560519271781295924, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
       propertyPath: sfxClips.Array.data[13]
       value: 
@@ -1177,6 +1177,10 @@ PrefabInstance:
       propertyPath: sfxClips.Array.data[18]
       value: 
       objectReference: {fileID: 8300000, guid: a4bd4518e6f38fc4291480b6dadedab2, type: 3}
+    - target: {fileID: 7560519271781295924, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
+      propertyPath: sfxClips.Array.data[19]
+      value: 
+      objectReference: {fileID: 8300000, guid: 861b62740cc5c8843b90bd00b29259ec, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
