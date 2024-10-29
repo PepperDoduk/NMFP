@@ -698,7 +698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd642d0cb7dec194a9302aaf1891c2f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
+  anim: {fileID: 1061845096}
   animNum: 0
   randF: 0
   maxAmmo: 0

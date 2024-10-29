@@ -14,6 +14,14 @@ public class AK : MonoBehaviour
 
     public bool reroading = false;
 
+    private void Update()
+    {
+        anim.SetInteger("AK", animNum);
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            animNum = 1;
+        }
+    }
     public void Fire()
     {
         Debug.Log("Fire");
@@ -48,4 +56,8 @@ public class AK : MonoBehaviour
         AudioManager.instance.PlaySfx(AudioManager.Sfx.AKr7);
     }
 
+    public void ReloadEnd()
+    {
+        animNum = 0;
+    }
 }
