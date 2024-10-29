@@ -92,17 +92,25 @@ public class AudioManager : MonoBehaviour
     }
     public void PlaySfx(Sfx sfx)
     {
+        bool isPlayed = false;
+
         for (int index = 0; index < sfxPlayers.Length; index++)
         {
             int loopIndex = (index + channelIndex) % sfxPlayers.Length;
 
-            if (sfxPlayers[loopIndex].isPlaying)
-                continue;
-            channelIndex = loopIndex;
-            sfxPlayers[0].clip = sfxClips[(int)sfx];
-            sfxPlayers[0].Play();
-            break;
+            if (!sfxPlayers[loopIndex].isPlaying)
+            {
+                sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
+                sfxPlayers[loopIndex].Play();
+                channelIndex = (loopIndex + 1) % sfxPlayers.Length;
+                isPlayed = true;
+                break;
+            }
         }
 
+        if (!isPlayed)
+        {
+            Debug.LogWarning("all SFX channels are in use.");
+        }
     }
 }

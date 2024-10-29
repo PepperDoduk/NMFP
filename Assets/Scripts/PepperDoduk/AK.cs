@@ -9,7 +9,7 @@ public class AK : MonoBehaviour
 
     public int randF;
 
-    private int AKfire=0;
+    public int AKfire;
 
     public int maxAmmo;
     public int currentAmmo;
@@ -18,32 +18,44 @@ public class AK : MonoBehaviour
 
     private void Update()
     {
-        AKfire = 0;
-        if (Input.GetMouseButtonDown(0))
-        {
-            animNum = -1;
-            //AKfire = 1;
-        }
-
         anim.SetInteger("AK", animNum);
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             animNum = 1;
         }
+
+        if (Input.GetMouseButtonDown(0) && animNum !=1)
+        {
+            animNum = -1;
+        }
+
+        if (Input.GetMouseButtonUp(0) && animNum != 1)
+        {
+            animNum = 0;
+            AKfire = 0;
+        }
+
+        
+        
+
     }
     public void Fire()
     {
-        Debug.Log("Fire");
-        animNum = -1;
-        if (AKfire == 0)
+        if (AKfire != 1 && AKfire == 0)
         {
             AudioManager.instance.PlaySfx(AudioManager.Sfx.AKfire1);
+            Debug.Log("1");
+            AKfire = 1;
         }
-        //else
-        //{
-       //     AudioManager.instance.PlaySfx(AudioManager.Sfx.AKfire2);
-      //  }
+
+        else if(AKfire == 1)
+        {
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.AKfire2);
+            Debug.Log("2");
+        }
     }
+
     public void OutMag()
     {
         AudioManager.instance.PlaySfx(AudioManager.Sfx.AKr1);

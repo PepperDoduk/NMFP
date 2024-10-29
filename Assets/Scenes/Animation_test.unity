@@ -598,6 +598,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 425510af531d5f14aaf25c0fcb3b0800, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: -7552582706839291426, guid: 425510af531d5f14aaf25c0fcb3b0800, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: -7552582706839291426, guid: 425510af531d5f14aaf25c0fcb3b0800, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.22
       objectReference: {fileID: 0}
@@ -701,6 +709,7 @@ MonoBehaviour:
   anim: {fileID: 1061845096}
   animNum: 0
   randF: 0
+  AKfire: 0
   maxAmmo: 0
   currentAmmo: 0
   reroading: 0
@@ -1094,7 +1103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7560519271781295924, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
       propertyPath: channels
-      value: 5
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 7560519271781295924, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
       propertyPath: bgmVolume
@@ -1163,11 +1172,11 @@ PrefabInstance:
     - target: {fileID: 7560519271781295924, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
       propertyPath: sfxClips.Array.data[17]
       value: 
-      objectReference: {fileID: 8300000, guid: d5410a162c32e814c8d3aa2a0ee839ae, type: 3}
+      objectReference: {fileID: 8300000, guid: 98f7a774ef72450419d3ed760007c112, type: 3}
     - target: {fileID: 7560519271781295924, guid: f69ddcfb8dd5e7944bdb10efdfea0fb2, type: 3}
       propertyPath: sfxClips.Array.data[18]
       value: 
-      objectReference: {fileID: 8300000, guid: f76e7d7c8f37a4e488c37a9cb219751e, type: 3}
+      objectReference: {fileID: 8300000, guid: a4bd4518e6f38fc4291480b6dadedab2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
