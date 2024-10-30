@@ -29,11 +29,10 @@ public class AK : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            if(currentAmmo > 0)
-            {
+            if (currentAmmo > 0)
                 animNum = 2;
-            }else
-            animNum = 1;
+            else
+                animNum = 1;
         }
 
         if (Input.GetMouseButtonDown(0) && animNum != 1)
@@ -71,9 +70,11 @@ public class AK : MonoBehaviour
     }
     public void Fire()
     {
-        randF = Random.Range(-2, 0);
         if (currentAmmo > 0)
         {
+            randF = Random.Range(-2, 0);
+            animNum = randF;
+
             AudioManager.instance.PlaySfx(AudioManager.Sfx.AKnoAmmo);
             currentAmmo--;
             if (AKfire != 1 && AKfire == 0)
