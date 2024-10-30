@@ -25,8 +25,6 @@ public class AK : MonoBehaviour
 
     private void Update()
     {
-        anim.SetInteger("AK", animNum);
-
         if (Input.GetKeyDown(KeyCode.R))
         {
             if (currentAmmo > 0)
@@ -38,7 +36,7 @@ public class AK : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && animNum != 1)
         {
 
-            if (currentAmmo < 1)
+            if (currentAmmo <= 0)
             {
                 AudioManager.instance.PlaySfx(AudioManager.Sfx.AKnoAmmo);
             }
@@ -54,16 +52,19 @@ public class AK : MonoBehaviour
             animNum = 0;
             AKfire = 0;
         }
+
+        anim.SetInteger("AK", animNum);
     }
 
     public void AmmoCheck()
     {
-        if(currentAmmo > 30)
+        if (currentAmmo > 30)
         {
             animNum = 0;
             return;
         }
-        if (currentAmmo < 1) {
+        if (currentAmmo < 1)
+        {
             animNum = 0;
             return;
         }
@@ -74,20 +75,20 @@ public class AK : MonoBehaviour
         {
             randF = Random.Range(-2, 0);
             animNum = randF;
-
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.AKnoAmmo);
             currentAmmo--;
-            if (AKfire != 1 && AKfire == 0)
+
+            if (AKfire == 0)
             {
                 AudioManager.instance.PlaySfx(AudioManager.Sfx.AKfire1);
                 AKfire = 1;
             }
-
-            else if (AKfire == 1)
+            else
             {
                 AudioManager.instance.PlaySfx(AudioManager.Sfx.AKfire2);
             }
         }
+        else
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.AKnoAmmo);
         anim.SetInteger("AK", animNum);
     }
 
@@ -124,15 +125,11 @@ public class AK : MonoBehaviour
 
     public void ReloadEnd()
     {
-        
-        if(animNum == 2)
-        {
+        if (animNum == 2)
             currentAmmo = maxAmmo + 1;
-            animNum = 0;
-        }
         else
-        currentAmmo = maxAmmo;
-        animNum = 0;
+            currentAmmo = maxAmmo;
 
+        animNum = 0;
     }
 }
