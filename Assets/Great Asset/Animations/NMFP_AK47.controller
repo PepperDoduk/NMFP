@@ -233,7 +233,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AK47_fireII
-  m_Speed: 2.1
+  m_Speed: 2.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6388057800688035287}
@@ -263,7 +263,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AK47_fire
-  m_Speed: 2.1
+  m_Speed: 2.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -861975566523714722}
