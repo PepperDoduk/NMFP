@@ -15,6 +15,4 @@ MonoBehaviour:
   Damage: 10
   Range: 30
   RPM: 1100
-  ReroadSpeed: 3
-  CurAmmo: 0
-  MaxAmmo: 15
+  MaxAmmo: 17

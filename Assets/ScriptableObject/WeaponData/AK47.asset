@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72fbbb2afbb5ca84fadd37a587bbcace, type: 3}
   m_Name: AK47
   m_EditorClassIdentifier: 
-  Damage: 0
+  Damage: 10
   Range: 0
-  RPM: 0
-  ReroadSpeed: 0
-  CurAmmo: 0
-  MaxAmmo: 0
+  RPM: 600
+  MaxAmmo: 30
