@@ -9,13 +9,15 @@ public class M29revolver : MonoBehaviour
 
     public int randF;
 
-    public int maxAmmo;
+    public int maxAmmo = 6;
     public int currentAmmo;
 
 
     private void Start()
     {
         anim = GetComponent<Animator>();
+        maxAmmo = 6;
+        currentAmmo = maxAmmo;
     }
 
     private void Update()
@@ -87,4 +89,10 @@ public class M29revolver : MonoBehaviour
         anim.SetInteger("M29", animNum);
     }
 
+    public void ReloadEnd()
+    {
+        currentAmmo = maxAmmo;
+
+        animNum = 0;
+    }
 }
