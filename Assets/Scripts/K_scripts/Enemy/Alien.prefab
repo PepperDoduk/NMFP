@@ -194,7 +194,7 @@ MonoBehaviour:
   laserCooldown: 5
   spawnPoint: {fileID: 4772999252394657985}
   shootingRange: 10
-  muzzleFlashParticle: {fileID: 0}
+  muzzleFlashParticle: {fileID: 100004, guid: e5727721799e00f44906e7af53883073, type: 3}
 --- !u!114 &4731522064492579803
 MonoBehaviour:
   m_ObjectHideFlags: 0

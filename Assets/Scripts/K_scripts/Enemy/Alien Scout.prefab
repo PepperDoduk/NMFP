@@ -125,7 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 0
   time: 5
-  muzzleFlashParticle: {fileID: 0}
+  muzzleFlashParticle: {fileID: 100004, guid: 62d07207e73637c428642d14ef91b778, type: 3}
   spawnPoint: {fileID: 858815968958289845}
   shootingRange: 10
 --- !u!212 &-3325930044849188945

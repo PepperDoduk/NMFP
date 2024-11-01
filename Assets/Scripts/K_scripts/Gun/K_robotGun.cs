@@ -6,6 +6,9 @@ public class K_robotGun : MonoBehaviour
     public float shootingRange = 10f; // 발사 거리
     public float shootInterval = 2f; // 발사 간격
     private Transform player;
+    public Transform railgun;
+    public Transform lazer;
+    public Transform tankbullet;
     public GameObject railgunMuzzleFlashParticle; // 레일건 파티클 효과
     public GameObject laserRifleMuzzleFlashParticle; // 레이저 라이플 파티클 효과
     GameObject damage;
@@ -34,7 +37,7 @@ public class K_robotGun : MonoBehaviour
 
     public void ShootRailgun(Vector3 targetPosition)
     {
-        GameObject particle = Instantiate(railgunMuzzleFlashParticle, transform.position, Quaternion.identity);
+        GameObject particle = Instantiate(railgunMuzzleFlashParticle, railgun.position, Quaternion.identity);
         Destroy(particle, 1f);
 
         if (Physics.Raycast(transform.position, (targetPosition - transform.position).normalized, out RaycastHit hit, shootingRange))
@@ -48,7 +51,7 @@ public class K_robotGun : MonoBehaviour
 
     public void ShootLaserRifle(Vector3 targetPosition)
     {
-        GameObject particle = Instantiate(laserRifleMuzzleFlashParticle, transform.position, Quaternion.identity);
+        GameObject particle = Instantiate(laserRifleMuzzleFlashParticle, lazer.position, Quaternion.identity);
         Destroy(particle, 1f);
 
         if (Physics.Raycast(transform.position, (targetPosition - transform.position).normalized, out RaycastHit hit, shootingRange))
