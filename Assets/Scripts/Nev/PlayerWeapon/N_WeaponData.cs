@@ -2,7 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class N_WeaponData : MonoBehaviour
+
+[CreateAssetMenu(
+    fileName = "WeaponData",
+    menuName = "Data/WeaponData",
+    order = int.MinValue)]
+public class N_WeaponData : ScriptableObject
 {
     //public string Name;
     public float Damage;

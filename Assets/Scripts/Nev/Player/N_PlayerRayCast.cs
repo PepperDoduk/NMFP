@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class N_PlayerRayCast : MonoBehaviour
 {
-    N_WeaponController weapon;
+    N_WeaponController m_weaponController;
+    N_WeaponData WeaponData;
     RaycastHit hit;
 
     public bool canShot = true;
@@ -17,7 +18,8 @@ public class N_PlayerRayCast : MonoBehaviour
 
     private void Awake()
     {
-        weapon = GetComponent<N_WeaponController>();
+        m_weaponController = GetComponent<N_WeaponController>();
+        WeaponData = m_weaponController.Inventory[m_weaponController.InvenNum].Data;
     }
 
     private void Update()
@@ -66,7 +68,7 @@ public class N_PlayerRayCast : MonoBehaviour
     }
     IEnumerator Shotcooldown()
     {
-        float RPM = weapon.Inventory[weapon.InvenNum].Data.RPM;
+        float RPM = WeaponData.RPM;
         yield return new WaitForSeconds(1 / (RPM / 60));
         canShot = true;
     }

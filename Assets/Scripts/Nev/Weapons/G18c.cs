@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class G18c : MonoBehaviour
 {
+    [SerializeField] private N_WeaponData Data;
     public N_PlayerRayCast playerRay;
-    public N_WeaponController Weapon;
     public Animator anim;
     public int animNum = 0;
 
@@ -20,13 +20,12 @@ public class G18c : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         playerRay = GameObject.Find("Player").GetComponent<N_PlayerRayCast>();
-        Weapon = GameObject.Find("Player").GetComponent<N_WeaponController>();
-        maxAmmo = GetComponent<N_WeaponData>().MaxAmmo;
+        maxAmmo = Data.MaxAmmo;
     }
 
     void Update()
     {
-        currentAmmo = Weapon.Inventory[Weapon.InvenNum].Data.CurAmmo;
+        currentAmmo = Data.CurAmmo;
         anim.SetInteger("g18", animNum);
 
         if (currentAmmo < 1)
@@ -64,7 +63,7 @@ public class G18c : MonoBehaviour
     public void Fire()
     {
         Debug.Log("Fire");
-        Weapon.Inventory[Weapon.InvenNum].Data.CurAmmo--;
+        Data.CurAmmo--;
         playerRay.Shot();
         AudioManager.instance.PlaySfx(AudioManager.Sfx.G18fire);
     }
@@ -87,7 +86,7 @@ public class G18c : MonoBehaviour
     public void Reaload()
     {
         Debug.Log("Reroaded");
-        Weapon.Inventory[Weapon.InvenNum].Data.CurAmmo = maxAmmo;
+        Data.CurAmmo = maxAmmo;
         animNum = 0;
         reroading = false;
     }
