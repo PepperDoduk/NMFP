@@ -44,6 +44,10 @@ public class AudioManager : MonoBehaviour
         AKfire1,
         AKfire2,
         AKnoAmmo,
+        m29fire,
+        m29openChamber,
+        m29ammo,
+        m29closeChamber,
 
     }
     void Awake()

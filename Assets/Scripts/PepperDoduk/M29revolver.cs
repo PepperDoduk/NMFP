@@ -9,8 +9,6 @@ public class M29revolver : MonoBehaviour
 
     public int randF;
 
-    public int M29fire;
-
     public int maxAmmo;
     public int currentAmmo;
 
@@ -24,9 +22,6 @@ public class M29revolver : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            if (currentAmmo > 0)
-                animNum = 2;
-            else
                 animNum = 1;
         }
 
@@ -47,15 +42,27 @@ public class M29revolver : MonoBehaviour
         if (Input.GetMouseButtonUp(0) && animNum != 1)
         {
             animNum = 0;
-            M29fire = 0;
         }
 
         anim.SetInteger("M29", animNum);
     }
 
+    public void OpenChamber()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.m29openChamber);
+    }
+    public void InsertChamber()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.m29ammo);
+    }
+    public void CloseChamber()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.m29closeChamber);
+    }
+
     public void AmmoCheck()
     {
-        if (currentAmmo > 30)
+        if (currentAmmo > 5)
         {
             animNum = 0;
             return;
@@ -73,16 +80,7 @@ public class M29revolver : MonoBehaviour
             randF = Random.Range(-2, 0);
             animNum = randF;
             currentAmmo--;
-
-            if (M29fire == 0)
-            {
-                AudioManager.instance.PlaySfx(AudioManager.Sfx.AKfire1);
-                M29fire = 1;
-            }
-            else
-            {
-                AudioManager.instance.PlaySfx(AudioManager.Sfx.AKfire2);
-            }
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.m29fire);
         }
         else
             AudioManager.instance.PlaySfx(AudioManager.Sfx.AKnoAmmo);

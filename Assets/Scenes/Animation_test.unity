@@ -807,8 +807,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1313c74a0060f74c85b19c711613fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Data: {fileID: 0}
   playerRay: {fileID: 0}
-  Weapon: {fileID: 0}
   anim: {fileID: 0}
   animNum: 0
   randF: 0
@@ -894,6 +894,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 3315f6aa5ddf6c44180f829ce954a2df, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1761118261}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 3315f6aa5ddf6c44180f829ce954a2df, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1761118262}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 3315f6aa5ddf6c44180f829ce954a2df, type: 3}
 --- !u!1 &1761118260 stripped
 GameObject:
@@ -921,6 +924,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1761118262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761118260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a9f3881a2044a4d8f5a28ebd7621f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  animNum: 0
+  randF: 0
+  maxAmmo: 0
+  currentAmmo: 0
 --- !u!1001 &8193181840173827889
 PrefabInstance:
   m_ObjectHideFlags: 0
