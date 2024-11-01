@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class N_PlayerModel : MonoBehaviour, N_IPlayerModel
+public class N_PlayerModel : MonoBehaviour, IPlayerModel
 {
     [SerializeField] private N_PlayerData m_playerData;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class N_PlayerController : MonoBehaviour
 {
-    private N_IPlayerModel m_playerModel = new N_PlayerModel();
+    private IPlayerModel m_playerModel;
 
     public Transform caemraTransform;
     public CharacterController characterController;

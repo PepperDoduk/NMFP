@@ -1,6 +1,6 @@
 ﻿using System;
 
-public interface N_IPlayerModel
+public interface IPlayerModel
 {
     public int MaxHealth { get; }
     public float MoveSpeed { get; }
