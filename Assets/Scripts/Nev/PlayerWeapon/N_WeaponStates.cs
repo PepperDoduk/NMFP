@@ -10,7 +10,6 @@ public class N_WeaponStates : MonoBehaviour
 
     private void Awake()
     {
-        Data.CurAmmo = Data.MaxAmmo;
         //WeaponPrefab.SetActive(false);
     }
 }

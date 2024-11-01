@@ -40,22 +40,22 @@ public class N_PlayerRayCast : MonoBehaviour
     {
         //Debug.Log("Shot");
         canShot = false;
-        //Debug.DrawRay(transform.position, transform.forward * maxRayDistance, Color.blue, 0.3f);
+        Debug.DrawRay(transform.position, transform.forward * maxRayDistance, Color.blue, 0.3f);
 
         float randY = Random.Range(-rayY * 100, rayY * 100);
         float randZ = Random.Range(-rayZ * 100, rayZ * 100);
         randY /= 100;
         randZ /= 100;
 
-        Debug.DrawRay(transform.position,
-            new Vector3(transform.forward.x * maxRayDistance, transform.forward.y * maxRayDistance + randY, transform.forward.z * maxRayDistance + randY),
-            Color.blue, 0.3f);
+        //Debug.DrawRay(transform.position,
+        //    new Vector3(transform.forward.x * maxRayDistance, transform.forward.y * maxRayDistance + randY, transform.forward.z * maxRayDistance + randZ),
+        //    Color.blue, 0.3f);
 
         if (Physics.Raycast(transform.position,
             new Vector3(
                 transform.forward.x * maxRayDistance,
                 transform.forward.y * maxRayDistance + randY,
-                transform.forward.z * maxRayDistance + randY)
+                transform.forward.z * maxRayDistance + randZ)
             , out hit, maxRayDistance))
         {
             //Debug.Log($"{hit.collider.tag} Hit");

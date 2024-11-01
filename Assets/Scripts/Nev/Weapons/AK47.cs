@@ -23,45 +23,35 @@ public class AK47 : MonoBehaviour
         anim = GetComponent<Animator>();
         playerRay = GameObject.Find("Player").GetComponent<N_PlayerRayCast>();
         maxAmmo = Data.MaxAmmo;
+        currentAmmo = maxAmmo;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
+            reloading = true;
             if (currentAmmo > 0)
                 animNum = 2;
             else
                 animNum = 1;
         }
 
-        if (playerRay.repeater)
-        {
-            if (Input.GetMouseButton(0) && currentAmmo > 0 && !reloading && playerRay.canShot)
-            {
-                randF = Random.Range(-2, 0);
-                animNum = randF;
-            }
-        }
-        else
-        {
-            if (Input.GetMouseButtonDown(0) && currentAmmo > 0 && !reloading && playerRay.canShot)
-            {
-                randF = Random.Range(-2, 0);
-                animNum = randF;
-            }
-        }
-
-        if (Input.GetMouseButtonDown(0) && animNum != 1)
+        if (Input.GetMouseButtonDown(0) && animNum != 1 && !reloading && playerRay.canShot)
         {
 
             if (currentAmmo <= 0)
             {
                 AudioManager.instance.PlaySfx(AudioManager.Sfx.AKnoAmmo);
             }
+            else
+            {
+                randF = Random.Range(-2, 0);
+                animNum = randF;
+            }
         }
 
-        if (Input.GetMouseButtonUp(0) && animNum != 1)
+        if (Input.GetMouseButtonUp(0) && animNum != 1 && !reloading)
         {
             animNum = 0;
             AKfire = 0;
@@ -89,6 +79,7 @@ public class AK47 : MonoBehaviour
         {
             randF = Random.Range(-2, 0);
             animNum = randF;
+            playerRay.Shot();
             currentAmmo--;
 
             if (AKfire == 0)
@@ -100,6 +91,8 @@ public class AK47 : MonoBehaviour
             {
                 AudioManager.instance.PlaySfx(AudioManager.Sfx.AKfire2);
             }
+
+            Debug.Log("Fire");
         }
         else
             AudioManager.instance.PlaySfx(AudioManager.Sfx.AKnoAmmo);
@@ -144,6 +137,7 @@ public class AK47 : MonoBehaviour
         else
             currentAmmo = maxAmmo;
 
+        reloading = false;
         animNum = 0;
     }
 }

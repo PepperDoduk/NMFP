@@ -21,11 +21,11 @@ public class G18c : MonoBehaviour
         anim = GetComponent<Animator>();
         playerRay = GameObject.Find("Player").GetComponent<N_PlayerRayCast>();
         maxAmmo = Data.MaxAmmo;
+        currentAmmo = maxAmmo;
     }
 
     void Update()
     {
-        currentAmmo = Data.CurAmmo;
         anim.SetInteger("g18", animNum);
 
         if (currentAmmo < 1)
@@ -63,7 +63,7 @@ public class G18c : MonoBehaviour
     public void Fire()
     {
         Debug.Log("Fire");
-        Data.CurAmmo--;
+        currentAmmo--;
         playerRay.Shot();
         AudioManager.instance.PlaySfx(AudioManager.Sfx.G18fire);
     }
@@ -86,7 +86,7 @@ public class G18c : MonoBehaviour
     public void Reaload()
     {
         Debug.Log("Reroaded");
-        Data.CurAmmo = maxAmmo;
+        currentAmmo = maxAmmo;
         animNum = 0;
         reloading = false;
     }

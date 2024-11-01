@@ -13,7 +13,5 @@ public class N_WeaponData : ScriptableObject
     public float Damage;
     public float Range;
     public float RPM;
-    public int ReroadSpeed;
-    public int CurAmmo;
     public int MaxAmmo;
 }
