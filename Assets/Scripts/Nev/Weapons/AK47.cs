@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AK47 : MonoBehaviour
 {
+    [SerializeField] private N_WeaponData Data;
     public N_PlayerRayCast playerRay;
-    public N_WeaponController Weapon;
     public Animator anim;
     public int animNum = 0;
 
@@ -22,8 +22,7 @@ public class AK47 : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         playerRay = GameObject.Find("Player").GetComponent<N_PlayerRayCast>();
-        Weapon = GameObject.Find("Player").GetComponent<N_WeaponController>();
-        maxAmmo = GetComponent<N_WeaponData>().MaxAmmo;
+        maxAmmo = Data.MaxAmmo;
     }
 
     private void Update()
@@ -36,17 +35,29 @@ public class AK47 : MonoBehaviour
                 animNum = 1;
         }
 
+        if (playerRay.repeater)
+        {
+            if (Input.GetMouseButton(0) && currentAmmo > 0 && !reloading && playerRay.canShot)
+            {
+                randF = Random.Range(-2, 0);
+                animNum = randF;
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButtonDown(0) && currentAmmo > 0 && !reloading && playerRay.canShot)
+            {
+                randF = Random.Range(-2, 0);
+                animNum = randF;
+            }
+        }
+
         if (Input.GetMouseButtonDown(0) && animNum != 1)
         {
 
             if (currentAmmo <= 0)
             {
                 AudioManager.instance.PlaySfx(AudioManager.Sfx.AKnoAmmo);
-            }
-            else
-            {
-                randF = Random.Range(-2, 0);
-                animNum = randF;
             }
         }
 
