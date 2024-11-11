@@ -97,10 +97,84 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1302765818439312499, guid: b283f81631736dc4bb06a12d45862330, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8861004386793119943}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1105088931657911696, guid: b283f81631736dc4bb06a12d45862330, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8006027107259507715}
+    - targetCorrespondingSourceObject: {fileID: 1105088931657911696, guid: b283f81631736dc4bb06a12d45862330, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2518839352562799078}
   m_SourcePrefab: {fileID: 100100000, guid: b283f81631736dc4bb06a12d45862330, type: 3}
+--- !u!1 &5382999559038644734 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1105088931657911696, guid: b283f81631736dc4bb06a12d45862330, type: 3}
+  m_PrefabInstance: {fileID: 5035676476980771950}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8006027107259507715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5382999559038644734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9103bf37780b4144e891b18a98ac2c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookRadius: 10
+  Hp: 100
+  dropChance: 0.5
+  flyHeight: 5
+  flySpeed: 5
+  laserCooldown: 5
+  shootingRange: 10
+  Pdistance: 3
+  enemySpeed: 0
+  damageAmount: 10
+  Speed: 0
+  dropItems: []
+  muzzleFlashParticle: {fileID: 100004, guid: b7d03fb0762c75449af69d624547e358, type: 3}
+  enemybullet: {fileID: 3336045428557012035, guid: 7fe4a7023ab62d34f887c049f03b42e9, type: 3}
+  spawnPoint: {fileID: 8861004386793119943}
+  player: {fileID: 0}
+  agent: {fileID: 9194307377509683365}
+  ani: {fileID: 0}
+  rb: {fileID: 2518839352562799078}
+--- !u!54 &2518839352562799078
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5382999559038644734}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &6338266235849021469 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1302765818439312499, guid: b283f81631736dc4bb06a12d45862330, type: 3}
+  m_PrefabInstance: {fileID: 5035676476980771950}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &9194307377509683365 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 4213940762109111499, guid: b283f81631736dc4bb06a12d45862330, type: 3}
   m_PrefabInstance: {fileID: 5035676476980771950}
   m_PrefabAsset: {fileID: 0}

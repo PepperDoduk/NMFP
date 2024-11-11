@@ -11,10 +11,7 @@ GameObject:
   - component: {fileID: 1302765818439312499}
   - component: {fileID: 3924148130601932732}
   - component: {fileID: 4213940762109111499}
-  - component: {fileID: 7645950817588122186}
-  - component: {fileID: 6450065866329782388}
   - component: {fileID: 8080683649661691515}
-  - component: {fileID: 1207789507795718812}
   m_Layer: 0
   m_Name: wjsxnrl
   m_TagString: Untagged
@@ -111,43 +108,6 @@ NavMeshAgent:
   m_BaseOffset: 1.875
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7645950817588122186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1105088931657911696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b3e3a1053ebccd44994a28fabcf4581, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lookRadius: 10
-  target: {fileID: 0}
-  agent: {fileID: 0}
-  Hp: 0
-  dropItems: []
-  dropChance: 0.5
---- !u!114 &6450065866329782388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1105088931657911696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78ee4b5f6b22b6245a9be3d052f0cb6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 0
-  laserCooldown: 5
-  spawnPoint: {fileID: 0}
-  shootingRange: 10
-  laserLine: {fileID: 8080683649661691515}
-  laserDuration: 0.2
-  lineWidth: 0.1
 --- !u!120 &8080683649661691515
 LineRenderer:
   serializedVersion: 2
@@ -252,21 +212,3 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &1207789507795718812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1105088931657911696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7bf92bb00bc1ea49b7bf7b615d058aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 0
-  time: 5
-  enemybullet: {fileID: 3336045428557012035, guid: 7fe4a7023ab62d34f887c049f03b42e9, type: 3}
-  spawnPoint: {fileID: 1302765818439312499}
-  enemySpeed: 0
-  shootingRange: 10
