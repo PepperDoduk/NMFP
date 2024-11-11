@@ -2,14 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class K_boss : MonoBehaviour
 {
     // 공통 변수
     public float lookRadius = 10f;
     public Transform target;
-    public NavMeshAgent agent;
     public int Hp;
     private int currentHp;
     public GameObject[] dropItems;
@@ -46,23 +44,18 @@ public class K_boss : MonoBehaviour
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        ani = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        ani = GetComponent<Animator>();
         GameObject player = GameObject.FindWithTag("Player");
         target = player?.transform;
         currentHp = Hp;
 
         if (fly)
         {
-            agent.enabled = false;
+            // 비행 상태 설정
             Vector3 flyPosition = transform.position;
             flyPosition.y = flyHeight;
             transform.position = flyPosition;
-        }
-        else
-        {
-            agent.enabled = true;
         }
 
         if (Hp == 0)
@@ -79,7 +72,8 @@ public class K_boss : MonoBehaviour
 
         if (target == null) return;
 
-        float distance = Vector3.Distance(target.position, transform.position);
+        // y축을 제외하고 x축만 비교
+        float distance = Mathf.Abs(target.position.x - transform.position.x);
 
         if (currentHp <= 0)
         {
@@ -87,32 +81,7 @@ public class K_boss : MonoBehaviour
             return;
         }
 
-        if (fly)
-        {
-            if (distance <= lookRadius)
-            {
-                Vector3 direction = (target.position - transform.position).normalized;
-                direction.y = 0;
-                transform.position += direction * flySpeed * Time.deltaTime;
-            }
-        }
-        else
-        {
-            if (distance <= lookRadius)
-            {
-                agent.SetDestination(target.position);
-            }
-        }
-
-        // 소환 처리
-        summonCooldown -= Time.deltaTime;
-        if (summonCooldown <= 0)
-        {
-            SummonEnemy();
-            summonCooldown = summonInterval;
-        }
-
-        // 사격 처리
+        // 총알 발사 범위 내에 있을 경우
         if (distance <= shootingRange)
         {
             if (!isShooting)
@@ -124,6 +93,31 @@ public class K_boss : MonoBehaviour
         else
         {
             isShooting = false;
+        }
+
+        // 비행 상태에서 플레이어를 바라보며 이동
+        if (fly)
+        {
+            if (distance <= lookRadius)
+            {
+                Vector3 direction = (target.position - transform.position).normalized;
+                direction.y = 0; // Y축만 조정하여 수평으로 플레이어를 바라보도록 함
+                transform.position += direction * flySpeed * Time.deltaTime;
+            }
+
+            // 플레이어를 바라보는 동작 (Y축만 변경)
+            Vector3 lookDirection = target.position - transform.position;
+            lookDirection.y = 0; // Y축은 제외한 방향만 바라보게
+            Quaternion rotation = Quaternion.LookRotation(lookDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5f);
+        }
+
+        // 소환 처리
+        summonCooldown -= Time.deltaTime;
+        if (summonCooldown <= 0)
+        {
+            SummonEnemy();
+            summonCooldown = summonInterval;
         }
     }
 
@@ -144,11 +138,7 @@ public class K_boss : MonoBehaviour
         isDead = true;
         OnDeath?.Invoke();
 
-        if (agent != null)
-        {
-            agent.enabled = false;
-        }
-
+        // 죽을 때 추락하는 처리
         if (rb != null)
         {
             rb.isKinematic = false;

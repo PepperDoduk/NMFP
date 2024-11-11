@@ -1,21 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class K_UFO : MonoBehaviour
 {
     // 기본 변수들
     public float lookRadius = 10f;
     public Transform target;
-    public NavMeshAgent agent;
     public int Hp;
     private int currentHp;
     public GameObject[] dropItems;
     public float dropChance = 0.5f;
-    public bool fly;
-    public float flyHeight = 5f;
-    public float flySpeed = 5f;
+    public bool fly; // 비행 여부
+    public float flyHeight = 5f; // 비행 높이
+    public float flySpeed = 5f; // 비행 속도
     public float shootingRange = 10f;
 
     // 총알 및 공격 관련 변수
@@ -39,9 +36,8 @@ public class K_UFO : MonoBehaviour
     void Start()
     {
         // 필요한 컴포넌트 초기화
-        agent = GetComponent<NavMeshAgent>();
-        ani = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        ani = GetComponent<Animator>();
         GameObject playerObject = GameObject.FindWithTag("Player");
         target = playerObject?.transform;
         currentHp = Hp;
@@ -49,14 +45,15 @@ public class K_UFO : MonoBehaviour
         // 비행 상태 설정
         if (fly)
         {
-            agent.enabled = false; // NavMeshAgent 비활성화
             Vector3 flyPosition = transform.position;
-            flyPosition.y = flyHeight;
-            transform.position = flyPosition; // 공중에 띄우기
+            flyPosition.y = flyHeight; // 비행 높이 설정
+            transform.position = flyPosition; // UFO를 공중에 띄움
+
+            rb.useGravity = false; // 중력 비활성화
         }
         else
         {
-            agent.enabled = true; // NavMeshAgent 활성화
+            rb.useGravity = true; // 지상에서는 중력 적용
         }
     }
 
@@ -73,7 +70,7 @@ public class K_UFO : MonoBehaviour
             return;
         }
 
-        // 비행 상태에서의 이동
+        // 비행 상태에서의 이동 (플레이어를 바라보며 이동)
         if (fly)
         {
             if (distance <= lookRadius)
@@ -81,14 +78,15 @@ public class K_UFO : MonoBehaviour
                 Vector3 direction = (target.position - transform.position).normalized;
                 direction.y = 0; // Y축 변경 방지
                 transform.position += direction * flySpeed * Time.deltaTime; // 공중에서 타겟 방향으로 이동
+
+                // 항상 플레이어를 향해 바라보는 동작
+                Quaternion targetRotation = Quaternion.LookRotation(target.position - transform.position);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f); // 회전 속도
             }
         }
         else
         {
-            if (distance <= lookRadius)
-            {
-                agent.SetDestination(target.position); // NavMeshAgent로 지상 이동
-            }
+            // 지상에서는 NavMeshAgent나 Rigidbody로 이동 (추가 필요시)
         }
 
         // 사격 처리
@@ -103,7 +101,6 @@ public class K_UFO : MonoBehaviour
         else
         {
             isShooting = false;
-            MoveTowardsPlayer();
         }
         if(Hp==0)
         {
@@ -130,16 +127,14 @@ public class K_UFO : MonoBehaviour
         isDead = true; // 적이 죽었다고 상태 업데이트
         OnDeath?.Invoke();
 
-        if (agent != null)
-        {
-            agent.enabled = false; // NavMeshAgent 비활성화
-        }
-
+        // 죽을 때 물리 적용 및 추락 효과
         if (rb != null)
         {
-            rb.isKinematic = false; // 물리적인 상호작용 허용
-            rb.useGravity = true;   // 중력 적용
-                                    // 뒤로 넘어지는 힘을 추가 (Z축을 음수로 설정)
+            rb.useGravity = true; // 죽을 때 중력 적용
+            rb.isKinematic = false; // 물리적 상호작용 가능
+            rb.velocity = Vector3.zero; // 죽을 때 움직이지 않도록 초기화
+
+            // 뒤로 넘어지는 힘을 추가 (Z축을 음수로 설정)
             rb.AddForce(new Vector3(0, -5f, 5f), ForceMode.Impulse); // 자연스러운 넘어짐 연출
         }
 
@@ -163,17 +158,6 @@ public class K_UFO : MonoBehaviour
             int randomIndex = UnityEngine.Random.Range(0, dropItems.Length);
             GameObject dropItem = dropItems[randomIndex];
             Instantiate(dropItem, transform.position, Quaternion.identity);
-        }
-    }
-
-    // 플레이어 방향으로 이동
-    void MoveTowardsPlayer()
-    {
-        if (!isDead && target != null)
-        {
-           // ani.SetBool("isWalking", true);
-            Vector3 direction = (target.position - transform.position).normalized;
-            transform.position += direction * flySpeed * Time.deltaTime;
         }
     }
 

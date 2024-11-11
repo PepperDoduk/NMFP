@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class K_AlienStormtrooper : MonoBehaviour
 {
@@ -10,9 +9,6 @@ public class K_AlienStormtrooper : MonoBehaviour
     private int currentHp;
     public GameObject[] dropItems;
     public float dropChance = 0.5f;
-    public bool fly;
-    public float flyHeight = 5f;
-    public float flySpeed = 5f;
     private float distance;
     public float Pdistance = 3f;
     private bool isDead = false;
@@ -26,7 +22,6 @@ public class K_AlienStormtrooper : MonoBehaviour
     public int Speed;
     public Transform spawnPoint;
     public Transform player;
-    public NavMeshAgent agent;
     public Animator ani;
     public Rigidbody rb;
 
@@ -34,23 +29,13 @@ public class K_AlienStormtrooper : MonoBehaviour
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
         ani = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindWithTag("Player")?.transform;
         currentHp = Hp;
 
-        if (fly)
-        {
-            agent.enabled = false;
-            Vector3 flyPosition = transform.position;
-            flyPosition.y = flyHeight;
-            transform.position = flyPosition;
-        }
-        else
-        {
-            agent.enabled = true;
-        }
+        // 물리 엔진 관련 설정 제거
+        // Rigidbody는 이제 물리 영향을 받지 않도록 설정되지 않음.
     }
 
     void Update()
@@ -59,21 +44,13 @@ public class K_AlienStormtrooper : MonoBehaviour
 
         distance = Vector3.Distance(player.position, transform.position);
 
-        if (fly)
+        if (distance <= lookRadius)
         {
-            if (distance <= lookRadius)
-            {
-                Vector3 direction = (player.position - transform.position).normalized;
-                direction.y = 0;
-                transform.position += direction * flySpeed * Time.deltaTime;
-            }
-        }
-        else
-        {
-            if (distance <= lookRadius) agent.SetDestination(player.position);
+            MoveTowardsPlayer();
         }
 
         UpdateStop();
+
         if (Hp <= 0) Die();
 
         if (distance <= shootingRange)
@@ -87,20 +64,16 @@ public class K_AlienStormtrooper : MonoBehaviour
         else
         {
             isShooting = false;
-            MoveTowardsPlayer();
-        }
-        if(Hp==0)
-        {
-            Die();
         }
     }
 
     void UpdateStop()
     {
-        if (!fly && distance < Pdistance)
-            agent.isStopped = true;
-        else
-            agent.isStopped = false;
+        if (distance < Pdistance)
+        {
+            // 물리적으로 정지하지 않게 하기 위해
+            rb.velocity = Vector3.zero;  // 물리엔진의 영향을 받지 않도록 수동으로 속도 초기화
+        }
     }
 
     public void TakeDamage(int damage)
@@ -116,16 +89,7 @@ public class K_AlienStormtrooper : MonoBehaviour
         isDead = true;
         OnDeath?.Invoke();
 
-        if (agent != null) agent.enabled = false;
-
-        if (rb != null)
-        {
-            rb.isKinematic = false;
-            rb.useGravity = true;
-            rb.AddTorque(new Vector3(0, 0, 5), ForceMode.Impulse);
-            rb.AddForce(new Vector3(0, -5f, -5f), ForceMode.Impulse); // 뒤로 넘어지도록 힘 추가
-        }
-
+        // 죽을 때 물리 적용 없앴음 (추락 효과만 있음)
         TryDropItem();
         Destroy(gameObject, 2f);
     }
@@ -170,6 +134,14 @@ public class K_AlienStormtrooper : MonoBehaviour
     void MoveTowardsPlayer()
     {
         Vector3 direction = (player.position - transform.position).normalized;
-        transform.position += direction * Speed * Time.deltaTime;
+
+        // y축으로는 이동하지 않도록 설정
+        direction.y = 0;
+
+        // Rigidbody를 사용하여 이동, 회전 방지
+        rb.velocity = direction * Speed;
+
+        // 회전 방지
+        rb.angularVelocity = Vector3.zero;  // 회전 방지
     }
 }

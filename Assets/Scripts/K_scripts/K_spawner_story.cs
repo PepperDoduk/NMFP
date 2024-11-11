@@ -66,10 +66,9 @@ public class K_spawner_story : MonoBehaviour
             GameObject enemy = Instantiate(GeneralEnemies[Random.Range(0, GeneralEnemies.Length)], furthestPosition, Quaternion.identity);
             ActiveMonsters.Add(enemy);
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(2f); // 0.5초 간격으로 소환
         }
     }
-
     Vector3 GetFurthestSpawnPositionFromPlayer()
     {
         Vector3 furthestPosition = GeneralEnemySpawnPositions[0];
