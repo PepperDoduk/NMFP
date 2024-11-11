@@ -37,15 +37,25 @@ public class K_spawner_story : MonoBehaviour
     }
 
     IEnumerator SpawnMajorEnemies()
+
     {
+        if (MajorEnemySpawnPositions.Length == 0 || MajorEnemies.Length == 0)
+        {
+            Debug.LogWarning("MajorEnemySpawnPositions 또는 MajorEnemies 배열이 비어 있습니다.");
+            yield break; // 배열이 비어 있을 경우 코루틴 종료
+        }
+
         for (int i = 0; i < MajorEnemiesToSpawn; i++)
         {
-            Vector3 spawnPosition = MajorEnemySpawnPositions[i % MajorEnemySpawnPositions.Length]; // 순환적으로 스폰 위치 선택
-            GameObject enemy = Instantiate(MajorEnemies[i % MajorEnemies.Length], spawnPosition, Quaternion.identity); // 순환적으로 적 선택
+            Vector3 spawnPosition = MajorEnemySpawnPositions[i % MajorEnemySpawnPositions.Length];
+            GameObject enemy = Instantiate(MajorEnemies[i % MajorEnemies.Length], spawnPosition, Quaternion.identity);
             ActiveMonsters.Add(enemy);
         }
 
         yield return null;
+
+        
+        
     }
 
     IEnumerator SpawnGeneralEnemies()
@@ -56,7 +66,7 @@ public class K_spawner_story : MonoBehaviour
             GameObject enemy = Instantiate(GeneralEnemies[Random.Range(0, GeneralEnemies.Length)], furthestPosition, Quaternion.identity);
             ActiveMonsters.Add(enemy);
 
-            yield return new WaitForSeconds(2f); 
+            yield return new WaitForSeconds(2f);
         }
     }
 
