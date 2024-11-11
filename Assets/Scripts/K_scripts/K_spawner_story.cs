@@ -113,13 +113,13 @@ public class K_spawner_story : MonoBehaviour
         Gizmos.color = Color.red;
         foreach (Vector3 position in MajorEnemySpawnPositions)
         {
-            Gizmos.DrawCube(position, Vector3.one * 0.5f);
+            Gizmos.DrawCube(position, Vector3.one * 2f);
         }
 
         Gizmos.color = Color.blue;
         foreach (Vector3 position in GeneralEnemySpawnPositions)
         {
-            Gizmos.DrawCube(position, Vector3.one * 0.5f);
+            Gizmos.DrawCube(position, Vector3.one * 2f);
         }
 
         Gizmos.color = Color.green;
