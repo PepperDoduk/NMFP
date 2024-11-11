@@ -17,6 +17,7 @@ public class K_spawner_story : MonoBehaviour
 
     private List<GameObject> ActiveMonsters = new List<GameObject>();
 
+    public GameObject Exit;
     void Start()
     {
     }
@@ -28,6 +29,9 @@ public class K_spawner_story : MonoBehaviour
             StartCoroutine(SpawnEnemies());
             hasSpawnedEnemies = true;
         }
+
+        // 적 리스트에서 모든 적이 제거되었는지 확인
+        CheckAllEnemiesDefeated();
     }
 
     IEnumerator SpawnEnemies()
@@ -37,7 +41,6 @@ public class K_spawner_story : MonoBehaviour
     }
 
     IEnumerator SpawnMajorEnemies()
-
     {
         if (MajorEnemySpawnPositions.Length == 0 || MajorEnemies.Length == 0)
         {
@@ -53,9 +56,6 @@ public class K_spawner_story : MonoBehaviour
         }
 
         yield return null;
-
-        
-        
     }
 
     IEnumerator SpawnGeneralEnemies()
@@ -86,6 +86,26 @@ public class K_spawner_story : MonoBehaviour
         }
 
         return furthestPosition;
+    }
+
+    
+    void CheckAllEnemiesDefeated()
+    {
+        // 활성화된 적 리스트에서 null이 아닌 요소만 남기기
+        ActiveMonsters.RemoveAll(monster => monster == null);
+
+        if (ActiveMonsters.Count == 0 && hasSpawnedEnemies)
+        {
+            AllEnemiesDefeated();
+        }
+    }
+
+    // 모든 적이 죽었을 때 호출되는 함수
+    void AllEnemiesDefeated()
+    {
+        Debug.Log("모든 적이 처치되었습니다!");
+        StopAllCoroutines();
+        Exit.SetActive(false);
     }
 
     void OnDrawGizmos()

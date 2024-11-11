@@ -800,6 +800,87 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
+--- !u!1 &712500416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 712500419}
+  - component: {fileID: 712500418}
+  - component: {fileID: 712500417}
+  m_Layer: 0
+  m_Name: RaidOneLandMonsterSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &712500417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712500416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8fe96da3d8d2614f8b465451a0d2b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MajorEnemies:
+  - {fileID: 5382999559038644734, guid: 8a5e84478ffd90944b3e0f42d0bb21d7, type: 3}
+  GeneralEnemies:
+  - {fileID: 2131624656129783164, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
+  MajorEnemySpawnPositions:
+  - {x: 0, y: 5, z: 0}
+  GeneralEnemySpawnPositions:
+  - {x: 0, y: 0, z: 0}
+  MajorEnemiesToSpawn: 1
+  GeneralEnemiesToSpawn: 5
+  SpawnerRange: 20
+  player: {fileID: 0}
+  TriggerRadius: 5
+  hasSpawnedEnemies: 0
+  Exit: {fileID: 0}
+--- !u!65 &712500418
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712500416}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &712500419
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712500416}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 7.32, z: 0}
+  m_LocalScale: {x: 70.0814, y: 10, z: 57.28206}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &846178906
 GameObject:
   m_ObjectHideFlags: 0
@@ -2020,66 +2101,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1874388249
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1874388251}
-  - component: {fileID: 1874388250}
-  m_Layer: 0
-  m_Name: storymonsterspawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1874388250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1874388249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8fe96da3d8d2614f8b465451a0d2b7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MajorEnemies:
-  - {fileID: 0}
-  GeneralEnemies:
-  - {fileID: 2131624656129783164, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
-  - {fileID: 5414475074028379879, guid: 7bc77fc0ea51e9c459d4e46992f29e05, type: 3}
-  - {fileID: 1911704582625844195, guid: 964c286d9d5a776428375f6aba848934, type: 3}
-  MajorEnemySpawnPositions:
-  - {x: -12, y: 3, z: 3}
-  GeneralEnemySpawnPositions:
-  - {x: 2, y: 2, z: 2}
-  MajorEnemiesToSpawn: 3
-  GeneralEnemiesToSpawn: 1
-  SpawnerRange: 20
-  player: {fileID: 1238784659}
-  TriggerRadius: 5
-  hasSpawnedEnemies: 0
---- !u!4 &1874388251
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1874388249}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.361866, y: 6.31, z: -8.07}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1948546390
 GameObject:
   m_ObjectHideFlags: 0
@@ -2398,10 +2419,10 @@ SceneRoots:
   - {fileID: 1238784659}
   - {fileID: 1568658627}
   - {fileID: 1854988164}
-  - {fileID: 1874388251}
   - {fileID: 1478078928}
   - {fileID: 1482393650370424333}
   - {fileID: 1184152785}
   - {fileID: 610725468}
   - {fileID: 1834204299}
   - {fileID: 454856759}
+  - {fileID: 712500419}
