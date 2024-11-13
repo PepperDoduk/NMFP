@@ -16,18 +16,18 @@ public class K_AlienTank : MonoBehaviour
     public Animator ani;
     private Rigidbody rb;
     private bool isDead = false;
-    public GameObject enemybullet; // 미사일 프리팹
+    public GameObject enemybullet; 
     public float missileSpeed = 20f;
     public int Speed;
-    [SerializeField] private float time = 5f; // 총알 발사 간격
-    private float bulletTime;  // 총알 발사 대기 시간
+    [SerializeField] private float time = 5f;
+    private float bulletTime;  
     
-    public Transform spawnPoint;  // 총알 발사 위치
-    public float shootingRange = 10f; // 사격 범위
+    public Transform spawnPoint; 
+    public float shootingRange = 10f; 
     private Transform player;
     private bool isShooting = false;
 
-    private bool isFalling = true;  // 공중에서 떨어지고 있는지 여부
+    private bool isFalling = true;  
 
     void Start()
     {
@@ -38,15 +38,15 @@ public class K_AlienTank : MonoBehaviour
         target = player;
         currentHp = Hp;
 
-        // 중력 적용
-        rb.useGravity = true; // 중력은 적용되도록 설정
+       
+        rb.useGravity = true; 
 
-        // 초기 하늘 위치에서 떨어지도록 설정
+        
         Vector3 fallPosition = transform.position;
-        fallPosition.y = 10f; // 하늘에서 떨어지기 위한 높이 설정
+        fallPosition.y = 10f;
         transform.position = fallPosition;
 
-        isFalling = true; // 공중에서 떨어지고 있다는 플래그
+        isFalling = true;
     }
 
     void Update()
@@ -61,7 +61,7 @@ public class K_AlienTank : MonoBehaviour
 
         distance = Vector3.Distance(target.position, transform.position);
 
-        // HP가 0 이하일 때 사망 처리
+     
         if (currentHp <= 0)
         {
             Die();
@@ -70,15 +70,14 @@ public class K_AlienTank : MonoBehaviour
 
         if (isFalling)
         {
-            // 공중에서 떨어지는 중이라면 중력의 영향을 받으며 내려옴
-            if (transform.position.y <= 1f)  // 바닥에 가까워지면 플레이어 추적 시작
+        
+            if (transform.position.y <= 1f) 
             {
-                isFalling = false;  // 떨어짐 완료, 추적 시작
+                isFalling = false; 
             }
-            return;  // 떨어지는 동안에는 플레이어 추적을 하지 않음
+            return;
         }
 
-        // 중력에 의해 내려온 후 플레이어를 쫓는 동작
         if (distance <= lookRadius)
         {
             MoveTowardsPlayer();
@@ -86,7 +85,6 @@ public class K_AlienTank : MonoBehaviour
 
         UpdateStop();
 
-        // 사격 처리
         if (distance <= shootingRange)
         {
             if (!isShooting)
@@ -156,23 +154,22 @@ public class K_AlienTank : MonoBehaviour
         isDead = true;
         OnDeath?.Invoke();
 
-        // 적이 죽으면 뒤로 넘어지는 효과 추가
+      
         if (rb != null)
         {
             rb.isKinematic = false;
             rb.useGravity = true;
 
-            // 뒤로 넘어지도록 힘을 주기
-            // 회전(토크) 추가
-            rb.AddTorque(new Vector3(0, 0, -5), ForceMode.Impulse);  // 뒤로 넘어가는 회전
+         
+            rb.AddTorque(new Vector3(0, 0, -5), ForceMode.Impulse); 
 
-            // 뒤로 밀리는 힘을 주기
-            rb.AddForce(new Vector3(0, -5f, 5f), ForceMode.Impulse);  // 뒤로 밀리는 힘
+          
+            rb.AddForce(new Vector3(0, -5f, 5f), ForceMode.Impulse);  
         }
 
-        TryDropItem();  // 아이템 드롭
+        TryDropItem();
 
-        Destroy(gameObject, 2f);  // 2초 후 오브젝트 삭제
+        Destroy(gameObject, 2f); 
     }
 
 
@@ -199,7 +196,7 @@ public class K_AlienTank : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * Speed);
 
-            // Rigidbody로 이동 처리
+            
             rb.velocity = direction * Speed * Time.deltaTime;
         }
     }
