@@ -34,8 +34,7 @@ public class K_AlienStormtrooper : MonoBehaviour
         player = GameObject.FindWithTag("Player")?.transform;
         currentHp = Hp;
 
-        // 물리 엔진 관련 설정 제거
-        // Rigidbody는 이제 물리 영향을 받지 않도록 설정되지 않음.
+
     }
 
     void Update()
@@ -71,8 +70,7 @@ public class K_AlienStormtrooper : MonoBehaviour
     {
         if (distance < Pdistance)
         {
-            // 물리적으로 정지하지 않게 하기 위해
-            rb.velocity = Vector3.zero;  // 물리엔진의 영향을 받지 않도록 수동으로 속도 초기화
+            rb.velocity = Vector3.zero;
         }
     }
 
@@ -89,7 +87,7 @@ public class K_AlienStormtrooper : MonoBehaviour
         isDead = true;
         OnDeath?.Invoke();
 
-        // 죽을 때 물리 적용 없앴음 (추락 효과만 있음)
+
         TryDropItem();
         Destroy(gameObject, 2f);
     }
@@ -135,13 +133,13 @@ public class K_AlienStormtrooper : MonoBehaviour
     {
         Vector3 direction = (player.position - transform.position).normalized;
 
-        // y축으로는 이동하지 않도록 설정
+
         direction.y = 0;
 
-        // Rigidbody를 사용하여 이동, 회전 방지
+
         rb.velocity = direction * Speed;
 
-        // 회전 방지
-        rb.angularVelocity = Vector3.zero;  // 회전 방지
+
+        rb.angularVelocity = Vector3.zero;
     }
 }

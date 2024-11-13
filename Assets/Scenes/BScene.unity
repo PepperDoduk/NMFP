@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589245, b: 0.2978263, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -256,7 +256,7 @@ Transform:
   m_GameObject: {fileID: 11521489}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03335, y: 5.05, z: 0.56753}
+  m_LocalPosition: {x: 0.03335, y: 5.05, z: -3.4}
   m_LocalScale: {x: 10.277162, y: 5, z: 8.990134}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -300,7 +300,7 @@ MonoBehaviour:
   GeneralEnemies:
   - {fileID: 7549938131649178602, guid: 268fefdda1df7134bbca19b52cf01d81, type: 3}
   MajorEnemySpawnPositions:
-  - {x: 0, y: 2, z: 520}
+  - {x: 0, y: 1, z: 520}
   GeneralEnemySpawnPositions:
   - {x: -20, y: 1, z: 560}
   MajorEnemiesToSpawn: 1
@@ -310,6 +310,9 @@ MonoBehaviour:
   TriggerRadius: 5
   hasSpawnedEnemies: 0
   Exit: {fileID: 1566802604}
+  Width: 200
+  Height: 10
+  backc: 0
 --- !u!1 &16045601
 GameObject:
   m_ObjectHideFlags: 0
@@ -4494,7 +4497,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 498913433}
-  - component: {fileID: 498913435}
   - component: {fileID: 498913434}
   m_Layer: 0
   m_Name: RaidThreespawner
@@ -4511,13 +4513,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498913432}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.71941, y: 45.5, z: -0.06611}
+  m_LocalRotation: {x: -0.3868462, y: 0.31543103, z: 0.284939, w: 0.81832945}
+  m_LocalPosition: {x: -3.249, y: 45.5, z: 0.19}
   m_LocalScale: {x: 1.42518, y: 5, z: 10.512939}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 174203062}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -54.38, y: 30.523, z: 22.438}
 --- !u!114 &498913434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4535,9 +4537,9 @@ MonoBehaviour:
   GeneralEnemies:
   - {fileID: 7549938131649178602, guid: 268fefdda1df7134bbca19b52cf01d81, type: 3}
   MajorEnemySpawnPositions:
-  - {x: 333, y: 52, z: 700}
+  - {x: 333, y: 40, z: 700}
   GeneralEnemySpawnPositions:
-  - {x: 370, y: 52, z: 700}
+  - {x: 370, y: 40, z: 700}
   MajorEnemiesToSpawn: 1
   GeneralEnemiesToSpawn: 5
   SpawnerRange: 20
@@ -4545,27 +4547,9 @@ MonoBehaviour:
   TriggerRadius: 5
   hasSpawnedEnemies: 0
   Exit: {fileID: 1781104615}
---- !u!65 &498913435
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 498913432}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  Width: 20
+  Height: 10
+  backc: 70
 --- !u!1 &527203644
 GameObject:
   m_ObjectHideFlags: 0
@@ -12675,7 +12659,7 @@ Transform:
   m_GameObject: {fileID: 1484568815}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.036, y: 6.5, z: 0.86058}
+  m_LocalPosition: {x: 0.036, y: 6.5, z: -3.12}
   m_LocalScale: {x: 10.011628, y: 10, z: 8.18315}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12719,9 +12703,9 @@ MonoBehaviour:
   GeneralEnemies:
   - {fileID: 2131624656129783164, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
   MajorEnemySpawnPositions:
-  - {x: 0, y: 4, z: 106}
+  - {x: 0, y: 1, z: 106}
   GeneralEnemySpawnPositions:
-  - {x: -5, y: 4, z: 150}
+  - {x: -5, y: 1, z: 150}
   MajorEnemiesToSpawn: 1
   GeneralEnemiesToSpawn: 5
   SpawnerRange: 5
@@ -12729,6 +12713,9 @@ MonoBehaviour:
   TriggerRadius: 7
   hasSpawnedEnemies: 0
   Exit: {fileID: 1721494797}
+  Width: 200
+  Height: 10
+  backc: 0
 --- !u!1 &1484626951
 GameObject:
   m_ObjectHideFlags: 0
@@ -14867,7 +14854,7 @@ Transform:
   m_GameObject: {fileID: 1743570193}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.52149, y: 10.5, z: 0.23363}
+  m_LocalPosition: {x: 3.177, y: 3.97, z: 0.545}
   m_LocalScale: {x: 4.1487355, y: 5, z: 10.927909}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14890,9 +14877,9 @@ MonoBehaviour:
   GeneralEnemies:
   - {fileID: 2131624656129783164, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
   MajorEnemySpawnPositions:
-  - {x: 280, y: 3, z: 1000}
+  - {x: 280, y: 1, z: 1000}
   GeneralEnemySpawnPositions:
-  - {x: 222, y: 3, z: 1000}
+  - {x: 222, y: 1, z: 1000}
   MajorEnemiesToSpawn: 1
   GeneralEnemiesToSpawn: 5
   SpawnerRange: 20
@@ -14900,6 +14887,9 @@ MonoBehaviour:
   TriggerRadius: 5
   hasSpawnedEnemies: 0
   Exit: {fileID: 1678929430}
+  Width: 10
+  Height: 5
+  backc: 300
 --- !u!65 &1743570196
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14917,7 +14907,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -16668,7 +16658,7 @@ Transform:
   m_GameObject: {fileID: 1987469010}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.06888, y: 10.7, z: -0.15339}
+  m_LocalPosition: {x: -0.06888, y: 10.7, z: -0.549}
   m_LocalScale: {x: -8.752888, y: 9, z: 4.6782355}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16691,9 +16681,9 @@ MonoBehaviour:
   GeneralEnemies:
   - {fileID: 7549938131649178602, guid: 268fefdda1df7134bbca19b52cf01d81, type: 3}
   MajorEnemySpawnPositions:
-  - {x: 52, y: 42, z: 1000}
+  - {x: 52, y: 40, z: 1000}
   GeneralEnemySpawnPositions:
-  - {x: 2, y: 42, z: 970}
+  - {x: 2, y: 40, z: 970}
   MajorEnemiesToSpawn: 1
   GeneralEnemiesToSpawn: 5
   SpawnerRange: 20
@@ -16701,6 +16691,9 @@ MonoBehaviour:
   TriggerRadius: 5
   hasSpawnedEnemies: 0
   Exit: {fileID: 0}
+  Width: 10
+  Height: 5
+  backc: 350
 --- !u!65 &1987469013
 BoxCollider:
   m_ObjectHideFlags: 0

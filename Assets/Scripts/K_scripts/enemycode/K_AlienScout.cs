@@ -26,7 +26,7 @@ public class K_AlienScout : MonoBehaviour
     private Transform player;
     private bool isShooting = false;
 
-    private bool isFalling = true;  // 공중에서 떨어지고 있는지 여부
+    private bool isFalling = true;
 
     void Start()
     {
@@ -37,15 +37,13 @@ public class K_AlienScout : MonoBehaviour
         target = player;
         currentHp = Hp;
 
-        // 중력 적용
-        rb.useGravity = true; // 중력은 적용되도록 설정
+        rb.useGravity = true;
 
-        // 초기 하늘 위치에서 떨어지도록 설정
         Vector3 fallPosition = transform.position;
-        fallPosition.y = 10f; // 하늘에서 떨어지기 위한 높이 설정
+        fallPosition.y = 10f;
         transform.position = fallPosition;
 
-        isFalling = true; // 공중에서 떨어지고 있다는 플래그
+        isFalling = true;
     }
 
     void Update()
@@ -55,7 +53,6 @@ public class K_AlienScout : MonoBehaviour
 
         distance = Vector3.Distance(target.position, transform.position);
 
-        // HP가 0 이하일 때 사망 처리
         if (currentHp <= 0)
         {
             Die();
@@ -64,15 +61,13 @@ public class K_AlienScout : MonoBehaviour
 
         if (isFalling)
         {
-            // 공중에서 떨어지는 중이라면 중력의 영향을 받으며 내려옴
-            if (transform.position.y <= 1f)  // 바닥에 가까워지면 플레이어 추적 시작
+            if (transform.position.y <= 1f)
             {
-                isFalling = false;  // 떨어짐 완료, 추적 시작
+                isFalling = false;
             }
-            return;  // 떨어지는 동안에는 플레이어 추적을 하지 않음
+            return;
         }
 
-        // 중력에 의해 내려온 후 플레이어를 쫓는 동작
         if (distance <= lookRadius)
         {
             MoveTowardsPlayer();
@@ -80,7 +75,6 @@ public class K_AlienScout : MonoBehaviour
 
         UpdateStop();
 
-        // 사격 처리
         if (distance <= shootingRange)
         {
             if (!isShooting)
@@ -95,7 +89,7 @@ public class K_AlienScout : MonoBehaviour
             isShooting = false;
             MoveTowardsPlayer();
         }
-        if(Hp==0)
+        if (Hp == 0)
         {
             Die();
         }
@@ -166,7 +160,6 @@ public class K_AlienScout : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * Speed);
 
-            // Rigidbody로 이동 처리
             rb.velocity = direction * Speed * Time.deltaTime;
         }
     }
@@ -187,7 +180,6 @@ public class K_AlienScout : MonoBehaviour
                 {
                     if (hitInfo.collider.CompareTag("Player"))
                     {
-                        // Assuming the player has a method to take damage
                     }
                 }
             }

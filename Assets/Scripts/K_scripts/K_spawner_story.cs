@@ -8,8 +8,8 @@ public class K_spawner_story : MonoBehaviour
     public GameObject[] GeneralEnemies;
     public Vector3[] MajorEnemySpawnPositions;
     public Vector3[] GeneralEnemySpawnPositions;
-    public int MajorEnemiesToSpawn = 1; // 소환할 주요 목표 적의 수
-    public int GeneralEnemiesToSpawn = 5; // 소환할 일반 목표 적의 수
+    public int MajorEnemiesToSpawn = 1;
+    public int GeneralEnemiesToSpawn = 5;
     public float SpawnerRange;
     public Transform player;
     public float TriggerRadius;
@@ -30,7 +30,6 @@ public class K_spawner_story : MonoBehaviour
             hasSpawnedEnemies = true;
         }
 
-        // 적 리스트에서 모든 적이 제거되었는지 확인
         CheckAllEnemiesDefeated();
     }
 
@@ -45,7 +44,7 @@ public class K_spawner_story : MonoBehaviour
         if (MajorEnemySpawnPositions.Length == 0 || MajorEnemies.Length == 0)
         {
             Debug.LogWarning("MajorEnemySpawnPositions 또는 MajorEnemies 배열이 비어 있습니다.");
-            yield break; // 배열이 비어 있을 경우 코루틴 종료
+            yield break;
         }
 
         for (int i = 0; i < MajorEnemiesToSpawn; i++)
@@ -66,7 +65,7 @@ public class K_spawner_story : MonoBehaviour
             GameObject enemy = Instantiate(GeneralEnemies[Random.Range(0, GeneralEnemies.Length)], furthestPosition, Quaternion.identity);
             ActiveMonsters.Add(enemy);
 
-            yield return new WaitForSeconds(2f); // 0.5초 간격으로 소환
+            yield return new WaitForSeconds(2f);
         }
     }
     Vector3 GetFurthestSpawnPositionFromPlayer()
@@ -87,10 +86,8 @@ public class K_spawner_story : MonoBehaviour
         return furthestPosition;
     }
 
-    
     void CheckAllEnemiesDefeated()
     {
-        // 활성화된 적 리스트에서 null이 아닌 요소만 남기기
         ActiveMonsters.RemoveAll(monster => monster == null);
 
         if (ActiveMonsters.Count == 0 && hasSpawnedEnemies)
@@ -99,7 +96,6 @@ public class K_spawner_story : MonoBehaviour
         }
     }
 
-    // 모든 적이 죽었을 때 호출되는 함수
     void AllEnemiesDefeated()
     {
         Debug.Log("모든 적이 처치되었습니다!");
@@ -107,6 +103,9 @@ public class K_spawner_story : MonoBehaviour
         Exit.SetActive(false);
     }
 
+    public float Width = 10f;
+    public float Height = 5f;
+    public float backc;
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -122,6 +121,6 @@ public class K_spawner_story : MonoBehaviour
         }
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position, Vector3.one * TriggerRadius * 2);
+        Gizmos.DrawWireCube(transform.position, new Vector3(Width, Height, backc));
     }
 }
