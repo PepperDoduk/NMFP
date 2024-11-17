@@ -10,27 +10,31 @@ public class K_spawner_story : MonoBehaviour
     public Vector3[] GeneralEnemySpawnPositions;
     public int MajorEnemiesToSpawn = 1;
     public int GeneralEnemiesToSpawn = 5;
-    public float SpawnerRange;
-    public Transform player;
-    public float TriggerRadius;
     public bool hasSpawnedEnemies = false;
 
     private List<GameObject> ActiveMonsters = new List<GameObject>();
-
     public GameObject Exit;
+
+    public float Width = 10f;
+    public float Height = 5f;
+    public float backc = 10f;
+
     void Start()
     {
+        // Collider 설정 (BoxCollider를 추가하고 트리거로 설정)
+        BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
+        boxCollider.isTrigger = true;
+        boxCollider.size = new Vector3(Width, Height, backc);
     }
 
-    void Update()
+    void OnTriggerEnter(Collider other)
     {
-        if (Vector3.Distance(player.position, transform.position) < TriggerRadius && !hasSpawnedEnemies)
+        // 플레이어가 트리거에 진입했을 때 적 스폰
+        if (other.CompareTag("Player") && !hasSpawnedEnemies)
         {
             StartCoroutine(SpawnEnemies());
             hasSpawnedEnemies = true;
         }
-
-        CheckAllEnemiesDefeated();
     }
 
     IEnumerator SpawnEnemies()
@@ -68,14 +72,15 @@ public class K_spawner_story : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }
     }
+
     Vector3 GetFurthestSpawnPositionFromPlayer()
     {
         Vector3 furthestPosition = GeneralEnemySpawnPositions[0];
-        float maxDistance = Vector3.Distance(player.position, furthestPosition);
+        float maxDistance = Vector3.Distance(transform.position, furthestPosition);
 
         foreach (Vector3 position in GeneralEnemySpawnPositions)
         {
-            float distance = Vector3.Distance(player.position, position);
+            float distance = Vector3.Distance(transform.position, position);
             if (distance > maxDistance)
             {
                 maxDistance = distance;
@@ -103,23 +108,8 @@ public class K_spawner_story : MonoBehaviour
         Exit.SetActive(false);
     }
 
-    public float Width = 10f;
-    public float Height = 5f;
-    public float backc;
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        foreach (Vector3 position in MajorEnemySpawnPositions)
-        {
-            Gizmos.DrawCube(position, Vector3.one * 2f);
-        }
-
-        Gizmos.color = Color.blue;
-        foreach (Vector3 position in GeneralEnemySpawnPositions)
-        {
-            Gizmos.DrawCube(position, Vector3.one * 2f);
-        }
-
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(transform.position, new Vector3(Width, Height, backc));
     }
