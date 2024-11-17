@@ -257,7 +257,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.03335, y: 5.05, z: -3.4}
-  m_LocalScale: {x: 10.277162, y: 5, z: 8.990134}
+  m_LocalScale: {x: 11.01, y: 5, z: 0.77}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 170688115}
@@ -305,9 +305,6 @@ MonoBehaviour:
   - {x: -20, y: 1, z: 560}
   MajorEnemiesToSpawn: 1
   GeneralEnemiesToSpawn: 5
-  SpawnerRange: 20
-  player: {fileID: 478881166}
-  TriggerRadius: 5
   hasSpawnedEnemies: 0
   Exit: {fileID: 1566802604}
   Width: 200
@@ -4256,7 +4253,7 @@ Transform:
   m_GameObject: {fileID: 478881159}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4498,6 +4495,7 @@ GameObject:
   m_Component:
   - component: {fileID: 498913433}
   - component: {fileID: 498913434}
+  - component: {fileID: 498913435}
   m_Layer: 0
   m_Name: RaidThreespawner
   m_TagString: Untagged
@@ -4513,13 +4511,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498913432}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.3868462, y: 0.31543103, z: 0.284939, w: 0.81832945}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.249, y: 45.5, z: 0.19}
-  m_LocalScale: {x: 1.42518, y: 5, z: 10.512939}
+  m_LocalScale: {x: 1.5, y: 9.61, z: 14.51}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 174203062}
-  m_LocalEulerAnglesHint: {x: -54.38, y: 30.523, z: 22.438}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &498913434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4542,14 +4540,32 @@ MonoBehaviour:
   - {x: 370, y: 40, z: 700}
   MajorEnemiesToSpawn: 1
   GeneralEnemiesToSpawn: 5
-  SpawnerRange: 20
-  player: {fileID: 478881166}
-  TriggerRadius: 5
   hasSpawnedEnemies: 0
   Exit: {fileID: 1781104615}
   Width: 20
   Height: 10
   backc: 70
+--- !u!65 &498913435
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498913432}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &527203644
 GameObject:
   m_ObjectHideFlags: 0
@@ -12660,7 +12676,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.036, y: 6.5, z: -3.12}
-  m_LocalScale: {x: 10.011628, y: 10, z: 8.18315}
+  m_LocalScale: {x: 11.73, y: 11.3, z: 1.19}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1142973687}
@@ -12708,9 +12724,6 @@ MonoBehaviour:
   - {x: -5, y: 1, z: 150}
   MajorEnemiesToSpawn: 1
   GeneralEnemiesToSpawn: 5
-  SpawnerRange: 5
-  player: {fileID: 478881166}
-  TriggerRadius: 7
   hasSpawnedEnemies: 0
   Exit: {fileID: 1721494797}
   Width: 200
@@ -14882,9 +14895,6 @@ MonoBehaviour:
   - {x: 222, y: 1, z: 1000}
   MajorEnemiesToSpawn: 1
   GeneralEnemiesToSpawn: 5
-  SpawnerRange: 20
-  player: {fileID: 478881166}
-  TriggerRadius: 5
   hasSpawnedEnemies: 0
   Exit: {fileID: 1678929430}
   Width: 10
@@ -14907,7 +14917,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -16659,7 +16669,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.06888, y: 10.7, z: -0.549}
-  m_LocalScale: {x: -8.752888, y: 9, z: 4.6782355}
+  m_LocalScale: {x: -8.752888, y: 11.27, z: 13.83}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1324914472}
@@ -16686,9 +16696,6 @@ MonoBehaviour:
   - {x: 2, y: 40, z: 970}
   MajorEnemiesToSpawn: 1
   GeneralEnemiesToSpawn: 5
-  SpawnerRange: 20
-  player: {fileID: 478881166}
-  TriggerRadius: 5
   hasSpawnedEnemies: 0
   Exit: {fileID: 0}
   Width: 10
