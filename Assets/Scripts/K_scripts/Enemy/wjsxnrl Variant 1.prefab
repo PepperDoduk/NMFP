@@ -43,6 +43,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wjsxnrl Variant 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1105088931657911696, guid: b283f81631736dc4bb06a12d45862330, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1302765818439312499, guid: b283f81631736dc4bb06a12d45862330, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.05266
