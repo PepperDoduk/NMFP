@@ -140,9 +140,9 @@ public class K_AlienScout : MonoBehaviour
 
     void OnEnemyDeath()
     {
-        enemyHp.Die();
+        
         isDead = true;
         ani.SetBool("isWalking", false);
-        rb.velocity = Vector3.zero;
+        enemyHp.Die();
     }
 }
