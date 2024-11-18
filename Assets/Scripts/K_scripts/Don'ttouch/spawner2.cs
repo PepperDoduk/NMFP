@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class K_spawner_story : MonoBehaviour
+public class spawner2 : MonoBehaviour
 {
     public GameObject[] MajorEnemies;
     public GameObject[] GeneralEnemies;
@@ -21,6 +21,7 @@ public class K_spawner_story : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("2222");
         // Collider 설정 (BoxCollider를 추가하고 트리거로 설정)
         BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
         boxCollider.isTrigger = true;
@@ -32,6 +33,7 @@ public class K_spawner_story : MonoBehaviour
         // 플레이어가 트리거에 진입했을 때 적 스폰
         if (other.CompareTag("Player") && !hasSpawnedEnemies)
         {
+            Debug.Log("2222");
             StartCoroutine(SpawnEnemies());
             hasSpawnedEnemies = true;
         }

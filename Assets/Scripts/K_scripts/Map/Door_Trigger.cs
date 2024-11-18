@@ -10,7 +10,7 @@ public class Door_Trigger : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            Invoke("Open",2);
+            Invoke("Open",0.3f);
         }
     }
     private void Open()
