@@ -4155,7 +4155,7 @@ MonoBehaviour:
   - {fileID: 682156096}
   - {fileID: 1798110378}
   - {fileID: 0}
-  hasItem: 010000
+  hasItem: 010100
   InvenNum: 0
   maxInvenNum: 3
 --- !u!114 &478881161
@@ -4253,7 +4253,7 @@ Transform:
   m_GameObject: {fileID: 478881159}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

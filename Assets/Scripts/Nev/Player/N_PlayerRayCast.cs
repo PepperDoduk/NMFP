@@ -62,6 +62,10 @@ public class N_PlayerRayCast : MonoBehaviour
             if (hit.collider.tag == "Enemy")
             {
                 Debug.Log("EnemyHit");
+                if(hit.collider.TryGetComponent<K_EnemyHp>(out var enemy))
+                {
+                    enemy.TakeDamage(10);
+                }
             }
         }
         StartCoroutine(Shotcooldown());

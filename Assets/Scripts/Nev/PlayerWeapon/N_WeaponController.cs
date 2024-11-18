@@ -21,10 +21,10 @@ public class N_WeaponController : MonoBehaviour
     {
         //Inventory = new N_WeaponStates[maxInvenNum];
         //hasItem = new bool[maxInvenNum];
-        for (int i = 1; i < maxInvenNum; ++i)
-        {
-            hasItem[i] = false;
-        }
+        //for (int i = 1; i < maxInvenNum; ++i)
+        //{
+        //    hasItem[i] = false;
+        //}
     }
 
     private void Update()
