@@ -12,7 +12,7 @@ public class N_PlayerRayCast : MonoBehaviour
     public bool canShot = true;
     public bool repeater = true;
 
-    float maxRayDistance = 15f;
+    float maxRayDistance = 30f;
     public float rayZ = 1.0f;
     public float rayY = 1.0f;
 
@@ -64,7 +64,7 @@ public class N_PlayerRayCast : MonoBehaviour
                 Debug.Log("EnemyHit");
                 if(hit.collider.TryGetComponent<K_EnemyHp>(out var enemy))
                 {
-                    enemy.TakeDamage(10);
+                    enemy.TakeDamage(20);
                 }
             }
         }
