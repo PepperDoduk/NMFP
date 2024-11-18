@@ -21,7 +21,7 @@ public class spawner2 : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("2222");
+       
         // Collider 설정 (BoxCollider를 추가하고 트리거로 설정)
         BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
         boxCollider.isTrigger = true;
