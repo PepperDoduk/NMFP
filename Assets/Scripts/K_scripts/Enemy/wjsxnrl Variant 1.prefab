@@ -103,6 +103,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1105088931657911696, guid: b283f81631736dc4bb06a12d45862330, type: 3}
       insertIndex: -1
       addedObject: {fileID: 136800282595969063}
+    - targetCorrespondingSourceObject: {fileID: 1105088931657911696, guid: b283f81631736dc4bb06a12d45862330, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4191798483814122142}
   m_SourcePrefab: {fileID: 100100000, guid: b283f81631736dc4bb06a12d45862330, type: 3}
 --- !u!4 &7854147370792742695 stripped
 Transform:
@@ -181,3 +184,26 @@ MonoBehaviour:
   dropItems: []
   dropChance: 50
   Isfly: 1
+--- !u!136 &4191798483814122142
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8195921786858915524}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.325
+  m_Height: 3.75
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
