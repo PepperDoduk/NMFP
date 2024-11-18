@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class AK : MonoBehaviour
 {
-    public N_PlayerRayCast playerRay;
-    public N_WeaponController Weapon;
     public Animator anim;
     public int animNum = 0;
 
@@ -21,9 +19,7 @@ public class AK : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-        playerRay = GameObject.Find("Player").GetComponent<N_PlayerRayCast>();
-        Weapon = GameObject.Find("Player").GetComponent<N_WeaponController>();
-        maxAmmo = GetComponent<N_WeaponData>().MaxAmmo;
+        maxAmmo = 30;
     }
 
     private void Update()
