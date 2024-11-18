@@ -1,33 +1,31 @@
 using System.Collections;
 using UnityEngine;
-using System;
 
 public class K_AlienTank : MonoBehaviour
 {
     public float lookRadius = 10f;
-    public Transform target;
-    public int Hp;
-    private int currentHp;
     public GameObject[] dropItems;
     public float dropChance = 0.5f;
-    float distance;
+    private float distance;
     public float Pdistance = 3f;
-    public event Action OnDeath;
-    public Animator ani;
-    private Rigidbody rb;
-    private bool isDead = false;
-    public GameObject enemybullet; 
+
+    public GameObject enemybullet;
     public float missileSpeed = 20f;
     public int Speed;
     [SerializeField] private float time = 5f;
-    private float bulletTime;  
-    
-    public Transform spawnPoint; 
-    public float shootingRange = 10f; 
+    private float bulletTime;
+
+    public Transform spawnPoint;
+    public float shootingRange = 10f;
     private Transform player;
     private bool isShooting = false;
 
-    private bool isFalling = true;  
+    private bool isFalling = true;
+    private bool isDead = false;
+
+    private Rigidbody rb;
+    private Animator ani;
+    private K_EnemyHp enemyHp; 
 
     void Start()
     {
@@ -35,13 +33,15 @@ public class K_AlienTank : MonoBehaviour
         ani = GetComponent<Animator>();
         GameObject playerObject = GameObject.FindWithTag("Player");
         player = playerObject?.transform;
-        target = player;
-        currentHp = Hp;
+        enemyHp = GetComponent<K_EnemyHp>();
 
-       
-        rb.useGravity = true; 
+        if (enemyHp != null)
+        {
+            enemyHp.OnDeath += OnEnemyDeath; 
+        }
 
-        
+        rb.useGravity = true;
+
         Vector3 fallPosition = transform.position;
         fallPosition.y = 10f;
         transform.position = fallPosition;
@@ -50,30 +50,16 @@ public class K_AlienTank : MonoBehaviour
     }
 
     void Update()
-
     {
-        if (Hp == 0)
-        {
-            Die();
-        }
-        if (isDead) return;
-        if (target == null) return;
+        if (isDead || player == null) return;
 
-        distance = Vector3.Distance(target.position, transform.position);
-
-     
-        if (currentHp <= 0)
-        {
-            Die();
-            return;
-        }
+        distance = Vector3.Distance(player.position, transform.position);
 
         if (isFalling)
         {
-        
-            if (transform.position.y <= 1f) 
+            if (transform.position.y <= 1f)
             {
-                isFalling = false; 
+                isFalling = false;
             }
             return;
         }
@@ -113,7 +99,7 @@ public class K_AlienTank : MonoBehaviour
                 K_missilebullet bulletScript = bulletObj.GetComponent<K_missilebullet>();
                 if (bulletScript != null)
                 {
-                    bulletScript.SetTarget(target);
+                    bulletScript.SetTarget(player);
                 }
 
                 Destroy(bulletObj, 5f);
@@ -122,7 +108,6 @@ public class K_AlienTank : MonoBehaviour
             yield return null;
         }
     }
-
 
     void UpdateStop()
     {
@@ -138,54 +123,17 @@ public class K_AlienTank : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    void OnEnemyDeath()
     {
-        currentHp -= damage;
-        if (currentHp <= 0)
-        {
-            Die();
-        }
-    }
-
-    public void Die()
-    {
-        if (isDead) return;
-
         isDead = true;
-        OnDeath?.Invoke();
 
-      
-        if (rb != null)
-        {
-            rb.isKinematic = false;
-            rb.useGravity = true;
-
-         
-            rb.AddTorque(new Vector3(0, 0, -5), ForceMode.Impulse); 
-
-          
-            rb.AddForce(new Vector3(0, -5f, 5f), ForceMode.Impulse);  
-        }
-
-        TryDropItem();
-
-        Destroy(gameObject, 2f); 
+       
+       
+        enemyHp.Die();
+        Destroy(gameObject, 2f);
     }
 
-
-    void TryDropItem()
-    {
-        if (dropItems.Length == 0) return;
-
-        float randomValue = UnityEngine.Random.Range(0f, 1f);
-        if (randomValue <= dropChance)
-        {
-            int randomIndex = UnityEngine.Random.Range(0, dropItems.Length);
-            GameObject dropItem = dropItems[randomIndex];
-            Instantiate(dropItem, transform.position, Quaternion.identity);
-        }
-    }
-
+   
     void MoveTowardsPlayer()
     {
         if (!isDead && player != null)
@@ -196,9 +144,7 @@ public class K_AlienTank : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * Speed);
 
-            
             rb.velocity = direction * Speed * Time.deltaTime;
         }
     }
-
 }

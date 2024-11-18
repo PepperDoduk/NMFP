@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 9004022743841132126}
   - component: {fileID: 513063705045641860}
   - component: {fileID: 8610349037986707675}
+  - component: {fileID: -5126285899259771100}
   m_Layer: 0
   m_Name: Alien 1 1
   m_TagString: Untagged
@@ -133,19 +134,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 700
-  Hp: 100
   dropItems: []
   dropChance: 0.5
   Pdistance: 3
   laserCooldown: 5
-  laserTime: 0
   shootingRange: 10
   muzzleFlashParticle: {fileID: 100004, guid: e5727721799e00f44906e7af53883073, type: 3}
   Speed: 5
   spawnPoint: {fileID: 6956070599270745520}
   player: {fileID: 0}
-  ani: {fileID: 0}
-  rb: {fileID: 0}
 --- !u!120 &9004022743841132126
 LineRenderer:
   serializedVersion: 2
@@ -300,3 +297,19 @@ CapsuleCollider:
   m_Height: 6.99
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5126285899259771100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7549938131649178602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e700330d321727b469e8bd80f37a2b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 100
+  dropItems: []
+  dropChance: 50
+  Isfly: 0

@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 9049128180219897496}
   - component: {fileID: 1274887947472994705}
   - component: {fileID: 4571662578976370868}
+  - component: {fileID: 4045001236580647041}
   m_Layer: 0
   m_Name: Tank (1) 1 1
   m_TagString: Untagged
@@ -81,16 +82,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 500
-  target: {fileID: 0}
-  Hp: 100
   dropItems: []
   dropChance: 0.5
   Pdistance: 3
-  ani: {fileID: 0}
   enemybullet: {fileID: 3336045428557012035, guid: 7fe4a7023ab62d34f887c049f03b42e9, type: 3}
   missileSpeed: 20
   Speed: 1500
-  time: 5
+  time: 2
   spawnPoint: {fileID: 7719701633252994812}
   shootingRange: 10
 --- !u!95 &9217531993480277877
@@ -214,3 +212,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.59, y: 1.9, z: 2.29}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4045001236580647041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8859670502227051641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e700330d321727b469e8bd80f37a2b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 200
+  dropItems: []
+  dropChance: 50
+  Isfly: 0

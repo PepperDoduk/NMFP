@@ -1,21 +1,15 @@
+using System;
 using System.Collections;
 using UnityEngine;
-using System;
 
 public class K_AlienScout : MonoBehaviour
 {
     public float lookRadius = 10f;
     public Transform target;
-    public int Hp;
-    private int currentHp;
-    public GameObject[] dropItems;
-    public float dropChance = 0.5f;
-    float distance;
-    public float Pdistance = 3f;
-    public event Action OnDeath;
-    public Animator ani;
     private Rigidbody rb;
-    private bool isDead = false;
+    private Animator ani;
+    private Transform player;
+    public float Pdistance = 3f;
 
     public int Speed;
     [SerializeField] private float time = 5f;
@@ -23,10 +17,12 @@ public class K_AlienScout : MonoBehaviour
     public GameObject muzzleFlashParticle;
     public Transform spawnPoint;
     public float shootingRange = 10f;
-    private Transform player;
     private bool isShooting = false;
 
     private bool isFalling = true;
+    private bool isDead = false;
+
+    private K_EnemyHp enemyHp; // 체력 관리용 스크립트 참조
 
     void Start()
     {
@@ -35,29 +31,26 @@ public class K_AlienScout : MonoBehaviour
         GameObject playerObject = GameObject.FindWithTag("Player");
         player = playerObject?.transform;
         target = player;
-        currentHp = Hp;
+
+        enemyHp = GetComponent<K_EnemyHp>(); 
 
         rb.useGravity = true;
-
         Vector3 fallPosition = transform.position;
         fallPosition.y = 10f;
         transform.position = fallPosition;
 
         isFalling = true;
+
+        if (enemyHp != null)
+        {
+            enemyHp.OnDeath += OnEnemyDeath; 
+        }
     }
 
     void Update()
     {
         if (isDead) return;
         if (target == null) return;
-
-        distance = Vector3.Distance(target.position, transform.position);
-
-        if (currentHp <= 0)
-        {
-            Die();
-            return;
-        }
 
         if (isFalling)
         {
@@ -68,12 +61,14 @@ public class K_AlienScout : MonoBehaviour
             return;
         }
 
+        float distance = Vector3.Distance(target.position, transform.position);
+
         if (distance <= lookRadius)
         {
             MoveTowardsPlayer();
         }
 
-        UpdateStop();
+        UpdateStop(distance);
 
         if (distance <= shootingRange)
         {
@@ -89,13 +84,9 @@ public class K_AlienScout : MonoBehaviour
             isShooting = false;
             MoveTowardsPlayer();
         }
-        if (Hp == 0)
-        {
-            Die();
-        }
     }
 
-    void UpdateStop()
+    void UpdateStop(float distance)
     {
         if (isDead) return;
 
@@ -106,47 +97,6 @@ public class K_AlienScout : MonoBehaviour
         else
         {
             MoveTowardsPlayer();
-        }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        currentHp -= damage;
-        if (currentHp <= 0)
-        {
-            Die();
-        }
-    }
-
-    public void Die()
-    {
-        if (isDead) return;
-
-        isDead = true;
-        OnDeath?.Invoke();
-
-        if (rb != null)
-        {
-            rb.isKinematic = false;
-            rb.useGravity = true;
-            rb.AddTorque(new Vector3(0, 0, 5), ForceMode.Impulse);
-            rb.AddForce(new Vector3(0, -5f, -5f), ForceMode.Impulse);
-        }
-
-        TryDropItem();
-        Destroy(gameObject, 2f);
-    }
-
-    void TryDropItem()
-    {
-        if (dropItems.Length == 0) return;
-
-        float randomValue = UnityEngine.Random.Range(0f, 1f);
-        if (randomValue <= dropChance)
-        {
-            int randomIndex = UnityEngine.Random.Range(0, dropItems.Length);
-            GameObject dropItem = dropItems[randomIndex];
-            Instantiate(dropItem, transform.position, Quaternion.identity);
         }
     }
 
@@ -180,10 +130,19 @@ public class K_AlienScout : MonoBehaviour
                 {
                     if (hitInfo.collider.CompareTag("Player"))
                     {
+                        // player damage
                     }
                 }
             }
             yield return null;
         }
+    }
+
+    void OnEnemyDeath()
+    {
+        enemyHp.Die();
+        isDead = true;
+        ani.SetBool("isWalking", false);
+        rb.velocity = Vector3.zero;
     }
 }

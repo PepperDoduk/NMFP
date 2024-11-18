@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7375104442748643501}
   - component: {fileID: 3337752681499530714}
   - component: {fileID: 1982335210261175747}
+  - component: {fileID: -944410558151318267}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -126,26 +127,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookRadius: 5000
   target: {fileID: 0}
-  Hp: 100
   dropItems: []
   dropChance: 0.5
   fly: 1
   flyHeight: 5
   flySpeed: 5
-  ani: {fileID: 0}
-  Speed: 3
+  shootingRange: 100
   enemyBullet: {fileID: 3336045428557012035, guid: 7fe4a7023ab62d34f887c049f03b42e9, type: 3}
   bulletSpawnPoint: {fileID: 7575371799363144609}
-  bulletSpeed: 500
-  shootingRange: 100
-  damageAmount: 10
+  enemyPrefabs: []
+  summonInterval: 10
+  spawnRadius: 5
   railgun: {fileID: 1343850142094770467}
   laserRifle: {fileID: 5145116277749853672}
   railgunMuzzleFlashParticle: {fileID: 100004, guid: b7d03fb0762c75449af69d624547e358, type: 3}
   laserRifleMuzzleFlashParticle: {fileID: 100008, guid: b11531b8eca86ad43a1931bd652b0c61, type: 3}
-  enemyPrefabs: []
-  summonInterval: 10
-  spawnRadius: 5
+  damageAmount: 10
+--- !u!114 &-944410558151318267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430868637242737214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e700330d321727b469e8bd80f37a2b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 300
+  dropItems: []
+  dropChance: 50
+  Isfly: 1
 --- !u!1 &1113906092144183679
 GameObject:
   m_ObjectHideFlags: 0

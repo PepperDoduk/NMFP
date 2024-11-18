@@ -1,20 +1,16 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class K_AlienStormtrooper : MonoBehaviour
 {
     public float lookRadius = 10f;
-    public int Hp;
-    private int currentHp;
     public GameObject[] dropItems;
     public float dropChance = 0.5f;
     private float distance;
     public float Pdistance = 3f;
-    private bool isDead = false;
 
     [SerializeField] private float laserCooldown = 5f;
-    public float laserTime;
+    private float laserTime;
     public float shootingRange = 10f;
     public GameObject muzzleFlashParticle;
     private bool isShooting = false;
@@ -22,19 +18,23 @@ public class K_AlienStormtrooper : MonoBehaviour
     public int Speed;
     public Transform spawnPoint;
     public Transform player;
-    public Animator ani;
-    public Rigidbody rb;
+    private Animator ani;
+    private Rigidbody rb;
 
-    public event Action OnDeath;
+    private bool isDead = false;
+    private K_EnemyHp enemyHp; 
 
     void Start()
     {
         ani = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindWithTag("Player")?.transform;
-        currentHp = Hp;
+        enemyHp = GetComponent<K_EnemyHp>();
 
-
+        if (enemyHp != null)
+        {
+            enemyHp.OnDeath += OnEnemyDeath; 
+        }
     }
 
     void Update()
@@ -49,8 +49,6 @@ public class K_AlienStormtrooper : MonoBehaviour
         }
 
         UpdateStop();
-
-        if (Hp <= 0) Die();
 
         if (distance <= shootingRange)
         {
@@ -74,35 +72,13 @@ public class K_AlienStormtrooper : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    void MoveTowardsPlayer()
     {
-        currentHp -= damage;
-        if (currentHp <= 0) Die();
-    }
+        Vector3 direction = (player.position - transform.position).normalized;
+        direction.y = 0;
 
-    public void Die()
-    {
-        if (isDead) return;
-
-        isDead = true;
-        OnDeath?.Invoke();
-
-
-        TryDropItem();
-        Destroy(gameObject, 2f);
-    }
-
-    void TryDropItem()
-    {
-        if (dropItems.Length == 0) return;
-
-        float randomValue = UnityEngine.Random.Range(0f, 1f);
-        if (randomValue <= dropChance)
-        {
-            int randomIndex = UnityEngine.Random.Range(0, dropItems.Length);
-            GameObject dropItem = dropItems[randomIndex];
-            Instantiate(dropItem, transform.position, Quaternion.identity);
-        }
+        rb.velocity = direction * Speed;
+        rb.angularVelocity = Vector3.zero;
     }
 
     IEnumerator ShootLaserAtPlayer()
@@ -129,17 +105,11 @@ public class K_AlienStormtrooper : MonoBehaviour
         }
     }
 
-    void MoveTowardsPlayer()
+    void OnEnemyDeath()
     {
-        Vector3 direction = (player.position - transform.position).normalized;
-
-
-        direction.y = 0;
-
-
-        rb.velocity = direction * Speed;
-
-
-        rb.angularVelocity = Vector3.zero;
+        isDead = true;
+        enemyHp.Die();
     }
+
+  
 }

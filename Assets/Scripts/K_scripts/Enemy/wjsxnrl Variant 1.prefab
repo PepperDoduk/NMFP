@@ -96,6 +96,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1105088931657911696, guid: b283f81631736dc4bb06a12d45862330, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2026024260353509060}
+    - targetCorrespondingSourceObject: {fileID: 1105088931657911696, guid: b283f81631736dc4bb06a12d45862330, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 136800282595969063}
   m_SourcePrefab: {fileID: 100100000, guid: b283f81631736dc4bb06a12d45862330, type: 3}
 --- !u!4 &7854147370792742695 stripped
 Transform:
@@ -121,17 +124,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookRadius: 500
   target: {fileID: 0}
-  Hp: 100
   dropItems: []
   dropChance: 0.5
   fly: 1
   flyHeight: 5
   flySpeed: 5
   shootingRange: 10
-  enemybullet: {fileID: 3336045428557012035, guid: 7fe4a7023ab62d34f887c049f03b42e9, type: 3}
+  enemyBullet: {fileID: 3336045428557012035, guid: 7fe4a7023ab62d34f887c049f03b42e9, type: 3}
   spawnPoint: {fileID: 1759202195770213180}
   time: 5
-  damageAmount: 10
   ani: {fileID: 0}
 --- !u!54 &2026024260353509060
 Rigidbody:
@@ -160,3 +161,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 72
   m_CollisionDetection: 0
+--- !u!114 &136800282595969063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8195921786858915524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e700330d321727b469e8bd80f37a2b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 300
+  dropItems: []
+  dropChance: 50
+  Isfly: 1

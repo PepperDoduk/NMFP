@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8363822724768478884}
   - component: {fileID: 6908637381449697293}
   - component: {fileID: 3286665606286805237}
+  - component: {fileID: 2082124118327113147}
   - component: {fileID: 1343265993082662988}
   - component: {fileID: 7942092844821708541}
   - component: {fileID: 3979464071272295494}
@@ -112,6 +113,22 @@ CapsuleCollider:
   m_Height: 3.1199996
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2082124118327113147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131624656129783164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e700330d321727b469e8bd80f37a2b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 100
+  dropItems: []
+  dropChance: 50
+  Isfly: 0
 --- !u!114 &1343265993082662988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,11 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookRadius: 500
   target: {fileID: 0}
-  Hp: 100
-  dropItems: []
-  dropChance: 0.5
   Pdistance: 3
-  ani: {fileID: 0}
   Speed: 1000
   time: 5
   muzzleFlashParticle: {fileID: 100004, guid: 510e0a736e5e66243b242a076c59611a, type: 3}

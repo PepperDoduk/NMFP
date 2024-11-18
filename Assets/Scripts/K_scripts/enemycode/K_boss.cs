@@ -1,66 +1,52 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class K_boss : MonoBehaviour
 {
- 
     public float lookRadius = 10f;
     public Transform target;
-    public int Hp;
-    private int currentHp;
     public GameObject[] dropItems;
     public float dropChance = 0.5f;
-    public bool fly; 
-    public float flyHeight = 5f; 
-    public float flySpeed = 5f; 
-    private bool isDead = false; 
-    public Animator ani;
-    private Rigidbody rb;
-    public event Action OnDeath;
-
-
-    public int Speed;
-    private float bulletTime;
+    public bool fly;
+    public float flyHeight = 5f;
+    public float flySpeed = 5f;
+    public float shootingRange = 10f;
     public GameObject enemyBullet;
     public Transform bulletSpawnPoint;
-    public float bulletSpeed;
-    public float shootingRange = 10f;
-    private bool isShooting = false;
-    public int damageAmount = 10;
-
-
+    public GameObject[] enemyPrefabs;
+    public float summonInterval = 10f;
+    public float spawnRadius = 5f;
     public Transform railgun;
     public Transform laserRifle;
     public GameObject railgunMuzzleFlashParticle;
     public GameObject laserRifleMuzzleFlashParticle;
+    public int damageAmount = 10;
 
-
-    public GameObject[] enemyPrefabs; 
-    public float summonInterval = 10f;
+    private K_EnemyHp enemyHp;
+    private Rigidbody rb;
+    private Animator ani;
+    private bool isShooting = false;
     private float summonCooldown;
-    public float spawnRadius = 5f; 
+    private bool isDead = false;
 
     void Start()
     {
+        enemyHp = GetComponent<K_EnemyHp>();
         rb = GetComponent<Rigidbody>();
         ani = GetComponent<Animator>();
         GameObject player = GameObject.FindWithTag("Player");
         target = player?.transform;
-        currentHp = Hp;
 
         if (fly)
         {
-           
             Vector3 flyPosition = transform.position;
             flyPosition.y = flyHeight;
             transform.position = flyPosition;
         }
 
-        if (Hp == 0)
+        if (enemyHp != null)
         {
-            Die();
+            enemyHp.OnDeath += Die;
         }
 
         StartCoroutine(AutomaticShooting());
@@ -68,50 +54,32 @@ public class K_boss : MonoBehaviour
 
     void Update()
     {
-        if (isDead) return;
+        if (isDead || target == null) return;
 
-        if (target == null) return;
+        float distance = Vector3.Distance(transform.position, target.position);
 
-      
-        float distance = Mathf.Abs(target.position.x - transform.position.x);
-
-        if (currentHp <= 0)
+        if (distance <= shootingRange && !isShooting)
         {
-            Die();
-            return;
+            isShooting = true;
+            StartCoroutine(ShootAtPlayer());
         }
-
-      
-        if (distance <= shootingRange)
-        {
-            if (!isShooting)
-            {
-                isShooting = true;
-                StartCoroutine(ShootAtPlayer());
-            }
-        }
-        else
+        else if (distance > shootingRange)
         {
             isShooting = false;
         }
 
-        if (fly)
+        if (fly && distance <= lookRadius)
         {
-            if (distance <= lookRadius)
-            {
-                Vector3 direction = (target.position - transform.position).normalized;
-                direction.y = 0;
-                transform.position += direction * flySpeed * Time.deltaTime;
-            }
+            Vector3 direction = (target.position - transform.position).normalized;
+            direction.y = 0;
+            transform.position += direction * flySpeed * Time.deltaTime;
 
-        
             Vector3 lookDirection = target.position - transform.position;
-            lookDirection.y = 0; 
+            lookDirection.y = 0;
             Quaternion rotation = Quaternion.LookRotation(lookDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5f);
         }
 
-     
         summonCooldown -= Time.deltaTime;
         if (summonCooldown <= 0)
         {
@@ -120,56 +88,21 @@ public class K_boss : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    private void Die()
     {
-        currentHp -= damage;
-        Debug.Log($"Damage taken: {damage}. Current HP: {currentHp}");
-        if (currentHp <= 0)
-        {
-            Die();
-        }
-    }
-
-    public void Die()
-    {
-        if (isDead) return;
-
-        isDead = true;
-        OnDeath?.Invoke();
-
         
-        if (rb != null)
-        {
-            rb.isKinematic = false;
-            rb.useGravity = true;
-            rb.AddForce(Vector3.down * 10f, ForceMode.Impulse); 
-        }
-
         ani.SetTrigger("Die");
-
-        TryDropItem();
+        enemyHp.Die();
         Destroy(gameObject, 2f);
     }
 
-    void TryDropItem()
-    {
-        if (dropItems.Length == 0) return;
-
-        float randomValue = UnityEngine.Random.Range(0f, 1f);
-        if (randomValue <= dropChance)
-        {
-            int randomIndex = UnityEngine.Random.Range(0, dropItems.Length);
-            GameObject dropItem = dropItems[randomIndex];
-            Instantiate(dropItem, transform.position, Quaternion.identity);
-        }
-    }
-
+  
     void SummonEnemy()
     {
         if (enemyPrefabs.Length == 0) return;
 
-        GameObject enemyPrefab = enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)];
-        Vector3 spawnPosition = transform.position + (UnityEngine.Random.insideUnitSphere * spawnRadius);
+        GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+        Vector3 spawnPosition = transform.position + (Random.insideUnitSphere * spawnRadius);
         spawnPosition.y = transform.position.y;
 
         Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
@@ -222,21 +155,14 @@ public class K_boss : MonoBehaviour
     {
         while (isShooting && !isDead)
         {
-            bulletTime -= Time.deltaTime;
-            if (bulletTime <= 0)
+            GameObject bullet = Instantiate(enemyBullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            K_missilebullet missile = bullet.GetComponent<K_missilebullet>();
+            if (missile != null)
             {
-                bulletTime = 2f;
-                GameObject bulletObj = Instantiate(enemyBullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-                K_missilebullet bulletScript = bulletObj.GetComponent<K_missilebullet>();
-                if (bulletScript != null)
-                {
-                    bulletScript.SetTarget(target);
-                }
-
-                Destroy(bulletObj, 5f);
+                missile.SetTarget(target);
             }
-
-            yield return null;
+            Destroy(bullet, 5f);
+            yield return new WaitForSeconds(2f);
         }
     }
 }
