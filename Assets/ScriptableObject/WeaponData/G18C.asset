@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72fbbb2afbb5ca84fadd37a587bbcace, type: 3}
   m_Name: G18C
   m_EditorClassIdentifier: 
-  Damage: 10
+  Damage: 23
   Range: 30
   RPM: 1100
   MaxAmmo: 17
