@@ -43,11 +43,18 @@ public class AudioManager : MonoBehaviour
         AKr7,
         AKfire1,
         AKfire2,
-        AKnoAmmo,
+        NoAmmo,
         m29fire,
         m29openChamber,
         m29ammo,
         m29closeChamber,
+        m29ammoCaseDrop,
+        VSSfire,
+        VSSoutMag,
+        VSSmagFromVest,
+        VSSmagComb,
+        VSSvolt1,
+        VSSvolt2,
 
     }
     void Awake()

@@ -37,7 +37,7 @@ public class AK : MonoBehaviour
 
             if (currentAmmo <= 0)
             {
-                AudioManager.instance.PlaySfx(AudioManager.Sfx.AKnoAmmo);
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.NoAmmo);
             }
             else
             {
@@ -87,7 +87,7 @@ public class AK : MonoBehaviour
             }
         }
         else
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.AKnoAmmo);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.NoAmmo);
         anim.SetInteger("AK", animNum);
     }
 

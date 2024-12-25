@@ -32,7 +32,7 @@ public class M29revolver : MonoBehaviour
 
             if (currentAmmo <= 0)
             {
-                AudioManager.instance.PlaySfx(AudioManager.Sfx.AKnoAmmo);
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.NoAmmo);
             }
             else
             {
@@ -61,6 +61,10 @@ public class M29revolver : MonoBehaviour
     {
         AudioManager.instance.PlaySfx(AudioManager.Sfx.m29closeChamber);
     }
+    public void BulletDrop()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.m29ammoCaseDrop);
+    }
 
     public void AmmoCheck()
     {
@@ -85,7 +89,7 @@ public class M29revolver : MonoBehaviour
                 AudioManager.instance.PlaySfx(AudioManager.Sfx.m29fire);
         }
         else
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.AKnoAmmo);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.NoAmmo);
         anim.SetInteger("M29", animNum);
     }
 
