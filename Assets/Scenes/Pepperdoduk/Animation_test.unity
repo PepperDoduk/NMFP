@@ -230,7 +230,7 @@ MonoBehaviour:
   currentAmmo: 0
   RPM: 900
   reloading: 0
-  recoil_y: -2
+  recoil_y: -1.4
   recoil_direction: {x: 0.5, y: 0, z: 1}
   maxRecoil: 12
   recoilRecovery: 3
@@ -497,7 +497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 4d2f0af39d8863741a4e944a4ec5c838, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.096769
+      value: -6.67
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 4d2f0af39d8863741a4e944a4ec5c838, type: 3}
       propertyPath: m_LocalPosition.z
@@ -505,19 +505,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 4d2f0af39d8863741a4e944a4ec5c838, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9986295
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 4d2f0af39d8863741a4e944a4ec5c838, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 4d2f0af39d8863741a4e944a4ec5c838, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 4d2f0af39d8863741a4e944a4ec5c838, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.052335896
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 4d2f0af39d8863741a4e944a4ec5c838, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -529,7 +529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 4d2f0af39d8863741a4e944a4ec5c838, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -6179861146155190530, guid: 4d2f0af39d8863741a4e944a4ec5c838, type: 3}
       propertyPath: m_IsActive

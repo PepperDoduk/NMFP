@@ -93,7 +93,7 @@ public class VSS : MonoBehaviour
         animNum = AN.Idle;
         anim.SetInteger("vss", animNum);
     }
-
+    [Header("RecoilAngle")]
     public float recoil_y;
     public Vector3 recoil_direction = Vector3.forward; // 회전 축 (Z축 기준)
     public float maxRecoil = 30f; // 최대 회전 각도
@@ -102,6 +102,15 @@ public class VSS : MonoBehaviour
     private float currentRecoil = 0f; // 누적된 회전 각도
     private bool isRecovery = false; // 현재 돌아오는 중인지 여부
     public float recoilReturnSpeed = 1f; // 돌아오는 속도 조절 (별도의 속도)
+
+
+    [Header("RecoilPos")]
+    private Vector2 currentRecoilPos = Vector2.zero; // 현재 반동 위치
+    public float recoil_x = 0.5f; // x축 반동 크기
+    public float recoil_Y = 0.5f; // y축 반동 크기
+    public float maxRecoilPos = 1.5f; // 최대 반동 거리
+    public float recoilReturnSpeedPos = 2f; // 복구 속도
+    private bool isRecoveryPos = false; // 복구 상태 플래그
 
     public void Recoil()
     {
@@ -119,26 +128,28 @@ public class VSS : MonoBehaviour
         Debug.Log("Current Rotation: " + currentRecoil);
 
         // 돌아오는 코루틴 실행
-        StartCoroutine(ReturnToZero());
+        StartCoroutine(ReturnToSix());
     }
 
-    private IEnumerator ReturnToZero()
+    private IEnumerator ReturnToSix()
     {
         isRecovery = true;
 
-        // 절반의 속도로 0도로 돌아가기
-        while (Mathf.Abs(currentRecoil) > 0.01f)
+        // 절반의 속도로 6도로 돌아가기
+        while (Mathf.Abs(currentRecoil - 6f) > 0.01f) // 6에 가까워질 때까지 반복
         {
-            float step = recoilReturnSpeed * Time.deltaTime * Mathf.Sign(-currentRecoil);
+            float step = recoilReturnSpeed * Time.deltaTime * Mathf.Sign(6f - currentRecoil); // 6으로 가는 방향의 step 계산
             currentRecoil += step;
 
             // 각도를 기준으로 Transform 회전 조정
             transform.rotation = Quaternion.Euler(recoil_direction * currentRecoil);
 
-            if (Mathf.Abs(currentRecoil) <= Mathf.Abs(step))
+            // step보다 작은 거리만 남은 경우 바로 6으로 설정
+            if (Mathf.Abs(currentRecoil - 6f) <= Mathf.Abs(step))
             {
-                currentRecoil = 0f;
-                transform.rotation = Quaternion.identity; // 완전히 초기화
+                currentRecoil = 6f;
+                transform.rotation = Quaternion.Euler(recoil_direction * currentRecoil); // 정확히 6도로 설정
+                break; // 루프 종료
             }
 
             yield return null;
@@ -147,11 +158,58 @@ public class VSS : MonoBehaviour
         isRecovery = false;
     }
 
+    public void RecoilPos()
+    {
+        // 현재 위치에서 반동 추가
+        Vector2 newPosition = currentRecoilPos + new Vector2(recoil_x, recoil_y);
+
+        if (newPosition.magnitude > maxRecoilPos)
+        {
+            Debug.Log("Max recoil position reached.");
+            return; // 최대 반동 거리를 초과하면 반동하지 않음
+        }
+
+        currentRecoilPos = newPosition;
+        transform.position += new Vector3(recoil_x, recoil_y, 0); // x, y 위치 변경
+        Debug.Log("Current Recoil Position: " + currentRecoilPos);
+
+        // 돌아오는 코루틴 실행
+        StartCoroutine(ReturnToCenter());
+    }
+
+    // 원래 위치로 돌아오는 코루틴
+    private IEnumerator ReturnToCenter()
+    {
+        isRecoveryPos = true;
+
+        while (currentRecoilPos.magnitude > 0.01f) // 원래 위치와 가까워질 때까지 반복
+        {
+            Vector2 step = recoilReturnSpeedPos * Time.deltaTime * currentRecoilPos.normalized; // 복구 방향으로 속도 적용
+            currentRecoilPos -= step;
+
+            // Transform의 위치를 현재 반동값에 따라 조정
+            transform.position = new Vector3(currentRecoilPos.x, currentRecoilPos.y, transform.position.z);
+
+            // step보다 작은 거리만 남은 경우 바로 원래 위치로 설정
+            if (currentRecoilPos.magnitude <= step.magnitude)
+            {
+                currentRecoilPos = Vector2.zero;
+                transform.position = new Vector3(0, 0, transform.position.z); // 원래 위치로 설정
+                break; // 루프 종료
+            }
+
+            yield return null;
+        }
+
+        isRecoveryPos = false;
+    }
+
+
     public void Fire()
     {
         if (currentAmmo > 0)
         {
-            
+           // RecoilPos();
             Recoil();
             currentAmmo--;
 
