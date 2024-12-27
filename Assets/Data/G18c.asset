@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b000ffbd43c871e4ea578bb7e08b8ee0, type: 3}
   m_Name: G18c
   m_EditorClassIdentifier: 
-  m_weaponPrefab: {fileID: 6129502695754818085, guid: 0764bb392ca019649b516662ffcaaa7f, type: 3}
+  m_weaponPrefab: {fileID: 7207951391389045143, guid: b440807411d83934cb3a15ba406a2899, type: 3}
   m_maxBullet: 17
   m_RPM: 1100
   m_damage: 23

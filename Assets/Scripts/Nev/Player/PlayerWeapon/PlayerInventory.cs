@@ -5,9 +5,8 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private WeaponFactory m_defaultWeapon;
-
+    [SerializeField] private WeaponFactory[] m_inventory;
     private PlayerWeapon m_playerWeapon;
-    private WeaponFactory[] m_inventory;
 
     public bool canChangeWep = true;
     public float swapCooldown = 0.5f;
@@ -19,8 +18,14 @@ public class PlayerInventory : MonoBehaviour
     {
         m_playerWeapon = GetComponent<PlayerWeapon>();
         m_inventory[0] = m_defaultWeapon;
+        m_inventory[1] = m_defaultWeapon;
 
-        for(int i = 1;  i < maxInvenNum; ++i)
+        m_playerWeapon.SetWeapon(
+            m_defaultWeapon.CreateWeaponStrategy(),
+            m_defaultWeapon.CreateWeaponData()
+            );
+
+        for (int i = 2; i < maxInvenNum; ++i)
         {
             m_inventory[i] = null;
         }
@@ -29,23 +34,32 @@ public class PlayerInventory : MonoBehaviour
     private void Update()
     {
         //InventoryWeaponSwap
-        if (Input.GetKeyDown(KeyCode.Alpha1) && curInvenNum != 0)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && curInvenNum != 0 && m_inventory[0] != null)
         {
             m_playerWeapon.SetWeapon(
                 m_inventory[0].CreateWeaponStrategy(),
                 m_inventory[0].CreateWeaponData());
+
+            curInvenNum = 0;
+            StartCoroutine(SwapCooldown(swapCooldown));
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && curInvenNum != 1)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && curInvenNum != 1 && m_inventory[1] != null)
         {
             m_playerWeapon.SetWeapon(
                 m_inventory[1].CreateWeaponStrategy(),
                 m_inventory[1].CreateWeaponData());
+
+            curInvenNum = 1;
+            StartCoroutine(SwapCooldown(swapCooldown));
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && curInvenNum != 2)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && curInvenNum != 2 && m_inventory[2] != null)
         {
             m_playerWeapon.SetWeapon(
                 m_inventory[2].CreateWeaponStrategy(),
                 m_inventory[2].CreateWeaponData());
+
+            curInvenNum = 2;
+            StartCoroutine(SwapCooldown(swapCooldown));
         }
 
         //InventoryWheelControll

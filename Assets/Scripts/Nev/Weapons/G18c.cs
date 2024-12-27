@@ -7,27 +7,24 @@ public class G18c : MonoBehaviour
     private PlayerWeapon Weapon;
     public Animator anim;
     public int animNum = 0;
-
     public int randF;
-
-    public int maxAmmo;
-    public int currentAmmo;
-
     public bool reloading = false;
+
+    public int testbullet;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         Weapon = GameObject.Find("Player").GetComponent<PlayerWeapon>();
-        maxAmmo = Weapon.MaxBullet;
-        currentAmmo = Weapon.CurrentBullet;
     }
 
     void Update()
     {
+        testbullet = Weapon.CurrentBullet;
+
         anim.SetInteger("g18", animNum);
 
-        if (currentAmmo < 1)
+        if (Weapon.CurrentBullet < 1)
         {
             reloading = true;
             animNum = 1;
@@ -36,7 +33,7 @@ public class G18c : MonoBehaviour
 
         if(Weapon.IsRepeat)
         {
-            if (Input.GetMouseButton(0) && currentAmmo > 0 && !reloading)
+            if (Input.GetMouseButton(0) && Weapon.CurrentBullet > 0 && !reloading)
             {
                 randF = Random.Range(-3, 0);
 
@@ -45,7 +42,7 @@ public class G18c : MonoBehaviour
         }
         else
         {
-            if (Input.GetMouseButtonDown(0) && currentAmmo > 0 && !reloading)
+            if (Input.GetMouseButtonDown(0) && Weapon.CurrentBullet > 0 && !reloading)
             {
                 randF = Random.Range(-3, 0);
 
@@ -53,7 +50,7 @@ public class G18c : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.R) && currentAmmo != maxAmmo)
+        if(Input.GetKeyDown(KeyCode.R) && Weapon.CurrentBullet != Weapon.MaxBullet)
         {
             animNum = 1;
         }
@@ -62,7 +59,6 @@ public class G18c : MonoBehaviour
     public void Fire()
     {
         Debug.Log("Fire");
-        currentAmmo--;
         Weapon.OnShoot();
         AudioManager.instance.PlaySfx(AudioManager.Sfx.G18fire);
     }
@@ -85,7 +81,7 @@ public class G18c : MonoBehaviour
     public void Reaload()
     {
         Debug.Log("Reroaded");
-        currentAmmo = maxAmmo;
+        Weapon.ReloadBullet();
         animNum = 0;
         reloading = false;
     }
