@@ -3,6 +3,7 @@
 
 public class PlayerWeapon : MonoBehaviour
 {
+    [SerializeField] private GameObject m_weaponPrefab;
     private IWeaponStrategy m_weaponStrategy;
     private WeaponData m_weaponData;
 
@@ -35,35 +36,13 @@ public class PlayerWeapon : MonoBehaviour
     public void InstallWeapon()
     {
         UninstallWeapon();
-
-        if (m_weaponData == null || m_weaponData.WeaponPrefab == null)
-        {
-            Debug.LogError("Weapon data or prefab is not set!");
-            return;
-        }
-
-        Canvas canvas = FindObjectOfType<Canvas>();
-        if (canvas == null)
-        {
-            Debug.LogError("Canvas not found in the scene!");
-            return;
-        }
-
-        GameObject weaponInstance = Instantiate(m_weaponData.WeaponPrefab, canvas.transform);
-
-        RectTransform rectTransform = weaponInstance.GetComponent<RectTransform>();
-        if (rectTransform != null)
-        {
-            rectTransform.anchoredPosition = Vector2.zero; // 캔버스 중심에 위치
-            rectTransform.sizeDelta = new Vector2(100, 100); // 크기 조정 (필요 시)
-        }
-
-        Instantiate(m_weaponData.WeaponPrefab);
+        m_weaponPrefab.SetActive(true);
         m_isWeaponInstalled = true;
     }
 
     public void UninstallWeapon()
     {
+        m_weaponPrefab.SetActive(false);
         m_isWeaponInstalled = false;
     }
 
