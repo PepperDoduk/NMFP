@@ -581,6 +581,11 @@ Transform:
   - {fileID: 1768678579}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &524681968 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1647102925816929955, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
+  m_PrefabInstance: {fileID: 1785156710}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &544911011
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,11 +731,11 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   MajorEnemiesToSpawn: 1
   GeneralEnemiesToSpawn: 5
-  SpawnerRange: 20
-  player: {fileID: 0}
-  TriggerRadius: 5
   hasSpawnedEnemies: 0
   Exit: {fileID: 0}
+  Width: 10
+  Height: 5
+  backc: 10
 --- !u!65 &712500418
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1772,6 +1777,31 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268fefdda1df7134bbca19b52cf01d81, type: 3}
+--- !u!1 &1650162304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2131624656129783164, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
+  m_PrefabInstance: {fileID: 1785156710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1650162307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650162304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47490c9fa2c1944384c35f961dc462f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1238784659}
+  lookRadius: 10
+  shootingRange: 10
+  meleeRange: 3
+  moveSpeed: 5
+  muzzleFlashParticle: {fileID: 100004, guid: 510e0a736e5e66243b242a076c59611a, type: 3}
+  spawnPoint: {fileID: 524681968}
+  shootCooldown: 5
 --- !u!1 &1768678578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1885,6 +1915,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1343265993082662988, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2131624656129783164, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
       propertyPath: m_Name
       value: AlienScout 1
@@ -1936,7 +1970,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2131624656129783164, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
+      insertIndex: 5
+      addedObject: {fileID: 1650162307}
   m_SourcePrefab: {fileID: 100100000, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
 --- !u!1 &1854988160
 GameObject:

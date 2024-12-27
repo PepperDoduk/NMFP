@@ -101,7 +101,7 @@ public class K_AlienScout : MonoBehaviour
         }
     }
 
-    void MoveTowardsPlayer()
+    public void MoveTowardsPlayer()
     {
         if (!isDead && player != null)
         {
@@ -115,7 +115,7 @@ public class K_AlienScout : MonoBehaviour
         }
     }
 
-    IEnumerator ShootAtPlayer()
+    public IEnumerator ShootAtPlayer()
     {
         while (isShooting && !isDead)
         {

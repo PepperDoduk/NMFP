@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: 5608320957207555554}
   - component: {fileID: 9004022743841132126}
   - component: {fileID: 513063705045641860}
-  - component: {fileID: 8610349037986707675}
   - component: {fileID: -5126285899259771100}
+  - component: {fileID: 6978997740666115705}
   m_Layer: 0
   m_Name: Alien 1 1
   m_TagString: Enemy
@@ -274,7 +274,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 36
   m_CollisionDetection: 0
---- !u!136 &8610349037986707675
+--- !u!114 &-5126285899259771100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7549938131649178602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e700330d321727b469e8bd80f37a2b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 100
+  dropItems: []
+  dropChance: 50
+  Isfly: 0
+--- !u!136 &6978997740666115705
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -297,19 +313,3 @@ CapsuleCollider:
   m_Height: 6.99
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-5126285899259771100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7549938131649178602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e700330d321727b469e8bd80f37a2b4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Hp: 100
-  dropItems: []
-  dropChance: 50
-  Isfly: 0
