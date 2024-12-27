@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class N_PlayerModel : MonoBehaviour, IPlayerModel
+public class PlayerModel : MonoBehaviour
 {
-    [SerializeField] private N_PlayerData m_playerData;
+    [SerializeField] private PlayerData m_playerData;
 
     public int m_currentHealth;
 

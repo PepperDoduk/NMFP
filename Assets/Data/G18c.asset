@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b000ffbd43c871e4ea578bb7e08b8ee0, type: 3}
+  m_Name: G18c
+  m_EditorClassIdentifier: 
+  m_weaponPrefab: {fileID: 6129502695754818085, guid: 0764bb392ca019649b516662ffcaaa7f, type: 3}
+  m_maxBullet: 17
+  m_RPM: 1100
+  m_damage: 23

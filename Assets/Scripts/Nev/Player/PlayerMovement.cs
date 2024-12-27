@@ -1,10 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class N_PlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    private IPlayerModel m_playerModel;
+    private PlayerModel m_playerModel;
 
     public Transform caemraTransform;
     public CharacterController characterController;
@@ -21,7 +21,7 @@ public class N_PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        m_playerModel = GetComponent<N_PlayerModel>();
+        m_playerModel = GetComponent<PlayerModel>();
 
         MoveSpeed = m_moveSpeed;
         JumpSpeed = m_jumpSpeed;
@@ -36,8 +36,8 @@ public class N_PlayerController : MonoBehaviour
         Vector3 moveDir = new Vector3(hAxis, 0, VAxis);
 
         moveDir = caemraTransform.TransformDirection(moveDir) * MoveSpeed;
-        
-        if(characterController.isGrounded)
+
+        if (characterController.isGrounded)
         {
             yVelocity = 0;
             isGround = true;

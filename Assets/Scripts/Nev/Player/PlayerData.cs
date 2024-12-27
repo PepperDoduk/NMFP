@@ -7,7 +7,7 @@ using UnityEngine;
     fileName = "PlayerData",
     menuName = "Data/PlayerData",
     order = int.MinValue)]
-public class N_PlayerData : ScriptableObject
+public class PlayerData : ScriptableObject
 {
     public int MaxHealth;
     public float MoveSpeed;

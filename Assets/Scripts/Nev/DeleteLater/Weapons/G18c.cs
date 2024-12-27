@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class G18c : MonoBehaviour
 {
-    [SerializeField] private N_WeaponData Data;
-    public N_PlayerRayCast playerRay;
+    private PlayerWeapon Weapon;
     public Animator anim;
     public int animNum = 0;
 
@@ -19,9 +18,9 @@ public class G18c : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        playerRay = GameObject.Find("Player").GetComponent<N_PlayerRayCast>();
-        maxAmmo = Data.MaxAmmo;
-        currentAmmo = maxAmmo;
+        Weapon = GameObject.Find("Player").GetComponent<PlayerWeapon>();
+        maxAmmo = Weapon.MaxBullet;
+        currentAmmo = Weapon.CurrentBullet;
     }
 
     void Update()
@@ -35,9 +34,9 @@ public class G18c : MonoBehaviour
             Debug.Log("Reroading");
         }
 
-        if(playerRay.repeater)
+        if(Weapon.IsRepeat)
         {
-            if (Input.GetMouseButton(0) && currentAmmo > 0 && !reloading && playerRay.canShot)
+            if (Input.GetMouseButton(0) && currentAmmo > 0 && !reloading)
             {
                 randF = Random.Range(-3, 0);
 
@@ -46,7 +45,7 @@ public class G18c : MonoBehaviour
         }
         else
         {
-            if (Input.GetMouseButtonDown(0) && currentAmmo > 0 && !reloading && playerRay.canShot)
+            if (Input.GetMouseButtonDown(0) && currentAmmo > 0 && !reloading)
             {
                 randF = Random.Range(-3, 0);
 
@@ -64,7 +63,7 @@ public class G18c : MonoBehaviour
     {
         Debug.Log("Fire");
         currentAmmo--;
-        playerRay.Shot();
+        Weapon.OnShoot();
         AudioManager.instance.PlaySfx(AudioManager.Sfx.G18fire);
     }
     public void R1()

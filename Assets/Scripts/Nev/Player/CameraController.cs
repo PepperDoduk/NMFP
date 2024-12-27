@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class N_CameraController : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     [SerializeField]
     private float sensitivity = 300;
@@ -14,6 +14,10 @@ public class N_CameraController : MonoBehaviour
     private float rotationX;
     private float rotationY;
 
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     void Update()
     {
