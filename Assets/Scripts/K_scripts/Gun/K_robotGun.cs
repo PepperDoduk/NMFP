@@ -44,7 +44,7 @@ public class K_robotGun : MonoBehaviour
         {
             if (hit.transform.CompareTag("Player"))
             {
-                damage.GetComponent<N_PlayerModel>().TakeDamage(3);
+                damage.GetComponent<PlayerModel>().TakeDamage(3);
             }
         }
     }
@@ -58,7 +58,7 @@ public class K_robotGun : MonoBehaviour
         {
             if (hit.transform.CompareTag("Player"))
             {
-                damage.GetComponent<N_PlayerModel>().TakeDamage(3);
+                damage.GetComponent<PlayerModel>().TakeDamage(3);
             }
         }
     }

@@ -97,7 +97,7 @@ public class K_AlienStormtrooper : MonoBehaviour
                     if (hit.transform.CompareTag("Player"))
                     {
                         GameObject damageObj = GameObject.Find("N_PlayerModel");
-                        damageObj?.GetComponent<N_PlayerModel>()?.TakeDamage(5);
+                        damageObj?.GetComponent<PlayerModel>()?.TakeDamage(5);
                     }
                 }
             }

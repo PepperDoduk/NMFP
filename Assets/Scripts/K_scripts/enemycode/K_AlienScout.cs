@@ -23,7 +23,7 @@ public class K_AlienScout : MonoBehaviour
     private bool isDead = false;
 
     private K_EnemyHp enemyHp; // 체력 관리용 스크립트 참조
-    private N_PlayerModel Hp;
+    private PlayerModel Hp;
 
     void Start()
     {
@@ -131,7 +131,7 @@ public class K_AlienScout : MonoBehaviour
                 {
                     if (hitInfo.collider.CompareTag("Player"))
                     {
-                        var playerHp = hitInfo.collider.GetComponent<N_PlayerModel>();
+                        var playerHp = hitInfo.collider.GetComponent<PlayerModel>();
                         if (playerHp != null)
                         {
                             playerHp.TakeDamage(10);

@@ -132,7 +132,7 @@ public class K_boss : MonoBehaviour
         {
             if (hit.transform.CompareTag("Player"))
             {
-                target.GetComponent<N_PlayerModel>()?.TakeDamage(damageAmount);
+                target.GetComponent<PlayerModel>()?.TakeDamage(damageAmount);
             }
         }
     }
@@ -146,7 +146,7 @@ public class K_boss : MonoBehaviour
         {
             if (hit.transform.CompareTag("Player"))
             {
-                target.GetComponent<N_PlayerModel>()?.TakeDamage(damageAmount);
+                target.GetComponent<PlayerModel>()?.TakeDamage(damageAmount);
             }
         }
     }

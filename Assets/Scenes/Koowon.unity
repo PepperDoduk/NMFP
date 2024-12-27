@@ -1261,6 +1261,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tank (1) 1 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8859670502227051641, guid: a28fb9e9b5a3ffb4f9d5d7bb2d7972e0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1798,7 +1802,7 @@ MonoBehaviour:
   lookRadius: 10
   shootingRange: 10
   meleeRange: 3
-  moveSpeed: 5
+  moveSpeed: 10
   muzzleFlashParticle: {fileID: 100004, guid: 510e0a736e5e66243b242a076c59611a, type: 3}
   spawnPoint: {fileID: 524681968}
   shootCooldown: 5

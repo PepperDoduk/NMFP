@@ -7,7 +7,7 @@ public class K_missilebullet : MonoBehaviour
     private Vector3 targetPosition;
     public float speed = 10f;
     public float destroyDistance = 0.1f;
-    public N_PlayerModel hp;
+    public PlayerModel hp;
     public void SetTarget(Transform target)
     {
         targetPosition = target.position;
@@ -32,7 +32,7 @@ public class K_missilebullet : MonoBehaviour
         }
         if (collision.transform.CompareTag("Player"))
         {
-            var playerHp = collision.transform.GetComponent<N_PlayerModel>();
+            var playerHp = collision.transform.GetComponent<PlayerModel>();
             if (playerHp != null)
             {
                 playerHp.TakeDamage(10);

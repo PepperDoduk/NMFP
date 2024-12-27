@@ -191,7 +191,7 @@ public class AlienScout : MonoBehaviour
             {
                 if (hitInfo.collider.CompareTag("Player"))
                 {
-                    var playerHp = hitInfo.collider.GetComponent<N_PlayerModel>();
+                    var playerHp = hitInfo.collider.GetComponent<PlayerModel>();
                     if (playerHp != null)
                     {
                         playerHp.TakeDamage(10);
