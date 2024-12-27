@@ -2,8 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class AlienScout : MonoBehaviour
+public class AlienTank : MonoBehaviour
 {
     public Transform player;
     public float lookRadius = 10f;
@@ -13,6 +12,12 @@ public class AlienScout : MonoBehaviour
     public GameObject muzzleFlashParticle;
     public Transform spawnPoint;
     public float shootCooldown = 5f;
+
+    public GameObject enemybullet;
+    public float missileSpeed = 20f;
+    public int Speed;
+    [SerializeField] private float time = 5f;
+    private float bulletTime;
 
     private Rigidbody rb;
     private Animator ani;
@@ -162,47 +167,39 @@ public class AlienScout : MonoBehaviour
     private void Patrol()
     {
         ani.SetBool("isWalking", true);
-        Debug.Log("Patrolling...");
+        MoveTowardsPlayer();
     }
 
     private void Search()
     {
         ani.SetBool("isWalking", false);
-        Debug.Log("Searching...");
+        MoveTowardsPlayer();
     }
 
     private void MeleeAttack()
     {
         ani.SetTrigger("MeleeAttack");
+        MoveTowardsPlayer();
         ShootAtPlayer();
+        Debug.Log("Melee Attack!");
     }
 
     private void ShootAtPlayer()
     {
-        if (currentShootCooldown <= 0)
+        bulletTime -= Time.deltaTime;
+        if (bulletTime <= 0)
         {
-            currentShootCooldown = shootCooldown;
-            ani.SetTrigger("Shoot");
-
-            GameObject particle = Instantiate(muzzleFlashParticle, spawnPoint.position, spawnPoint.rotation);
-            Destroy(particle, 0.1f);
-
-            if (Physics.Raycast(spawnPoint.position, spawnPoint.forward, out RaycastHit hitInfo, shootingRange))
+            bulletTime = time;
+            GameObject bulletObj = Instantiate(enemybullet, spawnPoint.position, spawnPoint.rotation);
+            K_missilebullet bulletScript = bulletObj.GetComponent<K_missilebullet>();
+            if (bulletScript != null)
             {
-                if (hitInfo.collider.CompareTag("Player"))
-                {
-                    var playerHp = hitInfo.collider.GetComponent<PlayerModel>();
-                    if (playerHp != null)
-                    {
-                        playerHp.TakeDamage(10);
-                    }
-                }
+                bulletScript.SetTarget(player);
             }
+
+            Destroy(bulletObj, 5f);
         }
-        else
-        {
-            currentShootCooldown -= Time.deltaTime;
-        }
+
     }
 
     private void OnEnemyDeath()
@@ -211,4 +208,32 @@ public class AlienScout : MonoBehaviour
         ani.SetBool("isWalking", false);
         Debug.Log("Enemy has died.");
     }
+    private void MoveTowardsPlayer()
+    {
+        if (!isDead && player != null)
+        {
+            ani.SetBool("isWalking", true);
+
+           
+            Vector3 direction = (player.position - transform.position).normalized;
+            direction.y = 0;
+
+          
+            if (direction.magnitude > 0.1f)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * moveSpeed);
+            }
+
+          
+            Vector3 movement = direction * moveSpeed;
+            rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
+        }
+        else
+        {
+            
+            rb.velocity = Vector3.zero;
+        }
+    }
+
 }
