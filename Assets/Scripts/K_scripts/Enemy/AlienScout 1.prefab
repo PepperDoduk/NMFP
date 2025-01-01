@@ -10,17 +10,18 @@ GameObject:
   m_Component:
   - component: {fileID: 8363822724768478884}
   - component: {fileID: 6908637381449697293}
-  - component: {fileID: 3286665606286805237}
   - component: {fileID: 2082124118327113147}
+  - component: {fileID: 6512622469395728361}
   - component: {fileID: 7942092844821708541}
   - component: {fileID: 3979464071272295494}
+  - component: {fileID: 7699334925819684162}
   m_Layer: 0
   m_Name: AlienScout 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8363822724768478884
 Transform:
   m_ObjectHideFlags: 0
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 2131624656129783164}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.33697, y: 3.8517427, z: 33.116344}
+  m_LocalPosition: {x: -15.218468, y: 3.065, z: 28.64103}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -89,29 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!136 &3286665606286805237
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131624656129783164}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.55999994
-  m_Height: 3.1199996
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2082124118327113147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +106,25 @@ MonoBehaviour:
   dropItems: []
   dropChance: 50
   Isfly: 0
+--- !u!114 &6512622469395728361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131624656129783164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47490c9fa2c1944384c35f961dc462f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookRadius: 10
+  muzzleFlashParticle: {fileID: 100004, guid: 510e0a736e5e66243b242a076c59611a, type: 3}
+  shootingRange: 10
+  Pdistance: 3
+  laserCooldown: 5
+  Speed: 1
+  spawnPoint: {fileID: 1647102925816929955}
 --- !u!95 &7942092844821708541
 Animator:
   serializedVersion: 5
@@ -174,8 +171,29 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &7699334925819684162
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131624656129783164}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1199999, y: 3.1199996, z: 0.19999999}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5593912311081446852
 GameObject:
   m_ObjectHideFlags: 0
