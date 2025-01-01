@@ -21,9 +21,10 @@ public class K_EnemyHp : MonoBehaviour
     {
         currentHp = Hp;
     }
-     private void Update()
+
+    private void Update()
     {
-        if(currentHp<=0||Hp<=0)
+        if (currentHp <= 0 && !isDead)
         {
             Die();
         }
@@ -32,8 +33,7 @@ public class K_EnemyHp : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
-        Debug.Log($"Damage taken: {damage}. Current HP: {currentHp}");
-        if (currentHp <= 0)
+        if (currentHp <= 0 && !isDead)
         {
             Die();
         }
@@ -55,13 +55,11 @@ public class K_EnemyHp : MonoBehaviour
             {
                 rb.AddTorque(new Vector3(0, 0, 5), ForceMode.Impulse);
                 rb.AddForce(new Vector3(0, -5f, -5f), ForceMode.Impulse);
-                Debug.Log("fly");
             }
             else
             {
                 rb.velocity = Vector3.zero;
                 rb.AddForce(new Vector3(0, -5f, 5f), ForceMode.Impulse);
-                Debug.Log("not flying");
             }
         }
 

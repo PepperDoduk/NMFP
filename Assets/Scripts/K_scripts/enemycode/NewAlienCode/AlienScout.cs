@@ -1,27 +1,23 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AlienScout : MonoBehaviour
 {
     public float lookRadius = 10f;
-    public GameObject[] dropItems;
-    public float dropChance = 0.5f;
+    public GameObject muzzleFlashParticle;
+    public float shootingRange = 10f;
     private float distance;
     public float Pdistance = 3f;
 
     [SerializeField] private float laserCooldown = 5f;
     private float laserTime;
-    public float shootingRange = 10f;
-    public GameObject muzzleFlashParticle;
     private bool isShooting = false;
 
     public int Speed;
     public Transform spawnPoint;
-    public Transform player;
     private Animator ani;
     private Rigidbody rb;
+    private Transform player;
 
     private bool isDead = false;
     private K_EnemyHp enemyHp;
@@ -30,12 +26,13 @@ public class AlienScout : MonoBehaviour
     {
         ani = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         player = GameObject.FindWithTag("Player")?.transform;
         enemyHp = GetComponent<K_EnemyHp>();
 
         if (enemyHp != null)
         {
-            enemyHp.OnDeath += OnEnemyDeath;
+            enemyHp.OnDeath += HandleDeath;
         }
     }
 
@@ -48,6 +45,7 @@ public class AlienScout : MonoBehaviour
         if (distance <= lookRadius)
         {
             MoveTowardsPlayer();
+            LookAtPlayer();
         }
 
         UpdateStop();
@@ -64,6 +62,19 @@ public class AlienScout : MonoBehaviour
         {
             isShooting = false;
         }
+
+        if (enemyHp.Hp <= 0)
+        {
+            enemyHp.Die();
+        }
+    }
+
+    void LookAtPlayer()
+    {
+        Vector3 direction = (player.position - transform.position).normalized;
+        direction.y = 0;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
     void UpdateStop()
@@ -107,11 +118,12 @@ public class AlienScout : MonoBehaviour
         }
     }
 
-    void OnEnemyDeath()
+    void HandleDeath()
     {
         isDead = true;
-        enemyHp.Die();
+        rb.velocity = Vector3.zero;
+
+        
+        rb.constraints = RigidbodyConstraints.None;
     }
-
-
 }

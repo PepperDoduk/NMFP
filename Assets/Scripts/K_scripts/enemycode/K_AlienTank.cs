@@ -25,28 +25,19 @@ public class K_AlienTank : MonoBehaviour
 
     private Rigidbody rb;
     private Animator ani;
-    private K_EnemyHp enemyHp; 
-
+    private K_EnemyHp enemyHp;
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         ani = GetComponent<Animator>();
-        GameObject playerObject = GameObject.FindWithTag("Player");
-        player = playerObject?.transform;
+        rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        player = GameObject.FindWithTag("Player")?.transform;
         enemyHp = GetComponent<K_EnemyHp>();
 
         if (enemyHp != null)
         {
-            enemyHp.OnDeath += OnEnemyDeath; 
+            enemyHp.OnDeath += HandleDeath;
         }
-
-        rb.useGravity = true;
-
-        Vector3 fallPosition = transform.position;
-        fallPosition.y = 10f;
-        transform.position = fallPosition;
-
-        isFalling = true;
     }
 
     void Update()
@@ -55,18 +46,10 @@ public class K_AlienTank : MonoBehaviour
 
         distance = Vector3.Distance(player.position, transform.position);
 
-        if (isFalling)
-        {
-            if (transform.position.y <= 1f)
-            {
-                isFalling = false;
-            }
-            return;
-        }
-
         if (distance <= lookRadius)
         {
             MoveTowardsPlayer();
+            LookAtPlayer();
         }
 
         UpdateStop();
@@ -76,15 +59,43 @@ public class K_AlienTank : MonoBehaviour
             if (!isShooting)
             {
                 isShooting = true;
-                ani.SetBool("isWalking", true);
                 StartCoroutine(ShootAtPlayer());
             }
         }
         else
         {
             isShooting = false;
-            MoveTowardsPlayer();
         }
+
+        if (enemyHp.Hp <= 0)
+        {
+            enemyHp.Die();
+        }
+    }
+
+    void LookAtPlayer()
+    {
+        Vector3 direction = (player.position - transform.position).normalized;
+        direction.y = 0;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+    }
+
+    void UpdateStop()
+    {
+        if (distance < Pdistance)
+        {
+            rb.velocity = Vector3.zero;
+        }
+    }
+
+    void MoveTowardsPlayer()
+    {
+        Vector3 direction = (player.position - transform.position).normalized;
+        direction.y = 0;
+
+        rb.velocity = direction * Speed;
+        rb.angularVelocity = Vector3.zero;
     }
 
     IEnumerator ShootAtPlayer()
@@ -109,42 +120,12 @@ public class K_AlienTank : MonoBehaviour
         }
     }
 
-    void UpdateStop()
-    {
-        if (isDead) return;
-
-        if (distance < Pdistance)
-        {
-            rb.velocity = Vector3.zero;
-        }
-        else
-        {
-            MoveTowardsPlayer();
-        }
-    }
-
-    void OnEnemyDeath()
+    void HandleDeath()
     {
         isDead = true;
+        rb.velocity = Vector3.zero;
 
-       
-       
-        enemyHp.Die();
-        Destroy(gameObject, 2f);
-    }
 
-   
-    void MoveTowardsPlayer()
-    {
-        if (!isDead && player != null)
-        {
-            ani.SetBool("isWalking", true);
-            Vector3 direction = (player.position - transform.position).normalized;
-
-            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * Speed);
-
-            rb.velocity = direction * Speed * Time.deltaTime;
-        }
+        rb.constraints = RigidbodyConstraints.None;
     }
 }

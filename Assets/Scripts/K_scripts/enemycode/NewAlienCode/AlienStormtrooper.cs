@@ -1,245 +1,129 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AlienStromtrooper : MonoBehaviour
+public class AlienStormtrooper : MonoBehaviour
 {
-    public Transform player;
     public float lookRadius = 10f;
-    public float shootingRange = 10f;
-    public float meleeRange = 3f;
-    public float moveSpeed = 5f;
     public GameObject muzzleFlashParticle;
-    public Transform spawnPoint;
-    public float shootCooldown = 5f;
+    public float shootingRange = 10f;
+    private float distance;
+    public float Pdistance = 3f;
 
-    private Rigidbody rb;
-    private Animator ani;
+    [SerializeField] private float laserCooldown = 5f;
+    private float laserTime;
     private bool isShooting = false;
-    private bool isDead = false;
-    private float currentShootCooldown;
 
+    public int Speed;
+    public Transform spawnPoint;
+    private Animator ani;
+    private Rigidbody rb;
+    private Transform player;
+
+    private bool isDead = false;
     private K_EnemyHp enemyHp;
 
-    public abstract class Node
+    void Start()
     {
-        public abstract NodeState Evaluate();
-    }
-
-    public enum NodeState
-    {
-        Success,
-        Failure,
-        Running
-    }
-
-    public class Selector : Node
-    {
-        private List<Node> _nodes;
-
-        public Selector(List<Node> nodes) => _nodes = nodes;
-
-        public override NodeState Evaluate()
-        {
-            foreach (var node in _nodes)
-            {
-                switch (node.Evaluate())
-                {
-                    case NodeState.Success:
-                        return NodeState.Success;
-                    case NodeState.Running:
-                        return NodeState.Running;
-                }
-            }
-            return NodeState.Failure;
-        }
-    }
-
-    public class Sequence : Node
-    {
-        private List<Node> _nodes;
-
-        public Sequence(List<Node> nodes) => _nodes = nodes;
-
-        public override NodeState Evaluate()
-        {
-            foreach (var node in _nodes)
-            {
-                switch (node.Evaluate())
-                {
-                    case NodeState.Failure:
-                        return NodeState.Failure;
-                    case NodeState.Running:
-                        return NodeState.Running;
-                }
-            }
-            return NodeState.Success;
-        }
-    }
-
-    public class ConditionNode : Node
-    {
-        private Func<bool> _condition;
-
-        public ConditionNode(Func<bool> condition) => _condition = condition;
-
-        public override NodeState Evaluate() =>
-            _condition.Invoke() ? NodeState.Success : NodeState.Failure;
-    }
-
-    public class ActionNode : Node
-    {
-        private Action _action;
-
-        public ActionNode(Action action) => _action = action;
-
-        public override NodeState Evaluate()
-        {
-            _action.Invoke();
-            return NodeState.Success;
-        }
-    }
-
-    private Node _rootNode;
-
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
         ani = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        player = GameObject.FindWithTag("Player")?.transform;
         enemyHp = GetComponent<K_EnemyHp>();
 
         if (enemyHp != null)
         {
-            enemyHp.OnDeath += OnEnemyDeath;
-        }
-
-        _rootNode = CreateBehaviorTree();
-    }
-
-    private void Update()
-    {
-        if (!isDead)
-        {
-            _rootNode.Evaluate();
+            enemyHp.OnDeath += HandleDeath;
         }
     }
 
-    private Node CreateBehaviorTree()
+    void Update()
     {
-        Func<bool> isPlayerInRange = () => Vector3.Distance(transform.position, player.position) <= meleeRange;
-        Func<bool> isPlayerDetected = () => Vector3.Distance(transform.position, player.position) <= lookRadius;
-        Func<bool> canShoot = () => Vector3.Distance(transform.position, player.position) <= shootingRange && currentShootCooldown <= 0;
+        if (isDead || player == null) return;
 
-        Action patrolAction = Patrol;
-        Action searchAction = Search;
-        Action meleeAttackAction = MeleeAttack;
-        Action rangedAttackAction = ShootAtPlayer;
+        distance = Vector3.Distance(player.position, transform.position);
 
-        var patrol = new ActionNode(patrolAction);
-        var search = new ActionNode(searchAction);
-        var meleeAttack = new ActionNode(meleeAttackAction);
-        var rangedAttack = new ActionNode(rangedAttackAction);
-
-        var isPlayerInMeleeRange = new ConditionNode(isPlayerInRange);
-        var isPlayerSpotted = new ConditionNode(isPlayerDetected);
-        var canShootNode = new ConditionNode(canShoot);
-
-        var attackSelector = new Selector(new List<Node>
+        if (distance <= lookRadius)
         {
-            new Sequence(new List<Node> { isPlayerInMeleeRange, meleeAttack }),
-            new Sequence(new List<Node> { canShootNode, rangedAttack })
-        });
+            MoveTowardsPlayer();
+            LookAtPlayer();
+        }
 
-        return new Selector(new List<Node>
+        UpdateStop();
+
+        if (distance <= shootingRange)
         {
-            new Sequence(new List<Node> { isPlayerSpotted, attackSelector }),
-            search,
-            patrol
-        });
-    }
-
-    private void Patrol()
-    {
-        ani.SetBool("isWalking", true);
-        MoveTowardsPlayer();
-    }
-
-    private void Search()
-    {
-        ani.SetBool("isWalking", false);
-        MoveTowardsPlayer();
-    }
-
-    private void MeleeAttack()
-    {
-        ani.SetTrigger("MeleeAttack");
-        MoveTowardsPlayer();
-        ShootAtPlayer();
-        Debug.Log("Melee Attack!");
-    }
-
-    private void ShootAtPlayer()
-    {
-        if (currentShootCooldown <= 0)
-        {
-            currentShootCooldown = shootCooldown;
-            ani.SetTrigger("Shoot");
-
-            GameObject particle = Instantiate(muzzleFlashParticle, spawnPoint.position, spawnPoint.rotation);
-            Destroy(particle, 0.1f);
-
-            if (Physics.Raycast(spawnPoint.position, spawnPoint.forward, out RaycastHit hitInfo, shootingRange))
+            if (!isShooting)
             {
-                if (hitInfo.collider.CompareTag("Player"))
-                {
-                    var playerHp = hitInfo.collider.GetComponent<PlayerModel>();
-                    if (playerHp != null)
-                    {
-                        playerHp.TakeDamage(10);
-                    }
-                }
+                isShooting = true;
+                StartCoroutine(ShootLaserAtPlayer());
             }
         }
         else
         {
-            currentShootCooldown -= Time.deltaTime;
+            isShooting = false;
+        }
+
+        if (enemyHp.Hp <= 0)
+        {
+            enemyHp.Die();
         }
     }
 
-    private void OnEnemyDeath()
+    void LookAtPlayer()
     {
-        isDead = true;
-        ani.SetBool("isWalking", false);
-        Debug.Log("Enemy has died.");
+        Vector3 direction = (player.position - transform.position).normalized;
+        direction.y = 0;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
-    private void MoveTowardsPlayer()
+
+    void UpdateStop()
     {
-        if (!isDead && player != null)
+        if (distance < Pdistance)
         {
-            ani.SetBool("isWalking", true);
-
-
-            Vector3 direction = (player.position - transform.position).normalized;
-            direction.y = 0;
-
-
-            if (direction.magnitude > 0.1f)
-            {
-                Quaternion lookRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * moveSpeed);
-            }
-
-
-            Vector3 movement = direction * moveSpeed;
-            rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
-        }
-        else
-        {
-
             rb.velocity = Vector3.zero;
         }
     }
 
+    void MoveTowardsPlayer()
+    {
+        Vector3 direction = (player.position - transform.position).normalized;
+        direction.y = 0;
 
+        rb.velocity = direction * Speed;
+        rb.angularVelocity = Vector3.zero;
+    }
+
+    IEnumerator ShootLaserAtPlayer()
+    {
+        while (isShooting)
+        {
+            laserTime -= Time.deltaTime;
+            if (laserTime <= 0)
+            {
+                laserTime = laserCooldown;
+                GameObject particle = Instantiate(muzzleFlashParticle, spawnPoint.position, spawnPoint.rotation);
+                Destroy(particle, 1f);
+
+                if (Physics.Raycast(spawnPoint.position, (player.position - spawnPoint.position).normalized, out RaycastHit hit, shootingRange))
+                {
+                    if (hit.transform.CompareTag("Player"))
+                    {
+                        GameObject damageObj = GameObject.Find("PlayerModel");
+                        damageObj?.GetComponent<PlayerModel>()?.TakeDamage(5);
+                    }
+                }
+            }
+            yield return null;
+        }
+    }
+
+    void HandleDeath()
+    {
+        isDead = true;
+        rb.velocity = Vector3.zero;
+
+
+        rb.constraints = RigidbodyConstraints.None;
+    }
 }
