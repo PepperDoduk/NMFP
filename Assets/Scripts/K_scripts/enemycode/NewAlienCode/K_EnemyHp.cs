@@ -11,7 +11,7 @@ public class K_EnemyHp : MonoBehaviour
     public GameObject[] dropItems;
     public float dropChance = 50f;
     public bool Isfly = false;
-
+    public int defense;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -32,7 +32,7 @@ public class K_EnemyHp : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHp -= damage;
+        //currentHp = currentHp-(damage-(defense-ฐüล๋ทย));
         if (currentHp <= 0 && !isDead)
         {
             Die();

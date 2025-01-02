@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AlienScout : MonoBehaviour
@@ -6,25 +7,29 @@ public class AlienScout : MonoBehaviour
     public float lookRadius = 10f;
     public GameObject muzzleFlashParticle;
     public float shootingRange = 10f;
-    private float distance;
     public float Pdistance = 3f;
-
     [SerializeField] private float laserCooldown = 5f;
     private float laserTime;
     private bool isShooting = false;
-
     public int Speed;
     public Transform spawnPoint;
-    private Animator ani;
     private Rigidbody rb;
     private Transform player;
-
-    private bool isDead = false;
     private K_EnemyHp enemyHp;
+    private bool isDead = false;
+    public float distance = 10;
+    private enum State
+    {
+        Idle,
+        MovingTowardsPlayer,
+        ShootingAtPlayer,
+        Dead
+    }
+
+    private State currentState;
 
     void Start()
     {
-        ani = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         player = GameObject.FindWithTag("Player")?.transform;
@@ -34,6 +39,8 @@ public class AlienScout : MonoBehaviour
         {
             enemyHp.OnDeath += HandleDeath;
         }
+
+        currentState = State.Idle;
     }
 
     void Update()
@@ -42,46 +49,38 @@ public class AlienScout : MonoBehaviour
 
         distance = Vector3.Distance(player.position, transform.position);
 
-        if (distance <= lookRadius)
-        {
-            MoveTowardsPlayer();
-            LookAtPlayer();
-        }
-
-        UpdateStop();
-
-        if (distance <= shootingRange)
-        {
-            if (!isShooting)
-            {
-                isShooting = true;
-                StartCoroutine(ShootLaserAtPlayer());
-            }
-        }
-        else
-        {
-            isShooting = false;
-        }
-
         if (enemyHp.Hp <= 0)
         {
             enemyHp.Die();
         }
+
+        RunBT();
     }
 
-    void LookAtPlayer()
+    void RunBT()
     {
-        Vector3 direction = (player.position - transform.position).normalized;
-        direction.y = 0;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-    }
-
-    void UpdateStop()
-    {
-        if (distance < Pdistance)
+        switch (currentState)
         {
-            rb.velocity = Vector3.zero;
+            case State.Idle:
+                IdleState();
+                break;
+            case State.MovingTowardsPlayer:
+                MoveTowardsPlayer();
+                break;
+            case State.ShootingAtPlayer:
+                ShootAtPlayer();
+                break;
+            case State.Dead:
+                HandleDeath();
+                break;
+        }
+    }
+
+    void IdleState()
+    {
+        if (distance <= lookRadius)
+        {
+            currentState = State.MovingTowardsPlayer;
         }
     }
 
@@ -89,32 +88,44 @@ public class AlienScout : MonoBehaviour
     {
         Vector3 direction = (player.position - transform.position).normalized;
         direction.y = 0;
-
         rb.velocity = direction * Speed;
-        rb.angularVelocity = Vector3.zero;
+
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+
+        if (distance <= shootingRange)
+        {
+            currentState = State.ShootingAtPlayer;
+        }
+        else if (distance > lookRadius)
+        {
+            currentState = State.Idle;
+        }
     }
 
-    IEnumerator ShootLaserAtPlayer()
+    void ShootAtPlayer()
     {
-        while (isShooting)
-        {
-            laserTime -= Time.deltaTime;
-            if (laserTime <= 0)
-            {
-                laserTime = laserCooldown;
-                GameObject particle = Instantiate(muzzleFlashParticle, spawnPoint.position, spawnPoint.rotation);
-                Destroy(particle, 1f);
+        laserTime -= Time.deltaTime;
 
-                if (Physics.Raycast(spawnPoint.position, (player.position - spawnPoint.position).normalized, out RaycastHit hit, shootingRange))
+        if (laserTime <= 0)
+        {
+            laserTime = laserCooldown;
+            GameObject particle = Instantiate(muzzleFlashParticle, spawnPoint.position, spawnPoint.rotation);
+            Destroy(particle, 1f);
+
+            if (Physics.Raycast(spawnPoint.position, (player.position - spawnPoint.position).normalized, out RaycastHit hit, shootingRange))
+            {
+                if (hit.transform.CompareTag("Player"))
                 {
-                    if (hit.transform.CompareTag("Player"))
-                    {
-                        GameObject damageObj = GameObject.Find("PlayerModel");
-                        damageObj?.GetComponent<PlayerModel>()?.TakeDamage(5);
-                    }
+                    GameObject damageObj = GameObject.Find("PlayerModel");
+                    damageObj?.GetComponent<PlayerModel>()?.TakeDamage(5);
                 }
             }
-            yield return null;
+        }
+
+        if (distance > shootingRange)
+        {
+            currentState = State.MovingTowardsPlayer;
         }
     }
 
@@ -122,8 +133,8 @@ public class AlienScout : MonoBehaviour
     {
         isDead = true;
         rb.velocity = Vector3.zero;
-
-        
         rb.constraints = RigidbodyConstraints.None;
+
+        Destroy(gameObject, 2f);
     }
 }
