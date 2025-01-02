@@ -8,7 +8,6 @@ public class PlayerWeapon : MonoBehaviour
     private WeaponData m_weaponData;
 
     private int m_currentBullet;
-    private bool m_isWeaponInstalled;
 
     public bool IsRepeat;
     public int MaxBullet => m_weaponData.MaxBullet;
@@ -35,25 +34,22 @@ public class PlayerWeapon : MonoBehaviour
 
     public void InstallWeapon()
     {
-        UninstallWeapon();
         m_weaponPrefab.SetActive(true);
-        m_isWeaponInstalled = true;
     }
 
     public void UninstallWeapon()
     {
         m_weaponPrefab.SetActive(false);
-        m_isWeaponInstalled = false;
     }
 
-    public void SetWeapon(IWeaponStrategy pStrategy, WeaponData pData)
+    public void SetWeapon(IWeaponStrategy pStrategy, WeaponData pData, GameObject pWeaponPrefab)
     {
         m_weaponStrategy = pStrategy;
         m_weaponData = pData;
+        m_weaponPrefab = pWeaponPrefab;
         m_currentBullet = 0;
 
-        if (m_isWeaponInstalled)
-            InstallWeapon();
+        InstallWeapon();
     }
 
     private void Awake()

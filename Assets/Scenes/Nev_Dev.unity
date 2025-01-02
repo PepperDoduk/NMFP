@@ -1907,7 +1907,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7207951391389045143, guid: b440807411d83934cb3a15ba406a2899, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8417175258625051124, guid: b440807411d83934cb3a15ba406a2899, type: 3}
       propertyPath: m_LocalScale.x
@@ -2991,6 +2991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aa138542021e0f449a7aa410551fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_weaponPrefab: {fileID: 0}
   IsRepeat: 0
 --- !u!114 &1180364756
 MonoBehaviour:
@@ -3005,9 +3006,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_defaultWeapon: {fileID: 11400000, guid: 0d4b3a4130075764293e696309fefd9b, type: 2}
+  m_defaultWeaponPrefab: {fileID: 917247453}
   m_inventory:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  m_weaponPrefabs:
+  - {fileID: 917247453}
+  - {fileID: 1645148890}
   - {fileID: 0}
   canChangeWep: 1
   swapCooldown: 0.5
