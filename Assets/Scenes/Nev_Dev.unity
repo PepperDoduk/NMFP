@@ -1907,7 +1907,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7207951391389045143, guid: b440807411d83934cb3a15ba406a2899, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8417175258625051124, guid: b440807411d83934cb3a15ba406a2899, type: 3}
       propertyPath: m_LocalScale.x
@@ -2632,7 +2632,7 @@ GameObject:
   - component: {fileID: 1086367101}
   - component: {fileID: 1086367100}
   - component: {fileID: 1086367099}
-  - component: {fileID: 1086367098}
+  - component: {fileID: 1086367103}
   m_Layer: 0
   m_Name: WeaponTest(AK47)
   m_TagString: Weapon
@@ -2640,20 +2640,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1086367098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1086367097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7941116313ca8b41b1fe4ec8db460c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WeaponPrefab: {fileID: 1645148890}
-  Data: {fileID: 11400000, guid: 45e849da7febd8e418dddf2e6d37e9a7, type: 2}
 --- !u!135 &1086367099
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2740,6 +2726,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1086367103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086367097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967360b07b0210348adf78a751044d0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_factory: {fileID: 11400000, guid: cc21ebef39e508b44a97f398a139c751, type: 2}
+  m_weaponPrefab: {fileID: 1645148890}
 --- !u!1 &1172150668
 GameObject:
   m_ObjectHideFlags: 0
@@ -2959,7 +2959,7 @@ MonoBehaviour:
   Weapon: {fileID: 917247453}
   swapWeapon: {fileID: 0}
   Inventory:
-  - {fileID: 1443786483}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   hasItem: 010000
@@ -3008,8 +3008,8 @@ MonoBehaviour:
   m_defaultWeapon: {fileID: 11400000, guid: 0d4b3a4130075764293e696309fefd9b, type: 2}
   m_defaultWeaponPrefab: {fileID: 917247453}
   m_inventory:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 0d4b3a4130075764293e696309fefd9b, type: 2}
+  - {fileID: 11400000, guid: cc21ebef39e508b44a97f398a139c751, type: 2}
   - {fileID: 0}
   m_weaponPrefabs:
   - {fileID: 917247453}
@@ -3382,11 +3382,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1443786478}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7941116313ca8b41b1fe4ec8db460c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 967360b07b0210348adf78a751044d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponPrefab: {fileID: 917247453}
-  Data: {fileID: 11400000, guid: 6c2475e07457bca4aa102637fb556c1e, type: 2}
+  m_factory: {fileID: 11400000, guid: 0d4b3a4130075764293e696309fefd9b, type: 2}
+  m_weaponPrefab: {fileID: 917247453}
 --- !u!1 &1457913883
 GameObject:
   m_ObjectHideFlags: 0

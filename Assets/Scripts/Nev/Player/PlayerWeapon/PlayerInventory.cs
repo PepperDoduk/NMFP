@@ -17,17 +17,44 @@ public class PlayerInventory : MonoBehaviour
     private int curInvenNum = 0;
     private int maxInvenNum = 3;
 
+
+    private void SetWeapon(int pNum)
+    {
+        m_playerWeapon.SetWeapon(
+            m_inventory[pNum].CreateWeaponStrategy(),
+            m_inventory[pNum].CreateWeaponData(),
+            m_weaponPrefabs[pNum]);
+    }
+
+    public void ChangeWeapon(WeaponFactory pWeaponFactory, GameObject pWeaponPrefab)
+    {
+        bool flag = true;
+        for(int i = 0; i < maxInvenNum; ++i)
+        {
+            if(m_inventory[i] == null)
+            {
+                m_inventory[i] = pWeaponFactory;
+                m_weaponPrefabs[i] = pWeaponPrefab;
+                curInvenNum = i;
+                flag = false;
+                break;
+            }
+        }
+        if(flag)
+        {
+            m_inventory[curInvenNum] = pWeaponFactory;
+            m_weaponPrefabs[curInvenNum] = pWeaponPrefab;
+        }
+        SetWeapon(curInvenNum);
+    }
+
     private void Awake()
     {
         m_playerWeapon = GetComponent<PlayerWeapon>();
         m_inventory[0] = m_defaultWeapon;
-        m_inventory[1] = m_defaultWeapon;
         m_weaponPrefabs[0] = m_defaultWeaponPrefab;
 
-        m_playerWeapon.SetWeapon(
-            m_defaultWeapon.CreateWeaponStrategy(),
-            m_defaultWeapon.CreateWeaponData(),
-            m_defaultWeaponPrefab);
+        SetWeapon(0);
 
         for (int i = 2; i < maxInvenNum; ++i)
         {
@@ -40,33 +67,21 @@ public class PlayerInventory : MonoBehaviour
         //InventoryWeaponSwap
         if (Input.GetKeyDown(KeyCode.Alpha1) && curInvenNum != 0 && m_inventory[0] != null)
         {
-            m_playerWeapon.UninstallWeapon();
-            m_playerWeapon.SetWeapon(
-                m_inventory[0].CreateWeaponStrategy(),
-                m_inventory[0].CreateWeaponData(),
-                m_weaponPrefabs[0]);
+            SetWeapon(0);
 
             curInvenNum = 0;
             StartCoroutine(SwapCooldown(swapCooldown));
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && curInvenNum != 1 && m_inventory[1] != null)
         {
-            m_playerWeapon.UninstallWeapon();
-            m_playerWeapon.SetWeapon(
-                m_inventory[1].CreateWeaponStrategy(),
-                m_inventory[1].CreateWeaponData(),
-                m_weaponPrefabs[1]);
+            SetWeapon(1);
 
             curInvenNum = 1;
             StartCoroutine(SwapCooldown(swapCooldown));
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && curInvenNum != 2 && m_inventory[2] != null)
         {
-            m_playerWeapon.UninstallWeapon();
-            m_playerWeapon.SetWeapon(
-                m_inventory[2].CreateWeaponStrategy(),
-                m_inventory[2].CreateWeaponData(),
-                m_weaponPrefabs[2]);
+            SetWeapon(2);
 
             curInvenNum = 2;
             StartCoroutine(SwapCooldown(swapCooldown));
@@ -85,11 +100,7 @@ public class PlayerInventory : MonoBehaviour
                     curInvenNum = maxInvenNum - 1;
             } while (m_inventory[curInvenNum] == null);
 
-            m_playerWeapon.UninstallWeapon();
-            m_playerWeapon.SetWeapon(
-                m_inventory[curInvenNum].CreateWeaponStrategy(),
-                m_inventory[curInvenNum].CreateWeaponData(),
-                m_weaponPrefabs[curInvenNum]);
+            SetWeapon(curInvenNum);
 
             StartCoroutine(SwapCooldown(swapCooldown));
 
@@ -105,11 +116,7 @@ public class PlayerInventory : MonoBehaviour
                 curInvenNum %= maxInvenNum;
             } while (m_inventory[curInvenNum] == null);
 
-            m_playerWeapon.UninstallWeapon();
-            m_playerWeapon.SetWeapon(
-                m_inventory[curInvenNum].CreateWeaponStrategy(),
-                m_inventory[curInvenNum].CreateWeaponData(),
-                m_weaponPrefabs[curInvenNum]);
+            SetWeapon(curInvenNum);
 
             StartCoroutine(SwapCooldown(swapCooldown));
             Debug.Log("ScrollDwon");

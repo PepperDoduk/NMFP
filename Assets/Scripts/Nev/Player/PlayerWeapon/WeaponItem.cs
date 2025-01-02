@@ -10,12 +10,9 @@ public class WeaponItem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerWeapon weapon = other.GetComponent<PlayerWeapon>();
-            weapon.SetWeapon(
-                m_factory.CreateWeaponStrategy(),
-                m_factory.CreateWeaponData(),
-                m_weaponPrefab);
-            GameObject.Destroy(gameObject);
+            PlayerInventory inventory = other.GetComponent<PlayerInventory>();
+            inventory.ChangeWeapon(m_factory, m_weaponPrefab);
+            //Destroy(gameObject);
         }
     }
 }

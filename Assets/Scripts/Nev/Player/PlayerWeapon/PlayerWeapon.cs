@@ -44,6 +44,9 @@ public class PlayerWeapon : MonoBehaviour
 
     public void SetWeapon(IWeaponStrategy pStrategy, WeaponData pData, GameObject pWeaponPrefab)
     {
+        if (m_weaponPrefab != null)
+            UninstallWeapon();
+
         m_weaponStrategy = pStrategy;
         m_weaponData = pData;
         m_weaponPrefab = pWeaponPrefab;

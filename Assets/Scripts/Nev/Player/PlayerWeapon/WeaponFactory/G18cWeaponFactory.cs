@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(
     fileName = "G18c",
     menuName = "Weapons/G18c",
-    order = int.MinValue)] //의존성 주입
+    order = int.MinValue)]
 public class G18cWeaponFactory : WeaponFactory
 {
     public override IWeaponStrategy CreateWeaponStrategy()
