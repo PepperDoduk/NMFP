@@ -296,9 +296,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MajorEnemies:
-  - {fileID: 8195921786858915524, guid: 8d0373367c20bf04bb160fb0b3221c63, type: 3}
+  - {fileID: 2264659489104525405, guid: 2e07624136d81814eb3292ef934b0b6a, type: 3}
   GeneralEnemies:
-  - {fileID: 7549938131649178602, guid: 268fefdda1df7134bbca19b52cf01d81, type: 3}
+  - {fileID: 468847942215561820, guid: 07c9e7608a8f61f47a333dc869a7313a, type: 3}
   MajorEnemySpawnPositions:
   - {x: 0, y: 1, z: 520}
   GeneralEnemySpawnPositions:
@@ -4200,9 +4200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1b0111a6be1e74484e7afefd7ba050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  caemraTransform: {fileID: 184519610}
-  characterController: {fileID: 478881165}
-  isGround: 1
 --- !u!114 &478881164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4531,9 +4528,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MajorEnemies:
-  - {fileID: 8859670502227051641, guid: a28fb9e9b5a3ffb4f9d5d7bb2d7972e0, type: 3}
+  - {fileID: 2264659489104525405, guid: 2e07624136d81814eb3292ef934b0b6a, type: 3}
   GeneralEnemies:
-  - {fileID: 7549938131649178602, guid: 268fefdda1df7134bbca19b52cf01d81, type: 3}
+  - {fileID: 468847942215561820, guid: 07c9e7608a8f61f47a333dc869a7313a, type: 3}
   MajorEnemySpawnPositions:
   - {x: 333, y: 40, z: 700}
   GeneralEnemySpawnPositions:
@@ -12764,7 +12761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MajorEnemies:
-  - {fileID: 8859670502227051641, guid: a28fb9e9b5a3ffb4f9d5d7bb2d7972e0, type: 3}
+  - {fileID: 5580438826534496760, guid: 56317103799cab949aaddf4bd0110600, type: 3}
   GeneralEnemies:
   - {fileID: 2131624656129783164, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
   MajorEnemySpawnPositions:
@@ -14939,7 +14936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MajorEnemies:
-  - {fileID: 8195921786858915524, guid: 8d0373367c20bf04bb160fb0b3221c63, type: 3}
+  - {fileID: 2264659489104525405, guid: 2e07624136d81814eb3292ef934b0b6a, type: 3}
   GeneralEnemies:
   - {fileID: 2131624656129783164, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
   MajorEnemySpawnPositions:
@@ -16740,9 +16737,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MajorEnemies:
-  - {fileID: 8859670502227051641, guid: a28fb9e9b5a3ffb4f9d5d7bb2d7972e0, type: 3}
+  - {fileID: 2264659489104525405, guid: 2e07624136d81814eb3292ef934b0b6a, type: 3}
   GeneralEnemies:
-  - {fileID: 7549938131649178602, guid: 268fefdda1df7134bbca19b52cf01d81, type: 3}
+  - {fileID: 468847942215561820, guid: 07c9e7608a8f61f47a333dc869a7313a, type: 3}
   MajorEnemySpawnPositions:
   - {x: 52, y: 40, z: 1000}
   GeneralEnemySpawnPositions:

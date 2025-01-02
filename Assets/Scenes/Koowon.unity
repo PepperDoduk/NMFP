@@ -764,7 +764,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &712500417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -778,13 +778,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MajorEnemies:
-  - {fileID: 5382999559038644734, guid: 8a5e84478ffd90944b3e0f42d0bb21d7, type: 3}
+  - {fileID: 5580438826534496760, guid: 56317103799cab949aaddf4bd0110600, type: 3}
   GeneralEnemies:
   - {fileID: 2131624656129783164, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
   MajorEnemySpawnPositions:
-  - {x: 0, y: 5, z: 0}
+  - {x: 0, y: 2, z: -11}
   GeneralEnemySpawnPositions:
-  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 4, z: -11}
   MajorEnemiesToSpawn: 1
   GeneralEnemiesToSpawn: 5
   hasSpawnedEnemies: 0
@@ -822,7 +822,7 @@ Transform:
   m_GameObject: {fileID: 712500416}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.32, z: 0}
+  m_LocalPosition: {x: 0, y: 7.51, z: 0}
   m_LocalScale: {x: 70.0814, y: 10, z: 57.28206}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1127,7 +1127,7 @@ Transform:
   m_GameObject: {fileID: 1238784655}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.09, y: 3.14, z: 33.18}
+  m_LocalPosition: {x: -11.09, y: 3.14, z: 62.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1364,7 +1364,7 @@ Transform:
   m_GameObject: {fileID: 1478078924}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.195257, y: 1.86, z: -11.39}
+  m_LocalPosition: {x: -37.6, y: 1.86, z: -11.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1838,7 +1838,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2131624656129783164, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512622469395728361, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
+      propertyPath: Speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512622469395728361, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
+      propertyPath: lookRadius
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512622469395728361, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
+      propertyPath: shootingRange
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8363822724768478884, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
       propertyPath: m_LocalPosition.x
