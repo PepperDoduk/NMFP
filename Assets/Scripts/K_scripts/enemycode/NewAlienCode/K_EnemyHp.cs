@@ -30,7 +30,7 @@ public class K_EnemyHp : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage,int penetrating)
+    public void TakeDamage(int damage)//,int penetrating
     {
         currentHp -= damage;
        // currentHp = currentHp-(damage-(defense-penetrating));
