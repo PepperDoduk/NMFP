@@ -186,11 +186,11 @@ MonoBehaviour:
   Pdistance: 3
   enemybullet: {fileID: 3336045428557012035, guid: 7fe4a7023ab62d34f887c049f03b42e9, type: 3}
   missileSpeed: 20
-  Speed: 3
+  Speed: 4
   time: 5
   fly: 1
   flyHeight: 10
-  flySpeed: 5
+  flySpeed: 10
   spawnPoint: {fileID: 3989339042890027626}
   shootingRange: 10
 --- !u!114 &6176065508237148095
@@ -205,8 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e700330d321727b469e8bd80f37a2b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 100
+  Hp: 300
   dropItems: []
   dropChance: 50
-  Isfly: 0
-  defense: 0
+  Isfly: 1
+  defense: 50

@@ -131,7 +131,7 @@ MonoBehaviour:
   dropChance: 0.5
   fly: 1
   flyHeight: 5
-  flySpeed: 5
+  flySpeed: 2
   shootingRange: 100
   enemyBullet: {fileID: 3336045428557012035, guid: 7fe4a7023ab62d34f887c049f03b42e9, type: 3}
   bulletSpawnPoint: {fileID: 7575371799363144609}
@@ -155,10 +155,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e700330d321727b469e8bd80f37a2b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 300
+  Hp: 10000
   dropItems: []
   dropChance: 50
   Isfly: 1
+  defense: 100
 --- !u!1 &1113906092144183679
 GameObject:
   m_ObjectHideFlags: 0

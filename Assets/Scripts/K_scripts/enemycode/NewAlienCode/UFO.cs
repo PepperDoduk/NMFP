@@ -25,12 +25,12 @@ public class UFO : MonoBehaviour
     private Transform player;
     private bool isShooting = false;
 
-    private bool isFalling = true;
     private bool isDead = false;
 
     private Rigidbody rb;
     private Animator ani;
     private K_EnemyHp enemyHp;
+
     void Start()
     {
         ani = GetComponent<Animator>();
@@ -43,6 +43,7 @@ public class UFO : MonoBehaviour
         {
             enemyHp.OnDeath += HandleDeath;
         }
+
         if (fly)
         {
             Vector3 flyPosition = transform.position;

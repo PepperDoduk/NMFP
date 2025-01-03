@@ -28,6 +28,17 @@ public class AlienTank : MonoBehaviour
     private Rigidbody rb;
     private Animator ani;
     private K_EnemyHp enemyHp;
+
+    private enum State
+    {
+        Idle,
+        MovingTowardsPlayer,
+        ShootingAtPlayer,
+        Dead
+    }
+
+    private State currentState;
+
     void Start()
     {
         ani = GetComponent<Animator>();
@@ -40,6 +51,8 @@ public class AlienTank : MonoBehaviour
         {
             enemyHp.OnDeath += HandleDeath;
         }
+
+        currentState = State.Idle;
     }
 
     void Update()
@@ -48,46 +61,64 @@ public class AlienTank : MonoBehaviour
 
         distance = Vector3.Distance(player.position, transform.position);
 
-        if (distance <= lookRadius)
-        {
-            MoveTowardsPlayer();
-            LookAtPlayer();
-        }
-
-        UpdateStop();
-
-        if (distance <= shootingRange)
-        {
-            if (!isShooting)
-            {
-                isShooting = true;
-                StartCoroutine(ShootAtPlayer());
-            }
-        }
-        else
-        {
-            isShooting = false;
-        }
+        RunStateMachine();
 
         if (enemyHp.Hp <= 0)
         {
-            enemyHp.Die();
+            currentState = State.Dead;
         }
     }
 
-    void LookAtPlayer()
+    void RunStateMachine()
     {
-        Vector3 direction = (player.position - transform.position).normalized;
-        direction.y = 0;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        switch (currentState)
+        {
+            case State.Idle:
+                IdleState();
+                break;
+            case State.MovingTowardsPlayer:
+                MoveTowardsPlayerState();
+                break;
+            case State.ShootingAtPlayer:
+                ShootingState();
+                break;
+            case State.Dead:
+                HandleDeath();
+                break;
+        }
     }
 
-    void UpdateStop()
+    void IdleState()
     {
-        if (distance < Pdistance)
+        if (distance <= lookRadius)
         {
-            rb.velocity = Vector3.zero;
+            currentState = State.MovingTowardsPlayer;
+        }
+    }
+
+    void MoveTowardsPlayerState()
+    {
+        if (distance > shootingRange)
+        {
+            MoveTowardsPlayer();
+        }
+        else
+        {
+            currentState = State.ShootingAtPlayer;
+        }
+    }
+
+    void ShootingState()
+    {
+        RotateTowardsPlayer();
+        if (distance > shootingRange)
+        {
+            currentState = State.MovingTowardsPlayer;
+        }
+        else if (!isShooting)
+        {
+            isShooting = true;
+            StartCoroutine(ShootAtPlayer());
         }
     }
 
@@ -98,6 +129,28 @@ public class AlienTank : MonoBehaviour
         ani.SetBool("isWalking", true);
         rb.velocity = direction * Speed;
         rb.angularVelocity = Vector3.zero;
+
+        RotateTowardsPlayer();
+        UpdateStop();
+    }
+
+    void UpdateStop()
+    {
+        if (distance < Pdistance)
+        {
+            rb.velocity = Vector3.zero;
+        }
+    }
+
+    void RotateTowardsPlayer()
+    {
+        Vector3 lookDirection = player.position - transform.position;
+        lookDirection.y = 0;
+        if (lookDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        }
     }
 
     IEnumerator ShootAtPlayer()
@@ -127,7 +180,19 @@ public class AlienTank : MonoBehaviour
         isDead = true;
         rb.velocity = Vector3.zero;
 
-
         rb.constraints = RigidbodyConstraints.None;
+
+        DropItemsOnDeath();
+
+        Destroy(gameObject, 2f);
+    }
+
+    void DropItemsOnDeath()
+    {
+        if (dropItems != null && dropItems.Length > 0 && UnityEngine.Random.value <= dropChance)
+        {
+            GameObject itemToDrop = dropItems[UnityEngine.Random.Range(0, dropItems.Length)];
+            Instantiate(itemToDrop, transform.position, Quaternion.identity);
+        }
     }
 }

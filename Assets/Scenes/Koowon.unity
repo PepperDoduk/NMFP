@@ -764,7 +764,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &712500417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1832,6 +1832,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2082124118327113147, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
+      propertyPath: defense
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2131624656129783164, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
       propertyPath: m_Name
       value: AlienScout 1
@@ -1845,12 +1849,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6512622469395728361, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
+      propertyPath: distance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512622469395728361, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
+      propertyPath: Pdistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512622469395728361, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
       propertyPath: lookRadius
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6512622469395728361, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
       propertyPath: shootingRange
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8363822724768478884, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1862,7 +1874,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8363822724768478884, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 28.64103
+      value: 35.68
       objectReference: {fileID: 0}
     - target: {fileID: 8363822724768478884, guid: de42b72901fb48e428fcfe2f036b1b58, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2425,6 +2437,22 @@ PrefabInstance:
     - target: {fileID: 5454491181723570935, guid: 07c9e7608a8f61f47a333dc869a7313a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8433612960118671969, guid: 07c9e7608a8f61f47a333dc869a7313a, type: 3}
+      propertyPath: Pdistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8433612960118671969, guid: 07c9e7608a8f61f47a333dc869a7313a, type: 3}
+      propertyPath: shootingRange
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9154586276079989375, guid: 07c9e7608a8f61f47a333dc869a7313a, type: 3}
+      propertyPath: Hp
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9154586276079989375, guid: 07c9e7608a8f61f47a333dc869a7313a, type: 3}
+      propertyPath: defense
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -90,13 +90,11 @@ public class K_boss : MonoBehaviour
 
     private void Die()
     {
-        
         ani.SetTrigger("Die");
         enemyHp.Die();
         Destroy(gameObject, 2f);
     }
 
-  
     void SummonEnemy()
     {
         if (enemyPrefabs.Length == 0) return;

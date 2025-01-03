@@ -102,11 +102,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e700330d321727b469e8bd80f37a2b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 100
+  Hp: 15
   dropItems: []
   dropChance: 50
   Isfly: 0
-  defense: 0
+  defense: 5
 --- !u!114 &6512622469395728361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,9 +124,9 @@ MonoBehaviour:
   shootingRange: 5
   Pdistance: 3
   laserCooldown: 2
-  Speed: 3
+  Speed: 5
   spawnPoint: {fileID: 1647102925816929955}
-  distance: 10
+  distance: 0
 --- !u!95 &7942092844821708541
 Animator:
   serializedVersion: 5

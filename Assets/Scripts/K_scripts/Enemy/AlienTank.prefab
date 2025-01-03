@@ -150,11 +150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e700330d321727b469e8bd80f37a2b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 200
+  Hp: 500
   dropItems: []
   dropChance: 50
   Isfly: 0
-  defense: 0
+  defense: 100
 --- !u!114 &2463160751802070242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,13 +170,13 @@ MonoBehaviour:
   lookRadius: 100
   dropItems: []
   dropChance: 0.5
-  Pdistance: 2
+  Pdistance: 5
   enemybullet: {fileID: 3336045428557012035, guid: 7fe4a7023ab62d34f887c049f03b42e9, type: 3}
   missileSpeed: 20
-  Speed: 3
+  Speed: 2
   time: 5
   spawnPoint: {fileID: 2485197959510445240}
-  shootingRange: 10
+  shootingRange: 5
 --- !u!65 &1286886627315221890
 BoxCollider:
   m_ObjectHideFlags: 0

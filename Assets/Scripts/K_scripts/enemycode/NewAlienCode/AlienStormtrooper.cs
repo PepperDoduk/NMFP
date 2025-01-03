@@ -22,6 +22,16 @@ public class AlienStormtrooper : MonoBehaviour
     private bool isDead = false;
     private K_EnemyHp enemyHp;
 
+    private enum State
+    {
+        Idle,
+        MovingTowardsPlayer,
+        ShootingAtPlayer,
+        Dead
+    }
+
+    private State currentState;
+
     void Start()
     {
         ani = GetComponent<Animator>();
@@ -34,6 +44,8 @@ public class AlienStormtrooper : MonoBehaviour
         {
             enemyHp.OnDeath += HandleDeath;
         }
+
+        currentState = State.Idle;
     }
 
     void Update()
@@ -42,39 +54,77 @@ public class AlienStormtrooper : MonoBehaviour
 
         distance = Vector3.Distance(player.position, transform.position);
 
-        if (distance <= lookRadius)
-        {
-            MoveTowardsPlayer();
-            LookAtPlayer();
-        }
-
-        UpdateStop();
-
-        if (distance <= shootingRange)
-        {
-            if (!isShooting)
-            {
-                isShooting = true;
-                StartCoroutine(ShootLaserAtPlayer());
-            }
-        }
-        else
-        {
-            isShooting = false;
-        }
+        RunStateMachine();
 
         if (enemyHp.Hp <= 0)
         {
-            enemyHp.Die();
+            currentState = State.Dead;
         }
     }
 
-    void LookAtPlayer()
+    void RunStateMachine()
+    {
+        switch (currentState)
+        {
+            case State.Idle:
+                IdleState();
+                break;
+            case State.MovingTowardsPlayer:
+                MoveTowardsPlayerState();
+                break;
+            case State.ShootingAtPlayer:
+                ShootingState();
+                break;
+            case State.Dead:
+                HandleDeath();
+                break;
+        }
+    }
+
+    void IdleState()
+    {
+        if (distance <= lookRadius)
+        {
+            currentState = State.MovingTowardsPlayer;
+        }
+    }
+
+    void MoveTowardsPlayerState()
+    {
+        if (distance > shootingRange)
+        {
+            MoveTowardsPlayer();
+        }
+        else
+        {
+            currentState = State.ShootingAtPlayer;
+        }
+    }
+
+    void ShootingState()
+    {
+        RotateTowardsPlayer();
+        if (distance > shootingRange)
+        {
+            currentState = State.MovingTowardsPlayer;
+        }
+        else if (!isShooting)
+        {
+            isShooting = true;
+            StartCoroutine(ShootLaserAtPlayer());
+        }
+    }
+
+    void MoveTowardsPlayer()
     {
         Vector3 direction = (player.position - transform.position).normalized;
         direction.y = 0;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        
+        rb.velocity = direction * Speed;
+        rb.angularVelocity = Vector3.zero;
+
+        RotateTowardsPlayer();
+        UpdateStop();
     }
 
     void UpdateStop()
@@ -85,18 +135,20 @@ public class AlienStormtrooper : MonoBehaviour
         }
     }
 
-    void MoveTowardsPlayer()
+    void RotateTowardsPlayer()
     {
-        Vector3 direction = (player.position - transform.position).normalized;
-        direction.y = 0;
-        ani.SetBool("isWalking", true);
-        rb.velocity = direction * Speed;
-        rb.angularVelocity = Vector3.zero;
+        Vector3 lookDirection = player.position - transform.position;
+        lookDirection.y = 0;
+        if (lookDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        }
     }
 
     IEnumerator ShootLaserAtPlayer()
     {
-        while (isShooting)
+        while (isShooting && currentState == State.ShootingAtPlayer)
         {
             laserTime -= Time.deltaTime;
             if (laserTime <= 0)
@@ -116,6 +168,8 @@ public class AlienStormtrooper : MonoBehaviour
             }
             yield return null;
         }
+
+        isShooting = false;
     }
 
     void HandleDeath()
@@ -123,6 +177,7 @@ public class AlienStormtrooper : MonoBehaviour
         isDead = true;
         rb.velocity = Vector3.zero;
         rb.constraints = RigidbodyConstraints.None;
+        
 
         Destroy(gameObject, 2f);
     }
