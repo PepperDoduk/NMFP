@@ -141,8 +141,8 @@ public class UFO : MonoBehaviour
     {
         isDead = true;
         rb.velocity = Vector3.zero;
-
-
         rb.constraints = RigidbodyConstraints.None;
+
+        Destroy(gameObject, 2f);
     }
 }

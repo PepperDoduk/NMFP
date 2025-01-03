@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 6176065508237148095}
   m_Layer: 0
   m_Name: UFO
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a3c8bd68f54204f895eac190e87672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRadius: 20
+  lookRadius: 100
   dropItems: []
   dropChance: 0.5
   Pdistance: 3
@@ -209,3 +209,4 @@ MonoBehaviour:
   dropItems: []
   dropChance: 50
   Isfly: 0
+  defense: 0

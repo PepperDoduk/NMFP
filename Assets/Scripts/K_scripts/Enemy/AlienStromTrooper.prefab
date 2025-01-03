@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9154586276079989375}
   m_Layer: 0
   m_Name: AlienStromTrooper
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,12 +149,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991168ec3908f2142a826f2b42ebdfc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRadius: 10
+  lookRadius: 100
   muzzleFlashParticle: {fileID: 100004, guid: 510e0a736e5e66243b242a076c59611a, type: 3}
-  shootingRange: 10
+  shootingRange: 5
   Pdistance: 3
-  laserCooldown: 5
-  Speed: 2
+  laserCooldown: 2
+  Speed: 3
   spawnPoint: {fileID: 5886080758423053571}
 --- !u!114 &9154586276079989375
 MonoBehaviour:
@@ -172,6 +172,7 @@ MonoBehaviour:
   dropItems: []
   dropChance: 50
   Isfly: 0
+  defense: 0
 --- !u!1 &3419662588025917580
 GameObject:
   m_ObjectHideFlags: 0

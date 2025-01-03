@@ -18,6 +18,7 @@ public class AlienScout : MonoBehaviour
     private K_EnemyHp enemyHp;
     private bool isDead = false;
     public float distance = 10;
+    private Animator ani;
     private enum State
     {
         Idle,
@@ -34,7 +35,7 @@ public class AlienScout : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         player = GameObject.FindWithTag("Player")?.transform;
         enemyHp = GetComponent<K_EnemyHp>();
-
+        ani= GetComponent<Animator>();
         if (enemyHp != null)
         {
             enemyHp.OnDeath += HandleDeath;
@@ -89,7 +90,7 @@ public class AlienScout : MonoBehaviour
         Vector3 direction = (player.position - transform.position).normalized;
         direction.y = 0;
         rb.velocity = direction * Speed;
-
+        ani.SetBool("isWalking", true);
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
 
@@ -100,6 +101,7 @@ public class AlienScout : MonoBehaviour
         else if (distance > lookRadius)
         {
             currentState = State.Idle;
+
         }
     }
 

@@ -154,6 +154,7 @@ MonoBehaviour:
   dropItems: []
   dropChance: 50
   Isfly: 0
+  defense: 0
 --- !u!114 &2463160751802070242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,13 +167,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a84586c86738ea4896f4e5328045131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRadius: 10
+  lookRadius: 100
   dropItems: []
   dropChance: 0.5
   Pdistance: 2
   enemybullet: {fileID: 3336045428557012035, guid: 7fe4a7023ab62d34f887c049f03b42e9, type: 3}
   missileSpeed: 20
-  Speed: 2
+  Speed: 3
   time: 5
   spawnPoint: {fileID: 2485197959510445240}
   shootingRange: 10

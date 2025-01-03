@@ -89,7 +89,7 @@ public class AlienStormtrooper : MonoBehaviour
     {
         Vector3 direction = (player.position - transform.position).normalized;
         direction.y = 0;
-
+        ani.SetBool("isWalking", true);
         rb.velocity = direction * Speed;
         rb.angularVelocity = Vector3.zero;
     }
@@ -122,8 +122,8 @@ public class AlienStormtrooper : MonoBehaviour
     {
         isDead = true;
         rb.velocity = Vector3.zero;
-
-
         rb.constraints = RigidbodyConstraints.None;
+
+        Destroy(gameObject, 2f);
     }
 }

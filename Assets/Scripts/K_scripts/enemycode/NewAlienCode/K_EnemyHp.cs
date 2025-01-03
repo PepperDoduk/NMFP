@@ -55,7 +55,7 @@ public class K_EnemyHp : MonoBehaviour
             if (!Isfly)
             {
                 rb.AddTorque(new Vector3(0, 0, 5), ForceMode.Impulse);
-                rb.AddForce(new Vector3(0, -5f, -5f), ForceMode.Impulse);
+                rb.AddForce(new Vector3(0, -5f, -10f), ForceMode.Impulse);
             }
             else
             {

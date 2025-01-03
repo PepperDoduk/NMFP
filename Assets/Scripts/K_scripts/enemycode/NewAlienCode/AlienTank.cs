@@ -95,7 +95,7 @@ public class AlienTank : MonoBehaviour
     {
         Vector3 direction = (player.position - transform.position).normalized;
         direction.y = 0;
-
+        ani.SetBool("isWalking", true);
         rb.velocity = direction * Speed;
         rb.angularVelocity = Vector3.zero;
     }

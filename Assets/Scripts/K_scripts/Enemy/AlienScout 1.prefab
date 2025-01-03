@@ -106,6 +106,7 @@ MonoBehaviour:
   dropItems: []
   dropChance: 50
   Isfly: 0
+  defense: 0
 --- !u!114 &6512622469395728361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,13 +119,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47490c9fa2c1944384c35f961dc462f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRadius: 10
+  lookRadius: 100
   muzzleFlashParticle: {fileID: 100004, guid: 510e0a736e5e66243b242a076c59611a, type: 3}
-  shootingRange: 10
+  shootingRange: 5
   Pdistance: 3
-  laserCooldown: 5
-  Speed: 1
+  laserCooldown: 2
+  Speed: 3
   spawnPoint: {fileID: 1647102925816929955}
+  distance: 10
 --- !u!95 &7942092844821708541
 Animator:
   serializedVersion: 5
