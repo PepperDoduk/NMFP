@@ -60,8 +60,8 @@ public class K_spawner_story : MonoBehaviour
         for (int i = 0; i < MajorEnemiesToSpawn; i++)
         {
             Vector3 spawnPosition = MajorEnemySpawnPositions[i % MajorEnemySpawnPositions.Length];
-            spawnPosition.x += Random.Range(-5f, 5f);
-            spawnPosition.z += Random.Range(-5f, 5f);
+            spawnPosition.x += Random.Range(-1f, 1f);
+            spawnPosition.z += Random.Range(-1f, 1f);
             GameObject enemy = Instantiate(MajorEnemies[i % MajorEnemies.Length], spawnPosition, Quaternion.identity);
             ActiveMonsters.Add(enemy);
         }
@@ -74,8 +74,8 @@ public class K_spawner_story : MonoBehaviour
         for (int i = 0; i < GeneralEnemiesToSpawn; i++)
         {
             Vector3 furthestPosition = GetFurthestSpawnPositionFromPlayer();
-            furthestPosition.x += Random.Range(-5f, 5f);
-            furthestPosition.z += Random.Range(-5f, 5f);
+            furthestPosition.x += Random.Range(-1f, 1f);
+            furthestPosition.z += Random.Range(-1f, 1f);
             GameObject enemy = Instantiate(GeneralEnemies[Random.Range(0, GeneralEnemies.Length)], furthestPosition, Quaternion.identity);
             ActiveMonsters.Add(enemy);
             yield return new WaitForSeconds(0.5f);
