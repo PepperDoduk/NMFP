@@ -4121,12 +4121,12 @@ GameObject:
   - component: {fileID: 478881166}
   - component: {fileID: 478881165}
   - component: {fileID: 478881164}
-  - component: {fileID: 478881163}
   - component: {fileID: 478881162}
   - component: {fileID: 478881161}
   - component: {fileID: 478881160}
   - component: {fileID: 478881168}
   - component: {fileID: 478881167}
+  - component: {fileID: 478881169}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4188,18 +4188,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerData: {fileID: 11400000, guid: b7d99659fc0bdae4f9e4f29cf75409e5, type: 2}
   m_currentHealth: 0
---- !u!114 &478881163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 478881159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd1b0111a6be1e74484e7afefd7ba050, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &478881164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4308,6 +4296,21 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &478881169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478881159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e96830c24533394b8dcf86dd41a64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  caemraTransform: {fileID: 184519610}
+  characterController: {fileID: 478881165}
+  isGround: 1
 --- !u!1 &486103643
 GameObject:
   m_ObjectHideFlags: 0
