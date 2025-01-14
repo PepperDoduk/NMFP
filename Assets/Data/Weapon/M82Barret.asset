@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72fbbb2afbb5ca84fadd37a587bbcace, type: 3}
-  m_Name: G18C
+  m_Script: {fileID: 11500000, guid: 9968e4a2979b01f4b901a5eedcf4050b, type: 3}
+  m_Name: M82Barret
   m_EditorClassIdentifier: 
-  Damage: 23
-  Range: 30
-  RPM: 1100
-  MaxAmmo: 17
+  m_maxBullet: 10
+  m_damage: 80

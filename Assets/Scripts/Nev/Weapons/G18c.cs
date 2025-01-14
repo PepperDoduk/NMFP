@@ -5,12 +5,16 @@ using UnityEngine;
 public class G18c : MonoBehaviour
 {
     private PlayerWeapon Weapon;
+
     public Animator anim;
     public int animNum = 0;
-    public int randF;
-    public bool reloading = false;
 
-    public int testbullet;
+    public int randF;
+
+    public int maxAmmo = 17;
+    public int currentAmmo;
+
+    public bool reloading = false;
 
     void Start()
     {
@@ -20,37 +24,24 @@ public class G18c : MonoBehaviour
 
     void Update()
     {
-        testbullet = Weapon.CurrentBullet;
-
         anim.SetInteger("g18", animNum);
 
-        if (Weapon.CurrentBullet < 1)
+        if (currentAmmo < 1)
         {
             reloading = true;
             animNum = 1;
             Debug.Log("Reroading");
         }
 
-        if(Weapon.IsRepeat)
+        if (Input.GetMouseButton(0) && currentAmmo > 0 && !reloading)
         {
-            if (Input.GetMouseButton(0) && Weapon.CurrentBullet > 0 && !reloading)
-            {
-                randF = Random.Range(-3, 0);
-
-                animNum = randF;
-            }
-        }
-        else
-        {
-            if (Input.GetMouseButtonDown(0) && Weapon.CurrentBullet > 0 && !reloading)
-            {
-                randF = Random.Range(-3, 0);
-
-                animNum = randF;
-            }
+            randF = Random.Range(-3, 0);
+            animNum = randF;
+            currentAmmo--;
         }
 
-        if(Input.GetKeyDown(KeyCode.R) && Weapon.CurrentBullet != Weapon.MaxBullet)
+
+        if (Input.GetKeyDown(KeyCode.R) && currentAmmo != Weapon.MaxBullet)
         {
             animNum = 1;
         }
@@ -58,8 +49,8 @@ public class G18c : MonoBehaviour
 
     public void Fire()
     {
-        Debug.Log("Fire");
         Weapon.OnShoot();
+        Debug.Log("Fire");
         AudioManager.instance.PlaySfx(AudioManager.Sfx.G18fire);
     }
     public void R1()
@@ -81,8 +72,10 @@ public class G18c : MonoBehaviour
     public void Reaload()
     {
         Debug.Log("Reroaded");
-        Weapon.ReloadBullet();
+
+        currentAmmo = maxAmmo;
         animNum = 0;
+
         reloading = false;
     }
 

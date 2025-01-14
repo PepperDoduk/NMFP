@@ -9,6 +9,8 @@ public class PlayerInventory : MonoBehaviour
     
     [SerializeField] private WeaponFactory[] m_inventory;
     [SerializeField] private GameObject[] m_weaponPrefabs;
+    [SerializeField] private GameObject[] m_dropWeapons;
+
     private PlayerWeapon m_playerWeapon;
 
     public bool canChangeWep = true;
@@ -26,7 +28,7 @@ public class PlayerInventory : MonoBehaviour
             m_weaponPrefabs[pNum]);
     }
 
-    public void ChangeWeapon(WeaponFactory pWeaponFactory, GameObject pWeaponPrefab)
+    public void ChangeWeapon(WeaponFactory pWeaponFactory, GameObject pWeaponPrefab, GameObject pDropWeapon)
     {
         bool flag = true;
         for(int i = 0; i < maxInvenNum; ++i)
@@ -35,6 +37,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 m_inventory[i] = pWeaponFactory;
                 m_weaponPrefabs[i] = pWeaponPrefab;
+                m_dropWeapons[i] = pDropWeapon;
                 curInvenNum = i;
                 flag = false;
                 break;
@@ -42,8 +45,13 @@ public class PlayerInventory : MonoBehaviour
         }
         if(flag)
         {
+            m_dropWeapons[curInvenNum].SetActive(true);
+            m_dropWeapons[curInvenNum].transform.position =
+                this.transform.position;
+
             m_inventory[curInvenNum] = pWeaponFactory;
             m_weaponPrefabs[curInvenNum] = pWeaponPrefab;
+            m_dropWeapons[curInvenNum] = pDropWeapon;
         }
         SetWeapon(curInvenNum);
     }

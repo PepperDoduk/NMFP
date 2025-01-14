@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AK47 : MonoBehaviour
 {
-    [SerializeField] private N_WeaponData Data;
-    public N_PlayerRayCast playerRay;
+    private PlayerWeapon Weapon;
+
     public Animator anim;
     public int animNum = 0;
 
@@ -21,8 +21,7 @@ public class AK47 : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-        playerRay = GameObject.Find("Player").GetComponent<N_PlayerRayCast>();
-        maxAmmo = Data.MaxAmmo;
+        Weapon = GameObject.Find("Player").GetComponent<PlayerWeapon>();
         currentAmmo = maxAmmo;
     }
 
@@ -37,7 +36,7 @@ public class AK47 : MonoBehaviour
                 animNum = 1;
         }
 
-        if (Input.GetMouseButtonDown(0) && animNum != 1 && !reloading && playerRay.canShot)
+        if (Input.GetMouseButtonDown(0) && animNum != 1 && !reloading)
         {
 
             if (currentAmmo <= 0)
@@ -77,9 +76,11 @@ public class AK47 : MonoBehaviour
     {
         if (currentAmmo > 0)
         {
+            Debug.Log("Fire");
+            Weapon.OnShoot();
+
             randF = Random.Range(-2, 0);
             animNum = randF;
-            playerRay.Shot();
             currentAmmo--;
 
             if (AKfire == 0)
@@ -91,8 +92,6 @@ public class AK47 : MonoBehaviour
             {
                 AudioManager.instance.PlaySfx(AudioManager.Sfx.AKfire2);
             }
-
-            Debug.Log("Fire");
         }
         else
             AudioManager.instance.PlaySfx(AudioManager.Sfx.AKnoAmmo);
@@ -137,7 +136,7 @@ public class AK47 : MonoBehaviour
         else
             currentAmmo = maxAmmo;
 
-        reloading = false;
         animNum = 0;
+        reloading = false;
     }
 }

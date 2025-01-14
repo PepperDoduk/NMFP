@@ -5,12 +5,10 @@ using UnityEngine;
 public class WeaponData
 {
     public int MaxBullet { get; }
-    public float RPM { get; }
 
     public WeaponData(
-        int maxBullet, float rpm)
+        int maxBullet)
     {
         MaxBullet = maxBullet;
-        RPM = rpm;
     }
 }

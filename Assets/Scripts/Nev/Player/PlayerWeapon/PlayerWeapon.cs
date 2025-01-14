@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 
 public class PlayerWeapon : MonoBehaviour
@@ -9,9 +10,7 @@ public class PlayerWeapon : MonoBehaviour
 
     private int m_currentBullet;
 
-    public bool IsRepeat;
     public int MaxBullet => m_weaponData.MaxBullet;
-    public int CurrentBullet => m_currentBullet;
 
     public void SetCurrentBullet(int pBullet)
     {
@@ -53,18 +52,5 @@ public class PlayerWeapon : MonoBehaviour
         m_currentBullet = 0;
 
         InstallWeapon();
-    }
-
-    private void Awake()
-    {
-        IsRepeat = false;
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.V))
-        {
-            IsRepeat = true;
-        }
     }
 }

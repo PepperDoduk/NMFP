@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: AK47
   m_EditorClassIdentifier: 
   m_maxBullet: 30
-  m_RPM: 600
-  m_damage: 40
+  m_damage: 23

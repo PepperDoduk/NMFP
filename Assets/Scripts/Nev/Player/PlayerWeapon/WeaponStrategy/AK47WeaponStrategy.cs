@@ -24,10 +24,10 @@ public class AK47WeaponStrategy : IWeaponStrategy
 
         if (Physics.Raycast(ray, out var hit, 30))
         {
-            //if (hit.collider.TryGetComponent<Enemy>(out Enemy enemy))
-            //{
-            //    enemy.TakeDamage(m_damage);
-            //}
+            if (hit.collider.TryGetComponent<K_EnemyHp>(out K_EnemyHp enemy))
+            {
+                enemy.TakeDamage(m_damage);
+            }
         }
     }
 }

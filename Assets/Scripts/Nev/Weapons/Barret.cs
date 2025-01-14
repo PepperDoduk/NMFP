@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Barret : MonoBehaviour
 {
+    private PlayerWeapon Weapon;
 
     public Animator anim;
     public int animNum = 0;
@@ -13,10 +14,12 @@ public class Barret : MonoBehaviour
     public int maxAmmo = 10;
     public int currentAmmo;
 
+    public bool reloading = false;
 
     void Start()
     {
         anim = GetComponent<Animator>();
+        Weapon = GameObject.Find("Player").GetComponent<PlayerWeapon>();
 
         currentAmmo = maxAmmo;
     }
@@ -25,10 +28,10 @@ public class Barret : MonoBehaviour
     {
         anim.SetInteger("M82", animNum);
 
-        if (currentAmmo < 1)
+        if (Input.GetKeyDown(KeyCode.R))
         {
+            reloading = true;
             animNum = 1;
-            
         }
 
         if (Input.GetMouseButtonDown(0) && currentAmmo > 0)
@@ -45,7 +48,8 @@ public class Barret : MonoBehaviour
 
     public void Fire()
     {
-        
+        Weapon.OnShoot();
+
         currentAmmo--;
         AudioManager.instance.PlaySfx(AudioManager.Sfx.BarretFire);
     }
@@ -76,5 +80,7 @@ public class Barret : MonoBehaviour
     {
         currentAmmo = maxAmmo;
         animNum = 0;
+
+        reloading = false;
     }
 }
